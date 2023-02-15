@@ -8,18 +8,25 @@
       "id": 1
     },
     {
-      "title": "https://youtu.be/G9p9dmpT4Wo",
-      "photo": "blob:http://localhost:5173/c15b043b-40ab-4ceb-b1d2-891f47e56b30",
-      "ingredients": "sayur, saos",
-      "video": "",
+      "title": "asd",
+      "photo": "blob:http://localhost:5173/b1135a8f-cf7f-43c4-aec0-fe2b80f131ec",
+      "ingredients": "asd",
+      "video": "asd",
       "id": 2
     },
     {
-      "title": "Recep Laptop",
-      "photo": "blob:http://localhost:5173/8934c32c-c8e2-43d5-b8eb-fe517f8490f0",
-      "ingredients": "Baju, saos",
-      "video": "https://youtu.be/G9p9dmpT4Wo",
+      "title": "asd",
+      "photo": "blob:http://localhost:5173/2ec14fe1-fa8d-44de-9204-3a01eb75ab51",
+      "ingredients": "asd",
+      "video": "asd",
       "id": 3
+    },
+    {
+      "title": "asd",
+      "photo": "blob:http://localhost:5173/22c20c6b-7707-47a1-a605-2057224ad7c3",
+      "ingredients": "asd",
+      "video": "ads",
+      "id": 4
     }
   ],
   "comments": [
@@ -29,7 +36,10 @@
       "postId": 1
     }
   ],
-  "profile": {
-    "name": "typicode"
+  "videos": {
+    "id": 1,
+    "step": 1,
+    "url": "asdasdas",
+    "id_recipes": 1
   }
 }

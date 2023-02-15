@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './style.module.css';
 
-const InputFormAddRecipe = ({ title, type, name, onchange }) => {
+const InputFormAddRecipe = ({ title, type, name, onchange, value }) => {
   const handlerChange = (e) => {
     onchange(e);
   };
@@ -12,7 +12,7 @@ const InputFormAddRecipe = ({ title, type, name, onchange }) => {
         return (
           <div className={`item rounded ${style.inputBackground} ${style.textareaSize} mx-auto d-flex flex-column p-3 px-5 gap-3`} id="thumbnail">
             <span className="text-secondary mt-2 text-nowrap text-dark fw-semibold">{title}</span>
-            <textarea name={name} className="form-control bg-transparent border-0 h-100" placeholder="Click Here!" onChange={handlerChange}></textarea>
+            <textarea name={name} className="form-control bg-transparent border-0 h-100" placeholder="Click Here!" value={value} onChange={handlerChange}></textarea>
           </div>
         );
       case 'text':
@@ -20,7 +20,7 @@ const InputFormAddRecipe = ({ title, type, name, onchange }) => {
           <div className={`item rounded ${style.inputBackground} mx-auto d-flex p-3 px-5 gap-3`} id="thumbnail">
             <span className="text-secondary mt-2 text-nowrap text-dark fw-semibold">{title}</span>
 
-            <input type={type} name={name} className="form-control bg-transparent border-0 border-bottom rounded-0 outline-none" onChange={handlerChange} />
+            <input type={type} name={name} className="form-control bg-transparent border-0 border-bottom rounded-0 outline-none" value={value} onChange={handlerChange} />
           </div>
         );
     }
