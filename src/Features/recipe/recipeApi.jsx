@@ -1,11 +1,14 @@
 import { apiSlice } from '../../Api/authApi';
 
+apiSlice.enhanceEndpoints({ addTagTypes: ['Recipe'] });
+
 const recipeApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllRecipe: builder.query({
       query: () => ({
         url: 'recipes',
       }),
+      providesTags: (result, error, arg) => (result ? [...result.map((data) => ({ type: 'Recipe', data }))] : ['Recipe']),
       transformResponse: (response, meta, arg) => response,
     }),
 
@@ -13,6 +16,7 @@ const recipeApi = apiSlice.injectEndpoints({
       query: (id) => ({
         url: `recipes/${id}`,
       }),
+      providesTags: (result, error, arg) => (result ? [...result.map((data) => ({ type: 'Recipe', data }))] : ['Recipe']),
       transformResponse: (response, meta, arg) => response,
     }),
 
@@ -23,6 +27,7 @@ const recipeApi = apiSlice.injectEndpoints({
         body: data,
       }),
 
+      invalidatesTags: ['Recipe'],
       transformResponse: (response, meta, arg) => response,
     }),
 

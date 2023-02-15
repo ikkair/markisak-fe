@@ -5,6 +5,7 @@ const Home = () => {
   return (
     <div>
       <Navbar />
+      <h1>Hello WWorld!</h1>
     </div>
   );
 };
