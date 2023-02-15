@@ -38,6 +38,7 @@ const recipeApi = apiSlice.injectEndpoints({
         body: data,
       }),
 
+      invalidatesTags: ['Recipe'],
       transformResponse: (response, meta, arg) => response,
     }),
 
@@ -46,7 +47,7 @@ const recipeApi = apiSlice.injectEndpoints({
         url: `recipes/${id}`,
         method: 'DELETE',
       }),
-
+      invalidatesTags: ['Recipe'],
       transformResponse: (response, meta, arg) => response,
     }),
   }),
