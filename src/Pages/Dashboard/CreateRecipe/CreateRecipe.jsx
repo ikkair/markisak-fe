@@ -8,27 +8,21 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import Footer from './../../../Components/Footer/Footer';
 
 const CreateRecipe = () => {
   const MySwal = withReactContent(Swal);
 
-  const { data: dataAllRecipe } = useGetAllRecipeQuery();
   const [createRecipe, { isLoading, error }] = useCreateRecipeMutation();
   const [deleteRecipe, { error: errorDeleteRecipe, isSuccess }] = useDeleteRecipeByIdMutation();
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
-  const [videos, setVideos] = useState([
-    {
-      step: 1,
-      url: '',
-    },
-  ]);
+  const [videos, setVideos] = useState([{ step: 1, url: '' }]);
   const [stepVideo, setStepVideo] = useState(1);
   const [data, setData] = useState({
     title: '',
     photo: '',
     ingredients: '',
-    video: '',
   });
 
   const changeVideoHandler = (e, i) => {
@@ -41,17 +35,16 @@ const CreateRecipe = () => {
   };
 
   const renderInputVideo = () => {
-    console.log(videos);
+    console.log(data);
     const inputs = [];
     for (let i = 1; i < stepVideo; i++) {
       inputs.push(
         <>
-          <div className="col-2 d-flex gap-2">
+          <div className="col-6 col-md-3 col-lg-2 d-flex gap-2">
             <span className="text-secondary mt-2 text-nowrap text-dark fw-semibold">Step :</span>
             <input type="number" className="text-center text-secondary form-control bg-transparent border-0 border-bottom rounded-0 outline-none" name="video" value={i + 1} disabled />
-            {setVideos((prev) => [...videos, { step: i + 1, url: '' }])}
           </div>
-          <div className="col-10 d-flex gap-2">
+          <div className="col-12 col-md-9 col-lg-10 d-flex gap-2">
             <span className="text-secondary mt-2 text-nowrap text-dark fw-semibold">Link : </span>
             <input type="text" className="text-secondary form-control bg-transparent border-0 border-bottom rounded-0 outline-none" name="video" onChange={(e) => changeVideoHandler(e, i)} />
 
@@ -124,7 +117,7 @@ const CreateRecipe = () => {
         <div className="row">
           <div className="col-12 ">
             <div className="row">
-              <div className="col-12 col-md-10 offset-md-1 d-flex justify-content-center">
+              <div className="col-12 col-lg-10 offset-lg-1 d-flex justify-content-center">
                 <div className={`item w-100 rounded ${style.inputBackground} ${style.inputPhoto} d-flex mx-auto justify-content-center align-items-center mb-2 flex-column mt-5`} onClick={imageClickHandler} id="thumbnail">
                   <img src={preview ? preview : photoLogo} alt="" className="img-fluid" />
                   <span className="text-secondary mt-2">Add Photo</span>
@@ -133,19 +126,19 @@ const CreateRecipe = () => {
                 </div>
               </div>
 
-              <div className="col-12 col-md-10 offset-md-1 mt-4">
+              <div className="col-12 col-lg-10 offset-lg-1 offset-md-1 mt-4">
                 <InputFormAddRecipe value={data.title} type={'text'} title={'Title'} name={'title'} onchange={(e) => changeHandler(e)} />
               </div>
 
-              <div className="col-12 col-md-10 offset-md-1 mt-4">
+              <div className="col-12 col-lg-10 offset-lg-1 mt-4">
                 <InputFormAddRecipe value={data.ingredients} type={'textarea'} title={'Ingredients'} name={'ingredients'} onchange={(e) => changeHandler(e)} />
               </div>
 
-              <div className="col-12 col-md-10 offset-md-1 mt-4">
+              <div className="col-12 col-lg-10 offset-lg-1 mt-4">
                 <div className={`item rounded ${style.inputBackground} mx-auto d-flex flex-column p-3 px-5 gap-3`} id="thumbnail">
                   <div className="main-video d-flex gap-3">
                     <span className="text-secondary mt-2 text-nowrap text-dark fw-semibold">Video</span>
-                    <input type="text" className="form-control bg-transparent border-0 border-bottom rounded-0 outline-none" name="video" onChange={changeHandler} />
+                    <input type="text" className="form-control bg-transparent border-0 border-bottom rounded-0 outline-none" name="video" onChange={(e) => setVideos((prev) => (prev[0].url = e.target.value))} />
 
                     <FontAwesomeIcon className={`${style.addVideo} bg-light text-secondary rounded-circle p-2`} onClick={() => setStepVideo((prev) => prev + 1)} icon={faPlus} />
                   </div>
@@ -154,7 +147,7 @@ const CreateRecipe = () => {
                 </div>
               </div>
 
-              <div className="col-12 col-md-10 offset-md-1 mt-5 d-flex justify-content-center">
+              <div className="col-12 col-lg-10 offset-lg-1 mt-5 d-flex justify-content-center">
                 <button className="btn btn-warning w-50 text-light" onClick={createHandler}>
                   Post
                 </button>
@@ -163,6 +156,7 @@ const CreateRecipe = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

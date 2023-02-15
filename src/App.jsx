@@ -14,13 +14,12 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/dashboard/create-recipe" element={<CreateRecipe />} />
-      <Route path="/login" element={<Login/>} />
-      <Route path="/register" element={<Register/>} />
-      <Route path="/forgotpassword" element={<ForgotPassword/>} />
-      <Route path="/code-reset-password" element={<CodeResetPassword/>} />
-      <Route path="/reset-password" element={<ResetPassword/>} />
-      <Route path="/profile" element={<Profile/>} />
-
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/code-reset-password" element={<CodeResetPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 }
