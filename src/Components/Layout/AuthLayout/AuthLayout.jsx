@@ -3,7 +3,7 @@ import InputFormAuth from '../../Form/InputFormAuth/InputFormAuth';
 import logo from '../../../assets/Authpage/Group.png';
 import style from './style.module.css';
 
-const AuthLayout = ({ children, title, description, linked }) => {
+const AuthLayout = ({ children, title, description }) => {
   return (
     <>
       <main>

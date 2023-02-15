@@ -11,7 +11,7 @@ const InputFormAuth = (props) => {
         <label for={name} class={`form-label ${style.formLabel}`}>
           {props.title}
         </label>
-        <input type={props.type} class="form-control" id={name} name={props.name} placeholder={props.title} onChange={changeHandler} />
+        <input type={props.type} class={`form-control ${style.formControl}`} id={name} name={props.name} placeholder={props.title} onChange={changeHandler} />
       </div>
     </>
   );
