@@ -1,0 +1,58 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'MetropolisNF', sans-serif;
+  }
+  
+  
+  /* SideLeft */
+  
+  .sideLeft {
+    background-position: center center;
+    background-size:cover;
+    overflow: hidden;
+    background: linear-gradient(rgba(239, 200, 26, 0.8), rgba(239, 200, 26, 0.8)), url('../../../assets/Authpage/image 15.png');
+  }
+  
+  .sideLeft img {
+    width: 120px;
+  }
+  
+  .sideLeft p{
+    margin-top: 20px;
+    color: white;
+    font-weight: 500;
+  }
+  
+  /* SideRigth */
+  .sideRight img {
+    display: block;
+    margin: auto;
+    width: 50px;
+    margin-bottom: 10px;
+  }
+  .sideRight header h3 {
+    color: rgb(239, 200, 26);
+    font-weight: 700;
+  }
+  .sideRight header p {
+    color: rgb(135, 135, 135);
+    font-weight: lighter;
+  }
+
+  /* @media screen and (max-width: 600px) {
+    .sideRight {
+    background-color: rgb(239, 200, 26);
+    }
+    .sideRight header h4 {
+        color: rgb(255, 255, 255);
+        font-weight: 700;
+      }
+    .sideRight header p {
+        color: rgb(0, 0, 0);
+        font-weight: lighter;
+    }
+    .inputField button {
+        background-color: white !important;
+    }
+  } */
