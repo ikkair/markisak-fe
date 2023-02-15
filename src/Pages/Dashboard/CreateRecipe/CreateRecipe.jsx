@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useCreateRecipeMutation } from '../../../Features/recipe/recipeApi';
+import { useCreateRecipeMutation, useGetAllRecipeQuery } from '../../../Features/recipe/recipeApi';
 
 const CreateRecipe = () => {
-  const [createNewRecipe, { isLoading, isSuccess, error }] = useCreateRecipeMutation();
+  const { data: dataAllRecipe } = useGetAllRecipeQuery();
+  const [createRecipe, { isLoading, error }] = useCreateRecipeMutation();
   const [data, setData] = useState({
     title: '',
     photo: '',
@@ -11,6 +12,7 @@ const CreateRecipe = () => {
   });
 
   const onChangeHandler = (e) => {
+    console.log(data);
     setData((prev) => {
       return {
         ...prev,
@@ -21,11 +23,18 @@ const CreateRecipe = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    await createNewRecipe(data);
+    await createRecipe(data);
   };
 
   return (
     <div>
+      <ul>
+        {dataAllRecipe?.map((recipe) => (
+          <li>
+            {recipe.title} <button className="btn btn-danger">Delete</button>{' '}
+          </li>
+        ))}
+      </ul>
       <form onSubmit={submitHandler}>
         <label htmlFor="title">Title</label>
         <input type="text" name="title" onChange={onChangeHandler} />
