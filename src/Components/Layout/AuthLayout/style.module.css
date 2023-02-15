@@ -57,7 +57,7 @@
     box-shadow: 0.5px 1px 10px 0.5px rgb(213, 213, 213) !important;
   }
   .formControl::placeholder {
-    color: rgb(163, 163, 163) !important;
-    font-size: 14px !important;
+    color: rgb(191, 191, 191) !important;
+    font-size: 13px !important;
     padding-left: 10px;
   }
