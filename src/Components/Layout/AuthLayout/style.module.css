@@ -4,7 +4,6 @@
     font-family: 'MetropolisNF', sans-serif;
   }
   
-  
   /* SideLeft */
   
   .sideLeft {
@@ -40,19 +39,25 @@
     font-weight: lighter;
   }
 
-  /* @media screen and (max-width: 600px) {
-    .sideRight {
-    background-color: rgb(239, 200, 26);
-    }
-    .sideRight header h4 {
-        color: rgb(255, 255, 255);
-        font-weight: 700;
-      }
-    .sideRight header p {
-        color: rgb(0, 0, 0);
-        font-weight: lighter;
-    }
-    .inputField button {
-        background-color: white !important;
-    }
-  } */
+  /* Custom Checkbox */
+
+  #flexCheckDefault:checked, #flexCheckDefault:focus {
+    background-color: rgb(239, 200, 26) !important;
+    border: white !important;
+    box-shadow: 0.5px 1px 10px 1px rgb(255, 255, 255) !important;
+  }
+
+  /* Input */
+  .formLabel {
+    color: grey;
+    font-size: 14px;
+  }
+  .formControl:active, .formControl:hover, .formControl:focus {
+    border-color: rgb(239, 200, 26) !important; 
+    box-shadow: 0.5px 1px 10px 0.5px rgb(213, 213, 213) !important;
+  }
+  .formControl::placeholder {
+    color: rgb(163, 163, 163) !important;
+    font-size: 12px !important;
+    padding-left: 10px;
+  }
