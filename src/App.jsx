@@ -11,11 +11,9 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/dashboard/create-recipe" element={<CreateRecipe />} />
-      <Route path="/login" element={<Login/>} />
-      <Route path="/register" element={<Register/>} />
-      <Route path="/forgotpassword" element={<ForgotPassword/>} />
-
-
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
     </Routes>
   );
 }

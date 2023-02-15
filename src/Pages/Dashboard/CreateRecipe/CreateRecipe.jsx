@@ -12,23 +12,16 @@ import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 const CreateRecipe = () => {
   const MySwal = withReactContent(Swal);
 
-  const { data: dataAllRecipe } = useGetAllRecipeQuery();
   const [createRecipe, { isLoading, error }] = useCreateRecipeMutation();
   const [deleteRecipe, { error: errorDeleteRecipe, isSuccess }] = useDeleteRecipeByIdMutation();
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
-  const [videos, setVideos] = useState([
-    {
-      step: 1,
-      url: '',
-    },
-  ]);
+  const [videos, setVideos] = useState([{ step: 1, url: '' }]);
   const [stepVideo, setStepVideo] = useState(1);
   const [data, setData] = useState({
     title: '',
     photo: '',
     ingredients: '',
-    video: '',
   });
 
   const changeVideoHandler = (e, i) => {
@@ -41,7 +34,7 @@ const CreateRecipe = () => {
   };
 
   const renderInputVideo = () => {
-    console.log(videos);
+    console.log(data);
     const inputs = [];
     for (let i = 1; i < stepVideo; i++) {
       inputs.push(
@@ -49,7 +42,6 @@ const CreateRecipe = () => {
           <div className="col-2 d-flex gap-2">
             <span className="text-secondary mt-2 text-nowrap text-dark fw-semibold">Step :</span>
             <input type="number" className="text-center text-secondary form-control bg-transparent border-0 border-bottom rounded-0 outline-none" name="video" value={i + 1} disabled />
-            {setVideos((prev) => [...videos, { step: i + 1, url: '' }])}
           </div>
           <div className="col-10 d-flex gap-2">
             <span className="text-secondary mt-2 text-nowrap text-dark fw-semibold">Link : </span>
@@ -145,7 +137,7 @@ const CreateRecipe = () => {
                 <div className={`item rounded ${style.inputBackground} mx-auto d-flex flex-column p-3 px-5 gap-3`} id="thumbnail">
                   <div className="main-video d-flex gap-3">
                     <span className="text-secondary mt-2 text-nowrap text-dark fw-semibold">Video</span>
-                    <input type="text" className="form-control bg-transparent border-0 border-bottom rounded-0 outline-none" name="video" onChange={changeHandler} />
+                    <input type="text" className="form-control bg-transparent border-0 border-bottom rounded-0 outline-none" name="video" onChange={(e) => setVideos((prev) => (prev[0].url = e.target.value))} />
 
                     <FontAwesomeIcon className={`${style.addVideo} bg-light text-secondary rounded-circle p-2`} onClick={() => setStepVideo((prev) => prev + 1)} icon={faPlus} />
                   </div>
