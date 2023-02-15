@@ -1,121 +1,25 @@
 {
   "recipes": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "title": "asd",
+      "photo": "asd",
+      "ingredients": "asd",
+      "video": "asd",
+      "id": 1
     },
     {
-      "title": "title",
-      "photo": "photo.jpg",
-      "ingredients": "terasi",
-      "video": "url.laksdlsa",
+      "title": "https://youtu.be/G9p9dmpT4Wo",
+      "photo": "blob:http://localhost:5173/c15b043b-40ab-4ceb-b1d2-891f47e56b30",
+      "ingredients": "sayur, saos",
+      "video": "",
       "id": 2
     },
     {
-      "title": "asdas",
-      "photo": "asda",
-      "ingredients": "sadsa",
-      "video": "asdad",
+      "title": "Recep Laptop",
+      "photo": "blob:http://localhost:5173/8934c32c-c8e2-43d5-b8eb-fe517f8490f0",
+      "ingredients": "Baju, saos",
+      "video": "https://youtu.be/G9p9dmpT4Wo",
       "id": 3
-    },
-    {
-      "title": "asd",
-      "photo": "asd",
-      "ingredients": "asd",
-      "video": "asd",
-      "id": 4
-    },
-    {
-      "title": "sad",
-      "photo": "asd",
-      "ingredients": "sad",
-      "video": "ad",
-      "id": 5
-    },
-    {
-      "title": "asda",
-      "photo": "sd",
-      "ingredients": "asd",
-      "video": "asd",
-      "id": 6
-    },
-    {
-      "title": "asd",
-      "photo": "asda",
-      "ingredients": "ds",
-      "video": "ads",
-      "id": 7
-    },
-    {
-      "title": "asd",
-      "photo": "asd",
-      "ingredients": "ads",
-      "video": "asd",
-      "id": 8
-    },
-    {
-      "title": "asd",
-      "photo": "asd",
-      "ingredients": "asd",
-      "video": "asd",
-      "id": 9
-    },
-    {
-      "title": "asd",
-      "photo": "asd",
-      "ingredients": "ads",
-      "video": "asd",
-      "id": 10
-    },
-    {
-      "title": "asd",
-      "photo": "asd",
-      "ingredients": "asd",
-      "video": "asd",
-      "id": 11
-    },
-    {
-      "title": "asd",
-      "photo": "asd",
-      "ingredients": "asd",
-      "video": "ads",
-      "id": 12
-    },
-    {
-      "title": "asd",
-      "photo": "asd",
-      "ingredients": "ads",
-      "video": "sad",
-      "id": 13
-    },
-    {
-      "title": "asd",
-      "photo": "asd",
-      "ingredients": "ads",
-      "video": "sad",
-      "id": 14
-    },
-    {
-      "title": "asd",
-      "photo": "asd",
-      "ingredients": "ads",
-      "video": "sad",
-      "id": 15
-    },
-    {
-      "title": "123",
-      "photo": "123",
-      "ingredients": "123",
-      "video": "123",
-      "id": 16
-    },
-    {
-      "title": "123asd",
-      "photo": "123asd",
-      "ingredients": "123asd",
-      "video": "123asd",
-      "id": 17
     }
   ],
   "comments": [
