@@ -1,4 +1,5 @@
 import React, { Children } from 'react';
+import style from '../../Layout/AuthLayout/style.module.css';
 
 const InputFormAuth = (props) => {
   const changeHandler = (e) => {
@@ -7,10 +8,10 @@ const InputFormAuth = (props) => {
   return (
     <>
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">
+        <label for={name} class={`form-label ${style.formLabel}`}>
           {props.title}
         </label>
-        <input type={props.type} class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name={props.name} onChange={changeHandler} />
+        <input type={props.type} class="form-control" id={name} name={props.name} placeholder={props.title} onChange={changeHandler} />
       </div>
     </>
   );
