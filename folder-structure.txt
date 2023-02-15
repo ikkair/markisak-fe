@@ -1,0 +1,23 @@
+Components
+  - Navbar 
+  - Form
+    - InputFormAuth
+  - Layout 
+    - AuthLayout
+  - Card
+    - CardRecipeProfile
+    - CardRecipeSection
+  - Footer
+    - MainFooter
+    - SecodaryFooter
+  - MainSection
+  - Comment
+
+Pages
+  - Dashboard
+    - Profile
+    - CreateRecipe
+    - MyRecipe
+  - Home
+  - RecipeDetail
+  - RecipeVideoDetail
