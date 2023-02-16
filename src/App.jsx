@@ -3,12 +3,13 @@ import { Routes, Route } from 'react-router-dom';
 import CodeResetPassword from './Pages/CodeResetPassword/CodeResetPassword';
 import CreateRecipe from './Pages/Dashboard/CreateRecipe/CreateRecipe';
 import ForgotPassword from './Pages/ForgotPassword/ForgotPassword';
-import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
-import Register from './Pages/Register/Register';
-import ResetPassword from './Pages/ResetPassword/ResetPassword';
-import Profile from './Pages/Profile/Profile';
 import DetailVideo from './Pages/DetailVideo/DetailVideo';
+import ResetPassword from './Pages/ResetPassword/ResetPassword';
+import Register from './Pages/Register/Register';
+import NotFound from './Pages/PageNotFound/NotFound';
+import Profile from './Pages/Dashboard/Profile/Profile';
+import Home from './Pages/Home/Home';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/recipes/videos/:id" element={<DetailVideo />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

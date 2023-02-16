@@ -1,5 +1,5 @@
 import React from 'react';
-import Footer from '../../Components/Footer/Footer';
+import Footer from '../../Components/Footer/MainFooter';
 import MainLayout from '../../Components/Layout/MainLayout/MainLayout';
 import Navbar from './../../Components/Navbar/Navbar';
 import InputFormAddRecipe from './../../Components/Form/InputFormAddRecipe/InputFormAddRecipe';
