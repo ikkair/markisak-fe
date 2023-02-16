@@ -9,7 +9,7 @@ Components
     - CardRecipeSection
   - Footer
     - MainFooter
-    - SecodaryFooter
+    - SecondaryFooter
   - MainSection
   - Comment
 

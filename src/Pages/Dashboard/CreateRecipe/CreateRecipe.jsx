@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import Footer from '../../../Components/Footer/MainFooter';
 
 const CreateRecipe = () => {
   const MySwal = withReactContent(Swal);
@@ -163,6 +164,7 @@ const CreateRecipe = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
