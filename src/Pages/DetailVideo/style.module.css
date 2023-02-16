@@ -1,0 +1,44 @@
+.mainSection {
+  height: 100vh !important;
+}
+
+.videoSection {
+  height: 100vh !important;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.mainSection::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  height: 100%;
+  background-color: #efc81a;
+}
+
+.mainContent {
+  overflow-x: hidden;
+}
+
+.containerContent {
+  margin-top: 70px;
+}
+
+@media (max-width: 640px) {
+  .mainSection::before {
+    display: none;
+  }
+}
+
+@media (max-width: 990px) {
+  .mainSection {
+    height: inherit !important;
+  }
+  .videoSection {
+    height: inherit !important;
+    overflow-y: hidden;
+  }
+}
