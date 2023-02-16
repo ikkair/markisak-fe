@@ -9,6 +9,10 @@ import Register from './Pages/Register/Register';
 import ResetPassword from './Pages/ResetPassword/ResetPassword';
 import Profile from './Pages/Profile/Profile';
 import DetailVideo from './Pages/DetailVideo/DetailVideo';
+import DetailResep from './Pages/DetailResep/DetailResep';
+
+
+
 
 function App() {
   return (
@@ -22,6 +26,12 @@ function App() {
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/recipes/videos/:id" element={<DetailVideo />} />
+
+
+
+      <Route path="/detail-resep" element={<DetailResep />} />
+
+
     </Routes>
   );
 }
