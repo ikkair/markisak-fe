@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useCreateRecipeMutation, useDeleteRecipeByIdMutation, useGetAllRecipeQuery } from '../../../Features/recipe/recipeApi';
+import { useCreateRecipeMutation } from '../../../Features/recipe/recipeApi';
 import Navbar from './../../../Components/Navbar/Navbar';
 import photoLogo from '../../../assets/createRecipe/image.png';
 import style from './style.module.css';
@@ -14,11 +14,16 @@ const CreateRecipe = () => {
   const MySwal = withReactContent(Swal);
 
   const [createRecipe, { isLoading, error }] = useCreateRecipeMutation();
-  const [deleteRecipe, { error: errorDeleteRecipe, isSuccess }] = useDeleteRecipeByIdMutation();
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
-  const [videos, setVideos] = useState([{ step: 1, url: '' }]);
   const [stepVideo, setStepVideo] = useState(1);
+  const [videos, setVideos] = useState([
+    {
+      step: stepVideo,
+      url: '',
+    },
+  ]);
+
   const [data, setData] = useState({
     title: '',
     photo: '',
@@ -26,16 +31,21 @@ const CreateRecipe = () => {
   });
 
   const changeVideoHandler = (e, i) => {
+    console.log(videos);
     videos[i].url = e.target.value;
   };
 
   const inputDeleteHandler = (i) => {
     setStepVideo((prev) => prev - 1);
-    setVideos((prev) => prev.splice(i, 1));
+    setVideos((prev) => prev.slice(0, i));
+  };
+
+  const incrementVideos = () => {
+    setStepVideo((prev) => prev + 1);
+    setVideos((prev) => [...prev, { step: stepVideo + 1, url: '' }]);
   };
 
   const renderInputVideo = () => {
-    console.log(data);
     const inputs = [];
     for (let i = 1; i < stepVideo; i++) {
       inputs.push(
@@ -138,9 +148,17 @@ const CreateRecipe = () => {
                 <div className={`item rounded ${style.inputBackground} mx-auto d-flex flex-column p-3 px-5 gap-3`} id="thumbnail">
                   <div className="main-video d-flex gap-3">
                     <span className="text-secondary mt-2 text-nowrap text-dark fw-semibold">Video</span>
-                    <input type="text" className="form-control bg-transparent border-0 border-bottom rounded-0 outline-none" name="video" onChange={(e) => setVideos((prev) => (prev[0].url = e.target.value))} />
+                    <input
+                      type="text"
+                      className="form-control bg-transparent border-0 border-bottom rounded-0 outline-none"
+                      name="video"
+                      onChange={(e) => {
+                        console.log(videos);
+                        videos[0].url = e.target.value;
+                      }}
+                    />
 
-                    <FontAwesomeIcon className={`${style.addVideo} bg-light text-secondary rounded-circle p-2`} onClick={() => setStepVideo((prev) => prev + 1)} icon={faPlus} />
+                    <FontAwesomeIcon className={`${style.addVideo} bg-light text-secondary rounded-circle p-2`} onClick={() => incrementVideos()} icon={faPlus} />
                   </div>
 
                   <div className="row">{renderInputVideo()?.map((input) => input)}</div>
