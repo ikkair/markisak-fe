@@ -1,0 +1,45 @@
+.inputBackground {
+  background: #f6f5f4;
+}
+
+.title {
+  color: #2e266f;
+}
+
+.firstSectionImg {
+  position: relative;
+  z-index: 4;
+}
+
+.firstSection::after {
+  content: '';
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 250px;
+  background-color: #efc81a;
+  position: absolute;
+  z-index: 1;
+}
+
+.borderTitle {
+  border-left: 10px solid #efc81a;
+}
+
+.sectionContainer {
+  position: relative;
+  z-index: 4;
+}
+
+@media (max-width: 576px) {
+  .borderTitle {
+    border: none;
+    width: 40px;
+    white-space: nowrap;
+    border-bottom: 2px solid #efc81a;
+    font-size: 3em;
+  }
+  .sectionContainer {
+    padding-top: 0 !important;
+  }
+}
