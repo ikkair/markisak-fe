@@ -1,0 +1,16 @@
+.iconLogin {
+  width: 35px;
+  height: 35px;
+  background-color: #ffffff;
+}
+
+@media (max-width: 576px) {
+  .mainNavbar {
+    background: #efc81a !important;
+    padding: 20px;
+  }
+
+  .textWhite {
+    color: #ffffff !important;
+  }
+}
