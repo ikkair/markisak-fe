@@ -1,7 +1,7 @@
 {
   "recipes": [
     {
-      "title": "asd",
+      "title": "Chicken ayam KFC Pedas manis (Quick - Easy)",
       "photo": "asd",
       "ingredients": "asd",
       "video": "asd",
@@ -27,6 +27,12 @@
       "ingredients": "asd",
       "video": "ads",
       "id": 4
+    },
+    {
+      "title": "Burger King Tuan Crab",
+      "photo": "blob:http://localhost:5173/bfa9764b-81d9-4fbe-b4d8-35c86feb6031",
+      "ingredients": "sayur oncom",
+      "id": 5
     }
   ],
   "comments": [

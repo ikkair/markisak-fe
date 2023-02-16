@@ -10,6 +10,9 @@
   position: relative;
   z-index: 4;
 }
+.title {
+  margin-bottom: 30px;
+}
 
 .firstSection::after {
   content: '';
@@ -27,6 +30,7 @@
 }
 
 .sectionContainer {
+  margin-top: 50px;
   position: relative;
   z-index: 4;
 }
@@ -34,12 +38,12 @@
 @media (max-width: 576px) {
   .borderTitle {
     border: none;
-    width: 40px;
     white-space: nowrap;
-    border-bottom: 2px solid #efc81a;
-    font-size: 3em;
   }
   .sectionContainer {
-    padding-top: 0 !important;
+    margin-top: 0;
+  }
+  .title {
+    margin-bottom: 0;
   }
 }

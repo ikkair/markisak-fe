@@ -2,13 +2,25 @@
   background: #f6f5f4;
 }
 
+.inputSearch {
+  color: #6c757d;
+}
+
 .title {
   color: #2e266f;
+  transition: 1s ease-in;
 }
 
 .firstSectionImg {
   position: relative;
   z-index: 4;
+}
+
+.sectionImage {
+  position: relative;
+  z-index: 4;
+  max-width: 456px;
+  max-height: 456px;
 }
 
 .firstSection::after {
@@ -24,12 +36,6 @@
 
 .sectionDesc {
   font-size: 0.8em;
-}
-
-.sectionTitleContent {
-  width: 50px;
-  color: #3f3a3a;
-  border-bottom: 2px solid #6f6a40;
 }
 
 .colImg::after {
@@ -54,6 +60,38 @@
   height: 450px;
   background-color: #efc81a;
 }
+
+.underlineTitleRecipe {
+  width: 70px;
+  height: 4px;
+  background-color: #6c757d;
+}
+
+/* Chat */
+.chatContainer {
+  width: 300px;
+  height: 400px;
+  max-height: 350px;
+  z-index: 10;
+  bottom: 0;
+  right: 100px;
+  border-radius: 10px 10px 0 0;
+}
+
+.chatBody {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+/* End Chat */
+
+/* Popular Recipe */
+.borderBottom {
+  width: 70px;
+  height: 4px;
+  background-color: #efc81a;
+}
+/* End Popular Recipe */
 
 @media (max-width: 990px) {
   .firstSection::after {
@@ -98,17 +136,38 @@
 }
 
 @media (max-width: 590px) {
+  .inputBackground {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
   .sectionTitleContent {
     word-wrap: inherit !important;
   }
 }
 
 @media (max-width: 576px) {
+  .colImg2::after {
+    display: none;
+  }
+
+  .sectionImage {
+    position: relative;
+    z-index: 4;
+    max-width: inherit;
+    max-height: inherit;
+  }
   .inputBackground {
     margin-top: 10px;
+    color: #ffffff;
+  }
+  .inputSearch {
+    color: #ffffff !important;
+  }
+  .inputSearch::placeholder {
+    color: #ffffff !important;
   }
   .sectionTitleContent {
-    padding: 0 !important;
+    padding: 0;
   }
   .sectionTitleContent {
     border: none;
@@ -134,7 +193,7 @@
 
   .leftSide {
     position: absolute;
-    bottom: 80px;
+    bottom: 15%;
     align-items: end !important;
   }
 
