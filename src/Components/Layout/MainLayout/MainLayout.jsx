@@ -1,5 +1,5 @@
 import React from 'react';
-import Footer from '../../Footer/Footer';
+import MainFooter from '../../Footer/MainFooter';
 import Navbar from '../../Navbar/Navbar';
 import style from './style.module.css';
 
@@ -8,7 +8,7 @@ const MainLayout = ({ children }) => {
     <>
       <Navbar />
       <main className={`${style.mainContent} mt-5 `}>{children}</main>
-      <Footer />
+      <MainFooter />
     </>
   );
 };

@@ -1,5 +1,36 @@
 .footer {
   /* margin-top: 140px; */
   background-color: #EFC81A;
-  height: 400px;
+  height: 350px;
+}
+
+.secondaryFooter {
+  background-color: #EFC81A;
+  min-height: 43px;
+}
+
+.listInline {
+  padding-top: 100px;
+}
+
+.listInlineSecondary {
+  padding: 8px;
+}
+
+.head {
+  color: #2E266F;
+  padding-top: 80px;
+}
+
+.listLink {
+  color: #707070;
+  background-color: transparent;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.listLink:hover:active {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
 }
