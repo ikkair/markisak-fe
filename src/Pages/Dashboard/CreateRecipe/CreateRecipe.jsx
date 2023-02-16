@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
-import Footer from './../../../Components/Footer/Footer';
+import MainFooter from '../../../Components/Footer/MainFooter';
 
 const CreateRecipe = () => {
   const MySwal = withReactContent(Swal);
@@ -123,7 +123,7 @@ const CreateRecipe = () => {
   return (
     <>
       <Navbar />
-      <div className="container pb-5">
+      <div className="container mt-4 pb-5">
         <div className="row">
           <div className="col-12 ">
             <div className="row">
@@ -174,7 +174,7 @@ const CreateRecipe = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      <MainFooter />
     </>
   );
 };

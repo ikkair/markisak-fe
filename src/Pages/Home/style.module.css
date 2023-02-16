@@ -1,0 +1,148 @@
+.inputBackground {
+  background: #f6f5f4;
+}
+
+.title {
+  color: #2e266f;
+}
+
+.firstSectionImg {
+  position: relative;
+  z-index: 4;
+}
+
+.firstSection::after {
+  content: '';
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 250px;
+  background-color: #efc81a;
+  position: absolute;
+  z-index: 1;
+}
+
+.sectionDesc {
+  font-size: 0.8em;
+}
+
+.sectionTitleContent {
+  width: 50px;
+  color: #3f3a3a;
+  border-bottom: 2px solid #6f6a40;
+}
+
+.colImg::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  left: 110px;
+  top: 40px;
+  width: 400px;
+  height: 450px;
+  border-radius: 15px;
+  border: 4px solid #efc81a;
+}
+
+.colImg2::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  right: 200px;
+  bottom: 40px;
+  width: 400px;
+  height: 450px;
+  background-color: #efc81a;
+}
+
+@media (max-width: 990px) {
+  .firstSection::after {
+    width: 200px;
+    height: 80% !important;
+  }
+  .colImg::after {
+    left: 50px;
+    top: 30px;
+    width: 336px;
+    height: 336px;
+  }
+
+  .colImg2::after {
+    right: 50px;
+    bottom: 30px;
+    width: 336px;
+    height: 336px;
+  }
+}
+@media (max-width: 768px) {
+  .title {
+    font-size: 1em !important;
+  }
+  .firstSection::after {
+    width: 100px;
+    height: 75% !important;
+  }
+  .colImg::after {
+    left: -10px;
+    top: 20px;
+    width: 246px;
+    height: 246px;
+  }
+
+  .colImg2::after {
+    right: 35px;
+    bottom: 25px;
+    width: 246px;
+    height: 246px;
+  }
+}
+
+@media (max-width: 590px) {
+  .sectionTitleContent {
+    word-wrap: inherit !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .inputBackground {
+    margin-top: 10px;
+  }
+  .sectionTitleContent {
+    padding: 0 !important;
+  }
+  .sectionTitleContent {
+    border: none;
+    margin-top: 10px;
+  }
+  .sectionDesc {
+    font-size: inherit;
+    margin-top: 0 !important;
+  }
+
+  .firstSection {
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../assets/Home/bg-landing-page.jpg') !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .title {
+    color: #ffffff !important;
+    font-size: 1.3em !important;
+  }
+
+  .leftSide {
+    position: absolute;
+    bottom: 80px;
+    align-items: end !important;
+  }
+
+  .colImg::after {
+    display: none;
+  }
+
+  .firstSection::after {
+    display: none;
+  }
+}
