@@ -26,7 +26,7 @@ const AuthLayout = ({ children, title, description }) => {
                 </div>
                 <div className={`${style.inputField} text-start mt-4`}>
                   <div className="row justify-content-center">
-                    <div className="col-lg-6 col-md-8 col-sm-8 col-10">{children}</div>
+                    <div className="col-lg-6 col-md-8 col-sm-6 col-10">{children}</div>
                   </div>
                 </div>
               </div>
