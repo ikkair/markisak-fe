@@ -8,6 +8,7 @@ import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
 import ResetPassword from './Pages/ResetPassword/ResetPassword';
 import Profile from './Pages/Dashboard/Profile/Profile';
+import NotFound from './Pages/PageNotFound/NotFound';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Route path="/code-reset-password" element={<CodeResetPassword/>} />
       <Route path="/reset-password" element={<ResetPassword/>} />
       <Route path="/profile" element={<Profile/>} />
+      <Route path="*" element={<NotFound/>} />
 
     </Routes>
   );
