@@ -123,7 +123,7 @@ const CreateRecipe = () => {
   return (
     <>
       <Navbar />
-      <div className="container pb-5">
+      <div className="container mt-4 pb-5">
         <div className="row">
           <div className="col-12 ">
             <div className="row">
