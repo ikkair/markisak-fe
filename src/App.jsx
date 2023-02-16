@@ -10,6 +10,7 @@ import Register from './Pages/Register/Register';
 import NotFound from './Pages/PageNotFound/NotFound';
 import Profile from './Pages/Dashboard/Profile/Profile';
 import Home from './Pages/Home/Home';
+import DetailResep from './Pages/DetailResep/DetailResep';
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
       <Route path="/profile" element={<Profile />} />
       <Route path="/recipes/videos/:id" element={<DetailVideo />} />
       <Route path="*" element={<NotFound />} />
+      <Route path="/detail-resep" element={<DetailResep/>} />
+
+      
     </Routes>
   );
 }
