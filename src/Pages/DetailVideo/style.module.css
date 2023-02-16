@@ -39,5 +39,6 @@
   }
   .videoSection {
     height: inherit !important;
+    overflow-y: hidden;
   }
 }
