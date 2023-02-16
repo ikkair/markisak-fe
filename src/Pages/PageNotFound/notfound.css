@@ -32,7 +32,7 @@ body {
 }
 
 .circles p {
-    font-size: 200px;
+    font-size: 100px;
     color: black;
     padding-top: 20px;
     position: relative;
@@ -41,7 +41,7 @@ body {
 }
 
 .circles p small {
-    font-size: 40px;
+    font-size: 50px;
     line-height: 100%;
     vertical-align: top;
 }

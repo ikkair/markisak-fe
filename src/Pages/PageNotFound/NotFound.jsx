@@ -10,7 +10,11 @@ const NotFound = () => {
             <div class="circles">
                 <img src={logo} alt="" style={{ marginTop: "100px" }} />
                 <p>404<br />
-                    <small>PAGE NOT FOUND</small>
+                    <small>PAGE NOT FOUND<br />
+                    <Link to="/" className="text-center" style={{ color: 'black', fontSize: "40px" }}>
+                        Back Home
+                    </Link>
+                    </small>
                 </p>
                 <span class="circle big"></span>
                 <span class="circle med"></span>
