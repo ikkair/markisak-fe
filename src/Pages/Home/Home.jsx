@@ -25,7 +25,6 @@ import { EffectCoverflow, Pagination } from 'swiper';
 
 const Home = () => {
   const { data: recipes, isLoading, error } = useGetAllRecipeQuery();
-  const { data: recipe } = useGetRecipeByIdQuery(1);
 
   const chat = document.querySelector('#chat');
   const closeChat = document.querySelector('#closeChat');
@@ -43,9 +42,8 @@ const Home = () => {
     });
 
     closeChat?.addEventListener('click', () => {
-      if (chat?.classList.contains('showChat')) {
-        chat?.classList.remove('showChat');
-      }
+      console.log('tes');
+      chat?.classList.toggle('showChat');
     });
   }, [chat, closeChat]);
   return (
@@ -169,7 +167,7 @@ const Home = () => {
         <div className="row">
           <div id="chatHeader" className={`col-12 align-self-start d-flex align-items-center justify-content-between px-4 py-2 shadow-sm ${style.chatHeader}`}>
             <span className="text-light">Admin</span>
-            <FontAwesomeIcon id="closeChat" className="text-light me-1 fs-3 d-sm-none" icon={faXmark} />
+            <FontAwesomeIcon id="closeChat" className={`${style.closeIcon} text-light me-1 fs-3 d-sm-none`} icon={faXmark} />
           </div>
           <div className={`col-12 ${style.chatBody} px-4 align-self-start d-flex flex-column justify-content-end bg-light gap-2 pb-2`}>
             <span className={`${style.chatSection} ${style.leftSideChat} p-2`}>loremlormlorem</span>
