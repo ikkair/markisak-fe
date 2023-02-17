@@ -7,32 +7,36 @@ import Card from '../../../Components/Profile/Card';
 import style from './style.module.css';
 import img from '../../../assets/Profile/img1.png';
 import img2 from '../../../assets/Profile/img2.png';
+import { useGetAllRecipeQuery } from '../../../Features/recipe/recipeApi'
 
 const Profile = () => {
-  let Cards = [
-    {
-      id: 1,
-      name: 'Bomb Chicken',
-      photo: `${img}`,
-    },
-    {
-      id: 2,
-      name: 'Bananas Pancake',
-      photo: `${img2}`,
-    },
+  // let Cards = [
+  //   {
+  //     id: 1,
+  //     name: 'Bomb Chicken',
+  //     photo: `${img}`,
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'Bananas Pancake',
+  //     photo: `${img2}`,
+  //   },
 
-    {
-      id: 3,
-      name: 'Bananas Pancake',
-      photo: `${img2}`,
-    },
+  //   {
+  //     id: 3,
+  //     name: 'Bananas Pancake',
+  //     photo: `${img2}`,
+  //   },
 
-    {
-      id: 4,
-      name: 'Bananas Pancake',
-      photo: `${img2}`,
-    },
-  ];
+  //   {
+  //     id: 4,
+  //     name: 'Bananas Pancake',
+  //     photo: `${img2}`,
+  //   },
+  // ];
+
+  const { data: recipes, isLoading, error } = useGetAllRecipeQuery();
+  console.log(recipes);
   return (
     <div>
       <Navbar />
@@ -62,12 +66,12 @@ const Profile = () => {
               </li>
             </ul>
           </div>
-          <div className="container mb-5">
-            <div className="d-flex flex-wrap gap-2">
-              {Cards.map((card, i) => (
-                <Card key={i} item={card} />
+          <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-4 g-3">
+            {isLoading
+              ? 'Loading...'
+              : recipes?.map((recipe, i) => (
+                <Card key={i} item={recipe} />
               ))}
-            </div>
           </div>
         </div>
       </div>

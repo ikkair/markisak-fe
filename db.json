@@ -33,6 +33,12 @@
       "photo": "blob:http://localhost:5173/bfa9764b-81d9-4fbe-b4d8-35c86feb6031",
       "ingredients": "sayur oncom",
       "id": 5
+    },
+    {
+      "title": "Sate Madura",
+      "photo": "blob:http://127.0.0.1:5173/29f1a9dc-5343-4f98-8f53-f893c2461bda",
+      "ingredients": "tes",
+      "id": 6
     }
   ],
   "comments": [

@@ -3,11 +3,25 @@
     width: 18rem;
 }
 
+.card:hover {
+
+}
+
 .cardBody h5 {
     position: absolute;
     color: white;
     bottom: 20px;
     left: 20px;
-    width: 55px;
+    width: 195px;
     ;
+}
+
+.img {
+    max-width: 400px;
+    max-height: 250px;
+    filter: brightness(50%);
+}
+
+.img:hover {
+    filter: brightness(100%);
 }
