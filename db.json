@@ -38,6 +38,11 @@
       "email": "ilham@gmail.com",
       "password": "password",
       "id": 6
+    },
+    {
+      "title": "Ayam Bakar Pijar",
+      "ingredients": "- 2 eggs\n- 2 tbsp mayonnaise\n- 3 slices bread\n- a little butter\n- ⅓ carton of cress\n- 2-3 slices of tomato or a lettuce leaf\nand a slice of ham or cheese\n- crisps , to serve",
+      "id": 7
     }
   ],
   "liked-recipes": [
@@ -45,6 +50,11 @@
       "id": 1,
       "id_user": 1,
       "id_recipe": 1
+    },
+    {
+      "id_recipe": "1",
+      "id_user": 1,
+      "id": 2
     }
   ],
   "saved-recipes": [
@@ -52,6 +62,16 @@
       "id": 1,
       "id_user": 1,
       "id_recipe": 1
+    },
+    {
+      "id_recipe": "1",
+      "id_user": 1,
+      "id": 2
+    },
+    {
+      "id_recipe": "1",
+      "id_user": 1,
+      "id": 3
     }
   ],
   "comments": [
