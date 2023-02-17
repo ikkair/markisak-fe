@@ -16,7 +16,6 @@ const recipeApi = apiSlice.injectEndpoints({
       query: (id) => ({
         url: `recipes/${id}`,
       }),
-      providesTags: (result, error, arg) => (result ? [...result.map((data) => ({ type: 'Recipe', data }))] : ['Recipe']),
       transformResponse: (response, meta, arg) => response,
     }),
 
