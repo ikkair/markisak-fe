@@ -10,7 +10,7 @@ import imgFood from '../../assets/Home/food.png';
 import imgFood2 from '../../assets/Home/food2.png';
 import imgFood3 from '../../assets/Home/food3.png';
 import LandingPageSection from './../../Components/Section/LandingPageSection/LandingPageSection';
-import { useGetAllRecipeQuery } from '../../Features/recipe/recipeApi';
+import { useGetAllRecipeQuery, useGetRecipeByIdQuery } from '../../Features/recipe/recipeApi';
 import { Link } from 'react-router-dom';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -25,12 +25,15 @@ import { EffectCoverflow, Pagination } from 'swiper';
 
 const Home = () => {
   const { data: recipes, isLoading, error } = useGetAllRecipeQuery();
+  const { data: recipe } = useGetRecipeByIdQuery(1);
+
   const chat = document.querySelector('#chat');
-  const chatHeader = document.querySelector('#chatHeader');
-  const chatIcon = document.querySelector('#chatIcon');
   const closeChat = document.querySelector('#closeChat');
 
   useEffect(() => {
+    const chatHeader = document.querySelector('#chatHeader');
+    const chatIcon = document.querySelector('#chatIcon');
+
     chatHeader?.addEventListener('click', () => {
       chat?.classList.toggle('showChat');
     });
