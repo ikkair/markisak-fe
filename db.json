@@ -59,6 +59,12 @@
       "id": 1,
       "body": "some comment",
       "postId": 1
+    },
+    {
+      "id_recipe": 1,
+      "id_user": 1,
+      "message": "Hello World!",
+      "id": 2
     }
   ],
   "videos": {
