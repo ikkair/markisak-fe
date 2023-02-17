@@ -33,6 +33,25 @@
       "photo": "blob:http://localhost:5173/bfa9764b-81d9-4fbe-b4d8-35c86feb6031",
       "ingredients": "sayur oncom",
       "id": 5
+    },
+    {
+      "email": "ilham@gmail.com",
+      "password": "password",
+      "id": 6
+    }
+  ],
+  "liked-recipes": [
+    {
+      "id": 1,
+      "id_user": 1,
+      "id_recipe": 1
+    }
+  ],
+  "saved-recipes": [
+    {
+      "id": 1,
+      "id_user": 1,
+      "id_recipe": 1
     }
   ],
   "comments": [
