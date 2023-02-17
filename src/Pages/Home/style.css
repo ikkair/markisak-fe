@@ -15,3 +15,7 @@
   display: block;
   width: 100%;
 }
+
+.showChat {
+  transform: translateY(0) !important;
+}

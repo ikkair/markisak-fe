@@ -1,12 +1,41 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import style from './style.module.css';
 
 const Navbar = () => {
+  const navbar = document.querySelector('#navbar');
+  const navMenu = document.querySelectorAll('.nav-link');
+
+  function changeColorMenu() {
+    navMenu?.forEach((menu) => {
+      if (window.pageYOffset > 60) {
+        menu.style.color = '#ffffff';
+      } else {
+        menu.style.color = '#000000';
+      }
+    });
+  }
+
+  function changeBackgroundNavbar() {
+    if (window.pageYOffset > 60) {
+      navbar.style.backgroundColor = '#efc81a';
+      navbar.style.padding = '0 !important';
+    } else {
+      navbar.style.backgroundColor = 'inherit';
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', (e) => {
+      changeColorMenu();
+      changeBackgroundNavbar();
+    });
+  }, [navbar]);
+
   return (
-    <nav className={`${style.mainNavbar} navbar navbar-expand-sm pt-3 fixed-top`}>
+    <nav id="navbar" className={`${style.mainNavbar} navbar navbar-expand-sm pt-3 fixed-top`}>
       <div className="container">
         <Link className={`${style.textWhite} navbar-brand d-sm-none`} to="#">
           Markisak
@@ -37,7 +66,7 @@ const Navbar = () => {
               <span className={`${style.iconLogin} d-md-flex align-items-center me-2 justify-content-center rounded-circle border border-1`}>
                 <FontAwesomeIcon icon={faUser} />
               </span>
-              <span>Login</span>
+              <span className="text-light">Login</span>
             </Link>
             <Link to="/login" className="text-decoration-none text-dark d-flex d-md-none align-items-center">
               <FontAwesomeIcon className={`${style.textWhite} me-2`} icon={faUser} />
