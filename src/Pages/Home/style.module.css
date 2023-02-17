@@ -89,6 +89,11 @@
   cursor: pointer;
 }
 
+.closeIcon {
+  position: relative;
+  z-index: 10;
+}
+
 .chatBody {
   width: 100% !important;
   overflow-y: scroll;

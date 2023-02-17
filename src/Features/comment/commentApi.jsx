@@ -1,11 +1,21 @@
 import { apiSlice } from '../../Api/authApi';
 
+apiSlice.enhanceEndpoints({ addTagTypes: ['Comment'] });
+
 const commentApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllComment: builder.query({
-      query: () => ({
-        url: 'comments',
-      }),
+      query: (id) => {
+        if (id) {
+          return {
+            url: `comments?id_recipe=${id}`,
+          };
+        }
+        return {
+          url: 'comments',
+        };
+      },
+      providesTags: (result, error, arg) => (result ? [...result.map((data) => ({ type: 'Comment', data }))] : ['Comment']),
       transformResponse: (response, meta, arg) => response,
     }),
 
@@ -13,6 +23,7 @@ const commentApi = apiSlice.injectEndpoints({
       query: (id) => ({
         url: `comments/${id}/recipes`,
       }),
+      providesTags: (result, error, arg) => (result ? [...result.map((data) => ({ type: 'Comment', data }))] : ['Comment']),
       transformResponse: (response, meta, arg) => response,
     }),
 
@@ -23,6 +34,7 @@ const commentApi = apiSlice.injectEndpoints({
         body: data,
       }),
 
+      invalidatesTags: ['Comment'],
       transformResponse: (response, meta, arg) => response,
     }),
 
@@ -47,4 +59,4 @@ const commentApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetAllLikedRecipeApiQuery, useGetLikedRecipeByIdQuery, useCreateLikedRecipeMutation, useUpdateLikedRecipeMutation, useDeleteLikedRecipeMutation, useGetLikedRecipeByIdUserQuery } = commentApi;
+export const { useGetAllCommentQuery, useGetCommentByIdRecipeQuery, useCreateCommentMutation, useUpdateCommentMutation, useDeleteCommentsMutation } = commentApi;
