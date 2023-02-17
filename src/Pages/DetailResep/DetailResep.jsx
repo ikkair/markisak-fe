@@ -6,7 +6,6 @@ import Navbar from '../../Components/Navbar/Navbar'
 import MainFooter from '../../Components/Footer/MainFooter'
 import InputFormAddRecipe from '../../Components/Form/InputFormAddRecipe/InputFormAddRecipe'
 import profil from '../../assets/detailResep/ProfileComment.png'
-// import InputFormAuth from '../../Components/Form/InputFormAuth/InputFormAuth'
 
 const DetailResep = () => {
 
@@ -17,7 +16,7 @@ const DetailResep = () => {
             <main className={`container ${style.contentDetail}`}>
                 <div className="row justify-content-center mb-5">
                     <div className="col-md-10 col-12 col-sm-12">
-                        <h1 className='text-center fw-normal'>Lorem Ipsum</h1>
+                        <h1 className='text-center fw-normal' style={{color : "rgba(46, 38, 111, 1)"}}>Lorem Ipsum</h1>
                         <img src={examplePicture} className={`img-fluid ${style.imageDetail} d-block mx-auto mt-5 mb-5`} alt="" />
                         <h4 className='ingredients fw-semibold mt-5'>Ingredients</h4>
                         <p className='mb-5'> - 2 eggs <br />
@@ -67,7 +66,6 @@ const DetailResep = () => {
                 
             </main>
             <MainFooter/>
-
         </>
     )
 }

@@ -132,7 +132,7 @@ const Home = () => {
               {isLoading
                 ? 'Loading...'
                 : recipes?.map((recipe, i) => (
-                    <SwiperSlide>
+                    <SwiperSlide key={i}>
                       <Link to={'/home'} className={'position-relative'}>
                         <img src={`https://source.unsplash.com/300x30${i}/?food`} />
                         <span className="position-absolute text-light">{recipe?.title}</span>
