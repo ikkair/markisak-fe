@@ -31,7 +31,6 @@ const CreateRecipe = () => {
   });
 
   const changeVideoHandler = (e, i) => {
-    console.log(videos);
     videos[i].url = e.target.value;
   };
 

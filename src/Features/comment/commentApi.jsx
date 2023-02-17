@@ -5,6 +5,16 @@ apiSlice.enhanceEndpoints({ addTagTypes: ['Comment'] });
 const commentApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllComment: builder.query({
+      query: () => {
+        return {
+          url: 'comments',
+        };
+      },
+      providesTags: (result, error, arg) => (result ? [...result.map((data) => ({ type: 'Comment', data }))] : ['Comment']),
+      transformResponse: (response, meta, arg) => response,
+    }),
+
+    getCommentByIdRecipe: builder.query({
       query: (id) => {
         if (id) {
           return {
@@ -15,14 +25,7 @@ const commentApi = apiSlice.injectEndpoints({
           url: 'comments',
         };
       },
-      providesTags: (result, error, arg) => (result ? [...result.map((data) => ({ type: 'Comment', data }))] : ['Comment']),
-      transformResponse: (response, meta, arg) => response,
-    }),
 
-    getCommentByIdRecipe: builder.query({
-      query: (id) => ({
-        url: `comments/${id}/recipes`,
-      }),
       providesTags: (result, error, arg) => (result ? [...result.map((data) => ({ type: 'Comment', data }))] : ['Comment']),
       transformResponse: (response, meta, arg) => response,
     }),

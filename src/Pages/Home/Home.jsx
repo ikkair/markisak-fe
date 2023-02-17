@@ -22,9 +22,11 @@ import './style.css';
 
 // import required modules
 import { EffectCoverflow, Pagination } from 'swiper';
+import { useSelector } from 'react-redux';
 
 const Home = () => {
   const { data: recipes, isLoading, error } = useGetAllRecipeQuery();
+  const user = useSelector((state) => state.auth.token);
 
   const chat = document.querySelector('#chat');
   const closeChat = document.querySelector('#closeChat');
