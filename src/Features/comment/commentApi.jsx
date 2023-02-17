@@ -59,4 +59,4 @@ const commentApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetAllLikedRecipeApiQuery, useGetLikedRecipeByIdQuery, useCreateLikedRecipeMutation, useUpdateLikedRecipeMutation, useDeleteLikedRecipeMutation, useGetLikedRecipeByIdUserQuery } = commentApi;
+export const { useGetAllCommentQuery, useGetCommentByIdRecipeQuery, useCreateCommentMutation, useUpdateCommentMutation, useDeleteCommentsMutation } = commentApi;
