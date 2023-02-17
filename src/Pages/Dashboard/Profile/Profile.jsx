@@ -5,8 +5,34 @@ import SecondaryFooter from '../../../Components/Footer/SecondaryFooter';
 import Navbar from '../../../Components/Navbar/Navbar';
 import Card from '../../../Components/Profile/Card';
 import style from './style.module.css';
+import img from '../../../assets/Profile/img1.png';
+import img2 from '../../../assets/Profile/img2.png';
 
 const Profile = () => {
+  let Cards = [
+    {
+      id: 1,
+      name: 'Bomb Chicken',
+      photo: `${img}`,
+    },
+    {
+      id: 2,
+      name: 'Bananas Pancake',
+      photo: `${img2}`,
+    },
+
+    {
+      id: 3,
+      name: 'Bananas Pancake',
+      photo: `${img2}`,
+    },
+
+    {
+      id: 4,
+      name: 'Bananas Pancake',
+      photo: `${img2}`,
+    },
+  ];
   return (
     <div>
       <Navbar />
@@ -36,7 +62,13 @@ const Profile = () => {
               </li>
             </ul>
           </div>
-          <Card />
+          <div className="container mb-5">
+            <div className="d-flex flex-wrap gap-2">
+              {Cards.map((card, i) => (
+                <Card key={i} item={card} />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
       <SecondaryFooter />
