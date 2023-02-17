@@ -1,63 +1,78 @@
 * {
-    padding: 0;
-    margin: 0;
-    font-family: 'MetropolisNF', sans-serif;
-  }
-  
-  /* SideLeft */
-  
-  .sideLeft {
-    background-position: center center;
+  padding: 0;
+  margin: 0;
+  font-family: 'MetropolisNF', sans-serif;
+}
+
+/* SideLeft */
+
+.sideLeft {
+  /* background-position: center center;
     background-size:cover;
     overflow: hidden;
-    background: linear-gradient(rgba(239, 200, 26, 0.8), rgba(239, 200, 26, 0.8)), url('../../../assets/Authpage/image 15.png');
-  }
-  
-  .sideLeft img {
-    width: 120px;
-  }
-  
-  .sideLeft p{
-    margin-top: 20px;
-    color: white;
-    font-weight: 500;
-  }
-  
-  /* SideRigth */
-  .sideRight img {
-    display: block;
-    margin: auto;
-    width: 50px;
-    margin-bottom: 10px;
-  }
-  .sideRight header h3 {
-    color: rgb(239, 200, 26);
-    font-weight: 700;
-  }
-  .sideRight header p {
-    color: rgb(135, 135, 135);
-    font-weight: lighter;
-  }
+    height: 100vh;
+    background: linear-gradient(rgba(239, 200, 26, 0.8), rgba(239, 200, 26, 0.8)), url('../../../assets/Authpage/image 15.png'); */
+  background-image: linear-gradient(to top, rgba(241, 188, 15, 0.82), rgba(241, 188, 15, 0.82)), url('../../../assets/Authpage/image 15.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  background-position: center;
+}
 
-  /* Custom Checkbox */
+.sideLeft img {
+  width: 120px;
+}
 
-  #flexCheckDefault:checked, #flexCheckDefault:focus {
-    background-color: rgb(239, 200, 26) !important;
-    border: white !important;
-    box-shadow: 0.5px 1px 10px 1px rgb(255, 255, 255) !important;
-  }
+.sideLeft p {
+  margin-top: 20px;
+  color: white;
+  font-weight: 500;
+}
 
-  /* Input */
-  .formLabel {
-    color: grey;
-    font-size: 14px;
-  }
-  .formControl:active, .formControl:hover, .formControl:focus {
-    border-color: rgb(239, 200, 26) !important; 
-    box-shadow: 0.5px 1px 10px 0.5px rgb(213, 213, 213) !important;
-  }
-  .formControl::placeholder {
-    color: rgb(191, 191, 191) !important;
-    font-size: 13px !important;
-    padding-left: 10px;
-  }
+/* SideRigth */
+.sideRight img {
+  display: block;
+  margin: auto;
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+.sideRight header h3 {
+  color: rgb(239, 200, 26);
+  font-weight: 700;
+}
+
+.sideRight header p {
+  color: rgb(135, 135, 135);
+  font-weight: lighter;
+}
+
+/* Custom Checkbox */
+
+#flexCheckDefault:checked,
+#flexCheckDefault:focus {
+  background-color: rgb(239, 200, 26) !important;
+  border: white !important;
+  box-shadow: 0.5px 1px 10px 1px rgb(255, 255, 255) !important;
+}
+
+/* Input */
+.formLabel {
+  color: grey;
+  font-size: 14px;
+}
+
+.formControl:active,
+.formControl:hover,
+.formControl:focus {
+  border-color: rgb(239, 200, 26) !important;
+  box-shadow: 0.5px 1px 10px 0.5px rgb(213, 213, 213) !important;
+}
+
+.formControl::placeholder {
+  color: rgb(191, 191, 191) !important;
+  font-size: 13px !important;
+  padding-left: 10px;
+}

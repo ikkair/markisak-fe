@@ -46,7 +46,7 @@
     width: 100%;
     padding: 12px;
     background-color: rgb(255, 255, 255);
-    margin-bottom: 40px;
+    margin-bottom: -5px;
     border-radius: 10px;
     box-shadow: 0px 0px 5px 1px rgb(226, 226, 226);
     transition: transform .2s;
@@ -58,8 +58,10 @@
 }
 .data {
     height: auto;
+    padding-bottom: 0;
 }
 .commentList .name {
+    margin-top: 15px;
     margin-bottom: -5px;
 }
 .commentList img {
