@@ -5,7 +5,7 @@ import style from '../Footer/style.module.css';
 const MainFooter = () => {
   return (
     <div>
-      <footer className={`container-fluid ${style.footer}`}>
+      <footer className={`container-fluid mt-5 ${style.footer}`}>
         <div className="row">
           <div className={`text-center ${style.head}`}>
             <h1>Eat, Cook, Repeat</h1>

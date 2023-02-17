@@ -10,7 +10,7 @@ const Profile = () => {
   return (
     <div>
       <Navbar />
-      <div className="container mb-2">
+      <div className="container mt-5 mb-2 min-vh-100">
         <div className="row">
           <div className="profil text-center py-5">
             <img className="rounded-circle mb-3" width={95} height={90} src={profile} alt="img" />
@@ -36,9 +36,9 @@ const Profile = () => {
               </li>
             </ul>
           </div>
+          <Card />
         </div>
       </div>
-      <Card />
       <SecondaryFooter />
     </div>
   );
