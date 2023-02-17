@@ -25,7 +25,7 @@ function App() {
       <Route path="/profile" element={<Profile />} />
       <Route path="/recipes/videos/:id" element={<DetailVideo />} />
       <Route path="*" element={<NotFound />} />
-      <Route path="/detail-resep" element={<DetailResep/>} />
+      <Route path="/recipes/:id" element={<DetailResep/>} />
 
       
     </Routes>
