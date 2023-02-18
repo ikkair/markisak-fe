@@ -13,6 +13,7 @@ import Home from './Pages/Home/Home';
 import DetailResep from './Pages/DetailResep/DetailResep';
 import AuthMiddleware from './Middleware/AuthMiddleware';
 import UpdateRecipe from './Pages/Dashboard/UpdateRecipe/UpdateRecipe';
+import Recipes from './Pages/Recipes/Recipes';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
       <Route path="/recipes/videos/:id" element={<DetailVideo />} />
       <Route path="*" element={<NotFound />} />
       <Route path="/recipes/:id" element={<DetailResep />} />
+      <Route path="/recipes" element={<Recipes />} />
     </Routes>
   );
 }

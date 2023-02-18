@@ -12,6 +12,15 @@
   transition: 0.2s ease;
 }
 
+.profileUser {
+  width: 36px;
+  height: 36px;
+}
+
+.userName {
+  color: #ffffff;
+}
+
 @media (max-width: 990px) {
   .textWhite {
     margin-right: 2em;
@@ -21,6 +30,9 @@
 @media (max-width: 768px) {
   .textWhite {
     margin-right: 1.5em;
+  }
+  .userName {
+    color: #000000;
   }
 }
 
