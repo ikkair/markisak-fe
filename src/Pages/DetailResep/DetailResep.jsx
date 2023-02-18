@@ -16,6 +16,7 @@ import { useCreateLikedRecipeMutation } from '../../Features/likedRecipe/likedRe
 import { useCreateSavedRecipeMutation } from '../../Features/savedRecipe/savedRecipe';
 import { useCreateCommentMutation, useGetAllCommentQuery, useGetCommentByIdRecipeQuery } from '../../Features/comment/commentApi';
 import MyVerticallyCenteredModal from '../../Components/ModalButton/ModalButton';
+import ModalDelete from '../../Components/ModalDelete';
 
 const DetailResep = () => {
   const MySwal = withReactContent(Swal);
@@ -26,8 +27,8 @@ const DetailResep = () => {
   const [createComment, { isLoading: loadingComment, error: errorComment, isSucces }] = useCreateCommentMutation();
 
   // const { data : comment } = useGetAllCommentQuery(id)
-  console.log(recipe)
   console.log(recipe?.id_user)
+  console.log(recipe?.comments);
 
 
   const [message, setMessage] = useState('');
@@ -130,15 +131,24 @@ const DetailResep = () => {
             {/* <h1>{recipe.message}</h1> */}
 
             {recipe?.comments.map(comment => (
-                        <div className={`${style.commentList} mt-4`}>
-                            <img crossOrigin='Anonymous' src={comment.photo} alt="" />
+                        // console.log(comment.id)
+                        // console.log(recipe.id)
+                        <div className={`${style.commentList} mt-4 position-relative`}>
+                            <img crossOrigin='Anonymous' src={profil} alt="" />
                             <div className={`${style.data} ms-4`}>
                                 <p className={`${style.name} fw-bold`}>{comment.name}</p>
                                 <p>{comment.message}</p>
+                                <ModalDelete
+                                id={comment.id}
+                                idRecipe ={recipe.id}
+                                >
+                                  Delete
+                                </ModalDelete>
+
+                                {/* <button className={`position-absolute ${style.delete}`}>Delete</button> */}
                             </div>
                         </div>
-
-                        ))} 
+            ))} 
           </div>
         </div>
       </main>
