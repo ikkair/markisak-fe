@@ -5,11 +5,19 @@ apiSlice.enhanceEndpoints({ addTagTypes: ['Recipe'] });
 const recipeApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllRecipe: builder.query({
-      query: () => ({
-        url: 'recipe',
-      }),
-      providesTags: (result, error, arg) => (result ? [...result.map((data) => ({ type: 'Recipe', data }))] : ['Recipe']),
-      transformResponse: (response, meta, arg) => response.data,
+      query: ({ search, limit, sortBy, sort, page }) => {
+        if (search) {
+          return {
+            url: `recipe?search=${search}&page=${page || 1}&limit=${limit || 8}&sortBy=${sortBy || 'like_count'}&sort=${sort || 'desc'}`,
+          };
+        }
+
+        return {
+          url: `recipe?page=${page || 1}&limit=${limit || 8}&sortBy=${sortBy || 'like_count'}&sort=${sort || 'desc'}`,
+        };
+      },
+      providesTags: (result, error, arg) => (result ? [...result.data.map((data) => ({ type: 'Recipe', data }))] : ['Recipe']),
+      transformResponse: (response, meta, arg) => response,
     }),
 
     getRecipeById: builder.query({

@@ -1,11 +1,28 @@
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import style from './style.module.css';
+import photoDefault from '../../assets/Profile/photo.png';
+import { logout } from '../../Features/auth/authSlice';
 
 const Navbar = () => {
   const { pathname } = useLocation();
+  const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+
+  function logoutHandler() {
+    dispatch(logout());
+  }
+
+  function profileUser() {
+    if (user.photo.split('.')[0] == 'photo') {
+      return [photoDefault];
+    }
+
+    return user.photo;
+  }
 
   useEffect(() => {
     const navbar = document.querySelector('#navbar');
@@ -63,16 +80,35 @@ const Navbar = () => {
             </li>
           </ul>
           <div className="d-flex justify-content-end">
-            <Link to="/login" className={`${style.textWhite} text-decoration-none text-dark d-none d-md-flex align-items-center`}>
-              <span className={`${style.iconLogin} d-md-flex align-items-center me-2 justify-content-center rounded-circle border border-1`}>
-                <FontAwesomeIcon icon={faUser} />
-              </span>
-              <span className={`${pathname == '/' ? 'text-light' : 'text-dark'}`}>Login</span>
-            </Link>
-            <Link to="/login" className="text-decoration-none text-dark d-flex d-md-none align-items-center  ">
-              <FontAwesomeIcon className={`${style.textWhite} me-2`} icon={faUser} />
-              <span className={`${style.textWhite} d-block`}>Login</span>
-            </Link>
+            {user ? (
+              <>
+                <Link to="#" className={`${style.textWhite} text-decoration-none text-dark d-flex align-items-center`}>
+                  <span className={`${style.iconLogin} d-flex align-items-center justify-content-center rounded-circle border border-1 me-2`}>
+                    <FontAwesomeIcon icon={faUser} />
+                  </span>
+                  <div class="btn-group d-flex align-items-center">
+                    <button type="button" class={`${style.userName} border-0 bg-transparent dropdown-toggle ${pathname != '/' ? 'text-dark' : 'text-white'}`} data-bs-toggle="dropdown" aria-expanded="false">
+                      {user?.name}
+                    </button>
+
+                    <ul class="dropdown-menu">
+                      <li className="dropdown-item" onClick={logoutHandler}>
+                        <FontAwesomeIcon className="text-danger" icon={faRightFromBracket} /> Logout
+                      </li>
+                    </ul>
+                  </div>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link to="/login" className={` text-dark text-decoration-none fw-semibold me-2`}>
+                  Login /
+                </Link>
+                <Link to="/register" className={` text-dark text-decoration-none fw-semibold `}>
+                  Register
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

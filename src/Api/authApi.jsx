@@ -4,14 +4,17 @@ const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_ENDPOINT,
   credentials: 'same-origin',
   prepareHeaders: (headers, { getState }) => {
-    // if (getState().auth.token) {
-    //   const { token } = getState().auth.token;
-    //   headers.set('authorization', `Bearer ${token}`);
-    // }
+    if (getState().auth.accessToken) {
+      const token = getState().auth.accessToken;
+      headers.set('authorization', `Bearer ${token}`);
+    } else {
+      {
+        headers.set('authorization', `Bearer ${localStorage.getItem('access_token')}`);
+      }
+    }
 
-    // if (localStorage.getItem('token')) {
-    //   headers.set('authorization', `Bearer ${localStorage.getItem('token')}`);
-    // }
+    if (localStorage.getItem('access_token')) {
+    }
 
     return headers;
   },
@@ -33,9 +36,9 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   //   }
   // }
 
-  // if (result?.error?.data?.status === 401) {
-  //   api.dispatch(logout());
-  // }
+  if (result?.error?.data?.status === 401) {
+    api.dispatch(logout());
+  }
 
   return result;
 };

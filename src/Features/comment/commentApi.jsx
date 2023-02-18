@@ -7,53 +7,48 @@ const commentApi = apiSlice.injectEndpoints({
     getAllComment: builder.query({
       query: () => {
         return {
-          url: 'comments',
+          url: 'comment',
         };
       },
       providesTags: (result, error, arg) => (result ? [...result.map((data) => ({ type: 'Comment', data }))] : ['Comment']),
-      transformResponse: (response, meta, arg) => response,
+      transformResponse: (response, meta, arg) => response.data,
     }),
 
     getCommentByIdRecipe: builder.query({
       query: (id) => {
-        if (id) {
-          return {
-            url: `comments?id_recipe=${id}`,
-          };
-        }
         return {
-          url: 'comments',
+          url: `recipe/${id}/comment`,
         };
       },
 
       providesTags: (result, error, arg) => (result ? [...result.map((data) => ({ type: 'Comment', data }))] : ['Comment']),
-      transformResponse: (response, meta, arg) => response,
+      transformResponse: (response, meta, arg) => response.data,
     }),
 
     createComment: builder.mutation({
-      query: (data) => ({
-        url: `comments`,
+      query: ({ id_recipe, ...other }) => ({
+        url: `recipe/${id_recipe}/comment`,
         method: 'POST',
-        body: data,
+        body: other,
       }),
 
-      invalidatesTags: ['Comment'],
-      transformResponse: (response, meta, arg) => response,
+      invalidatesTags: ['Recipe'],
+      transformResponse: (response, meta, arg) => response.data,
     }),
 
     updateComment: builder.mutation({
-      query: ({ id, data }) => ({
-        url: `comments/${id}`,
+      query: ({ id_recipe, id, ...other }) => ({
+        url: `recipe/${id_recipe}/comment/${id}`,
         method: 'PUT',
-        body: data,
+        body: other,
       }),
 
       transformResponse: (response, meta, arg) => response,
     }),
 
     deleteComments: builder.mutation({
-      query: (id) => ({
-        url: `comments/${id}`,
+      query: ({ id_recipe, id }) => ({
+        url: `recipe/${id_recipe}/comment/${id}`,
         method: 'DELETE',
       }),
 

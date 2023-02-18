@@ -5,13 +5,21 @@ import { useState } from 'react';
 import style from './style.module.css'
 
 function MyVerticallyCenteredModal(props) {
+  const [modalShow, setModalShow] = useState(false);
+
   return (
     <>
+      <Button className={`${style.Buttons} my-2 `} variant="warning" onClick={() => setModalShow(true)}>
+      <span className='me-4 fw-bolder'> {props.step}</span><i className="fa-solid fa-play"></i>
+      </Button>
+
       <Modal
         {...props}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
+        show={modalShow}
+        onHide={() => setModalShow(false)}
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
@@ -19,31 +27,14 @@ function MyVerticallyCenteredModal(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <CardDetailVideo url={'https://www.youtube.com/watch?v=9m7YHjBeduA'} title={'MUKBANG 7 BUNGKUS NASI PADANG PORSI JUMB0!!'} time={'3 Months ago'} />
+          <CardDetailVideo url={props.link} title={'MUKBANG 7 BUNGKUS NASI PADANG PORSI JUMB0!!'} time={'3 Months ago'} />
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
+          {/* <Button onClick={props.onHide}>Close</Button> */}
         </Modal.Footer>
       </Modal>
     </>
   );
 }
 
-const ButtonVideos = () => {
-  const [modalShow, setModalShow] = useState(false);
-
-  return (
-    <>
-      <Button className={`${style.Buttons} my-2 `} variant="warning" onClick={() => setModalShow(true)}>
-         <i className="fa-solid fa-play"></i>
-      </Button>
-
-      <MyVerticallyCenteredModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      />
-    </>
-  );
-}
-
-export default ButtonVideos
+export default MyVerticallyCenteredModal

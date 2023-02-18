@@ -17,7 +17,7 @@ const Login = () => {
 
   const loginHandler = async () => {
     const data = await loginUser({ email, password });
-    const userBeforRedestruct = data.data.data;
+    const userBeforRedestruct = data.data.data[0];
     const { refreshToken, token, ...other } = userBeforRedestruct;
     dispatch(setCredentials({ data: other, token, refreshToken }));
   };
@@ -28,6 +28,12 @@ const Login = () => {
     }
   }, [isSuccess]);
 
+  useEffect(() => {
+    if (checkTerms) {
+      setCheckTerms((prev) => !prev);
+    }
+  }, [error]);
+
   return (
     <div>
       <AuthLayout title="Welcome" description="Log in into your exiting account">
@@ -35,7 +41,14 @@ const Login = () => {
           'Wait for a minute...'
         ) : (
           <>
-            <InputFormAuth title="Email" name="email" type="text" onchange={(e) => setEmail(e.target.value)} />
+            {error && (
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>{error?.data?.status}</strong> {error?.data?.message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            )}
+
+            <InputFormAuth title="Email" value={email} name="email" type="text" onchange={(e) => setEmail(e.target.value)} />
             <InputFormAuth title="Password" name="password" type="password" onchange={(e) => setPassword(e.target.value)} />
 
             <div className="form-check mb-3 customCheck">
