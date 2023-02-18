@@ -126,7 +126,7 @@ const DetailResep = () => {
               </button>
             </div>
 
-            <h1>Comment</h1>
+            <h1>Comments</h1>
             {/* <h1>{recipe.message}</h1> */}
 
             {recipe?.comments.map(comment => (
