@@ -15,6 +15,7 @@ import withReactContent from 'sweetalert2-react-content';
 import { useCreateLikedRecipeMutation } from '../../Features/likedRecipe/likedRecipeApi';
 import { useCreateSavedRecipeMutation } from '../../Features/savedRecipe/savedRecipe';
 import { useCreateCommentMutation, useGetAllCommentQuery, useGetCommentByIdRecipeQuery } from '../../Features/comment/commentApi';
+import MyVerticallyCenteredModal from '../../Components/ModalButton/ModalButton';
 
 const DetailResep = () => {
   const MySwal = withReactContent(Swal);
@@ -25,9 +26,12 @@ const DetailResep = () => {
   const [createComment, { isLoading: loadingComment, error: errorComment, isSucces }] = useCreateCommentMutation();
 
   // const { data : comment } = useGetAllCommentQuery(id)
-  // console.log(comment);
+  console.log(recipe)
+  console.log(recipe?.id_user)
+
 
   const [message, setMessage] = useState('');
+  console.log(`${message}`);
 
   // console.log(errorComment);
   const changeHandler = (e) => {
@@ -36,7 +40,7 @@ const DetailResep = () => {
 
   const createHandler = async () => {
     // console.log({ message, id_recipe: id, id_user: "1" });
-    await createComment({ message, id_recipe: id, id_user: '1' });
+    await createComment({ message, id_recipe : id });
     if (isSucces) {
       MySwal.fire({
         title: <p>Product add to Cart!</p>,
@@ -48,11 +52,11 @@ const DetailResep = () => {
   };
 
   const onClickLike = async () => {
-    await createLikedRecipe({ id_recipe: id, id_user: 1 });
+    await createLikedRecipe({ id_recipe: id });
   };
 
   const onClickSave = async () => {
-    await createSavedRecipe({ id_recipe: id, id_user: 1 });
+    await createSavedRecipe({ id_recipe: id});
   };
 
   return (
@@ -69,7 +73,7 @@ const DetailResep = () => {
               </h1>
               <div className="row justify-content-center">
                 <div className="col-12 col-lg-8  position-relative">
-                  <img src={`https://source.unsplash.com/300x300/?food`} className={`img-fluid ${style.imageDetail} d-block mx-auto mt-5 mb-5 `} alt="" />
+                  <img crossOrigin='Anonymous' src={recipe.photo} className={`img-fluid ${style.imageDetail} d-block mx-auto mt-5 mb-5 `} alt="" />
                   <span className={style.action}>
                     <button className={`position-absolute ${style.saved}`} onClick={onClickSave}>
                       <i class="fa-sharp fa-solid fa-bookmark"></i>
@@ -84,23 +88,27 @@ const DetailResep = () => {
               <h4 className="ingredients fw-semibold ">Ingredients</h4>
               <p className="mb-5">{recipe.ingredients}</p>
               <h4 className="fw-semibold">Step Video</h4>
-              <ul className="list-unstyled">
-                <li className="list-group-item">
-                  <ButtonVideos />
-                </li>
-                <li className="list-group-item">
-                  <ButtonVideos />
-                </li>
-                <li className="list-group-item">
-                  <ButtonVideos />
-                </li>
-                <li className="list-group-item">
-                  <ButtonVideos />
-                </li>
-                <li className="list-group-item">
-                  <ButtonVideos />
-                </li>
-              </ul>
+              <div className="row">
+
+              {recipe?.videos?.map((video,index) => (
+                <>
+                {/* console.log(video.url_video); */}
+                
+                <div className="col-md-12 col-6">
+                  <ul className="list-unstyled">
+                    <li className="list-group-item">
+                      {/* <p>Step {index + 1}. </p> */}
+                      <MyVerticallyCenteredModal
+                      link={video.url_video}
+                      step={`STEP ${index + 1}`}
+                      />
+                    </li>
+                  </ul>
+                </div>
+                </>
+              ))}
+       
+              </div>
             </div>
           </div>
         )}
@@ -119,17 +127,18 @@ const DetailResep = () => {
             </div>
 
             <h1>Comment</h1>
+            {/* <h1>{recipe.message}</h1> */}
 
-            {/* {comment.map(comments => (
+            {recipe?.comments.map(comment => (
                         <div className={`${style.commentList} mt-4`}>
-                            <img src={profil} alt="" />
+                            <img crossOrigin='Anonymous' src={comment.photo} alt="" />
                             <div className={`${style.data} ms-4`}>
-                                <p className={`${style.name} fw-bold`}>Ayudia</p>
-                                <p>{comments.message}</p>
+                                <p className={`${style.name} fw-bold`}>{comment.name}</p>
+                                <p>{comment.message}</p>
                             </div>
                         </div>
 
-                        ))}  */}
+                        ))} 
           </div>
         </div>
       </main>
