@@ -11,7 +11,7 @@ const commentApi = apiSlice.injectEndpoints({
         };
       },
       providesTags: (result, error, arg) => (result ? [...result.map((data) => ({ type: 'Comment', data }))] : ['Comment']),
-      transformResponse: (response, meta, arg) => response,
+      transformResponse: (response, meta, arg) => response.data,
     }),
 
     getCommentByIdRecipe: builder.query({
@@ -22,7 +22,7 @@ const commentApi = apiSlice.injectEndpoints({
       },
 
       providesTags: (result, error, arg) => (result ? [...result.map((data) => ({ type: 'Comment', data }))] : ['Comment']),
-      transformResponse: (response, meta, arg) => response,
+      transformResponse: (response, meta, arg) => response.data,
     }),
 
     createComment: builder.mutation({
@@ -33,7 +33,7 @@ const commentApi = apiSlice.injectEndpoints({
       }),
 
       invalidatesTags: ['Comment'],
-      transformResponse: (response, meta, arg) => response,
+      transformResponse: (response, meta, arg) => response.data,
     }),
 
     updateComment: builder.mutation({
