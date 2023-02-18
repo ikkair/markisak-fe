@@ -1,6 +1,7 @@
 .card {
     position: relative;
     width: 18rem;
+    border-radius: 20px;
 }
 
 .cardBody h5 {
@@ -8,6 +9,19 @@
     color: white;
     bottom: 20px;
     left: 20px;
-    width: 55px;
+    width: 195px;
     ;
+}
+
+.img {
+    filter: brightness(50%);
+    border-radius: 15px !important;
+}
+
+.img:hover {
+    filter: brightness(100%);
+}
+
+.edit {
+    text-decoration: underline;
 }
