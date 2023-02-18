@@ -14,7 +14,6 @@ const Navbar = () => {
 
   function logoutHandler() {
     dispatch(logout());
-    console.log(user);
   }
 
   function profileUser() {
@@ -88,21 +87,17 @@ const Navbar = () => {
                     <FontAwesomeIcon icon={faUser} />
                   </span>
                   <div class="btn-group d-flex align-items-center">
-                    <button type="button" class={`${style.userName} border-0 bg-transparent dropdown-toggle`} data-bs-toggle="dropdown" aria-expanded="false">
+                    <button type="button" class={`${style.userName} border-0 bg-transparent dropdown-toggle ${pathname != '/' ? 'text-dark' : 'text-white'}`} data-bs-toggle="dropdown" aria-expanded="false">
                       {user?.name}
                     </button>
 
                     <ul class="dropdown-menu">
-                      <li className="dropdown-item">
-                        <FontAwesomeIcon className="text-danger" onClick={logoutHandler} icon={faRightFromBracket} /> Logout
+                      <li className="dropdown-item" onClick={logoutHandler}>
+                        <FontAwesomeIcon className="text-danger" icon={faRightFromBracket} /> Logout
                       </li>
                     </ul>
                   </div>
                 </Link>
-                {/* <Link to="#" className="text-decoration-none text-dark d-flex d-md-none align-items-center  ">
-                  <FontAwesomeIcon className={`${style.textWhite} me-2`} icon={faUser} />
-                  <span className={`${style.textWhite} d-block`}>{user.name}</span>
-                </Link> */}
               </>
             ) : (
               <>
