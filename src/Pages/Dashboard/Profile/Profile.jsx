@@ -45,7 +45,7 @@ const Profile = () => {
         <div className="row">
           <div className="profil text-center py-5">
             <img className="rounded-circle mb-3" width={95} height={90} src={profile} alt="img" />
-            <Link className={style.edit} to="#">
+            <Link to="/dashboard/my-recipe/:id">
               <img className="mt-5" src={edit} alt="" />
             </Link>
             <h3>Garneta Sharina</h3>

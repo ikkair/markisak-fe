@@ -11,8 +11,8 @@ import NotFound from './Pages/PageNotFound/NotFound';
 import Profile from './Pages/Dashboard/Profile/Profile';
 import Home from './Pages/Home/Home';
 import DetailResep from './Pages/DetailResep/DetailResep';
-import AuthMiddleware from './Middleware/AuthMiddleware';
-import UpdateRecipe from './Pages/Dashboard/UpdateRecipe/UpdateRecipe';
+// import AuthMiddleware from './Middleware/AuthMiddleware';
+// import UpdateRecipe from './Pages/Dashboard/UpdateRecipe/UpdateRecipe';
 
 function App() {
   return (
@@ -21,12 +21,12 @@ function App() {
       <Route
         path="/dashboard/create-recipe"
         element={
-          <AuthMiddleware>
+          
             <CreateRecipe />
-          </AuthMiddleware>
+          
         }
       />
-      <Route path="/dashboard/my-recipe/:id" element={<UpdateRecipe />} />
+      {/* <Route path="/dashboard/my-recipe/:id" element={<UpdateRecipe />} /> */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
