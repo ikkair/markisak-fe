@@ -44,7 +44,6 @@ const Home = () => {
     });
 
     closeChat?.addEventListener('click', () => {
-      console.log('tes');
       chat?.classList.toggle('showChat');
     });
   }, [chat, closeChat]);
@@ -154,7 +153,7 @@ const Home = () => {
                 ? 'Loading...'
                 : recipes?.map((recipe, i) => (
                     <SwiperSlide key={i}>
-                      <Link to={'/home'} className={'position-relative'}>
+                      <Link to={`/recipes/${recipe.id}`} className={'position-relative'}>
                         <img className={`${style.imgSwipper}`} src={`https://source.unsplash.com/300x30${i}/?food`} />
                         <span className={`${style.titleSwipper} fs-4 position-absolute text-light`}>{recipe?.title}</span>
                       </Link>

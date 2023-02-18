@@ -14,9 +14,11 @@ const recipeApi = apiSlice.injectEndpoints({
 
     getRecipeById: builder.query({
       query: (id) => ({
-        url: `recipes/${id}`,
+        url: `recipe/${id}`,
       }),
-      transformResponse: (response, meta, arg) => response,
+      transformResponse: (response, meta, arg) => {
+        return response.data[0];
+      },
     }),
 
     createRecipe: builder.mutation({

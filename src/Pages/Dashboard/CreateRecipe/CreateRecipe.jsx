@@ -44,28 +44,6 @@ const CreateRecipe = () => {
     setVideos((prev) => [...prev, { step: stepVideo + 1, url: '' }]);
   };
 
-  const renderInputVideo = () => {
-    const inputs = [];
-    for (let i = 1; i < stepVideo; i++) {
-      inputs.push(
-        <>
-          <div className="col-6 col-md-3 col-lg-2 d-flex gap-2">
-            <span className="text-secondary mt-2 text-nowrap text-dark fw-semibold">Step :</span>
-            <input type="number" className="text-center text-secondary form-control bg-transparent border-0 border-bottom rounded-0 outline-none" name="video" value={i + 1} disabled />
-          </div>
-          <div className="col-12 col-md-9 col-lg-10 d-flex gap-2">
-            <span className="text-secondary mt-2 text-nowrap text-dark fw-semibold">Link : </span>
-            <input type="text" className="text-secondary form-control bg-transparent border-0 border-bottom rounded-0 outline-none" name="video" onChange={(e) => changeVideoHandler(e, i)} />
-
-            {i == stepVideo - 1 && <FontAwesomeIcon className={`${style.addVideo} bg-light text-secondary rounded-circle p-2`} onClick={() => inputDeleteHandler(i)} icon={faMinus} />}
-          </div>
-        </>
-      );
-    }
-
-    return inputs;
-  };
-
   const changeHandler = (e) => {
     setData((prev) => {
       return {
@@ -119,6 +97,28 @@ const CreateRecipe = () => {
     return () => URL.revokeObjectURL(objectUrl);
   }, [selectedFile]);
 
+  const renderInputVideo = () => {
+    const inputs = [];
+    for (let i = 1; i < stepVideo; i++) {
+      inputs.push(
+        <>
+          <div className="col-6 col-md-3 col-lg-2 d-flex gap-2">
+            <span className="text-secondary mt-2 text-nowrap text-dark fw-semibold">Step :</span>
+            <input type="number" className="text-center text-secondary form-control bg-transparent border-0 border-bottom rounded-0 outline-none" name="video" value={i + 1} disabled />
+          </div>
+          <div className="col-12 col-md-9 col-lg-10 d-flex gap-2">
+            <span className="text-secondary mt-2 text-nowrap text-dark fw-semibold">Link : </span>
+            <input type="text" className="text-secondary form-control bg-transparent border-0 border-bottom rounded-0 outline-none" name="video" onChange={(e) => changeVideoHandler(e, i)} />
+
+            {i == stepVideo - 1 && <FontAwesomeIcon className={`${style.addVideo} bg-light text-secondary rounded-circle p-2`} onClick={() => inputDeleteHandler(i)} icon={faMinus} />}
+          </div>
+        </>
+      );
+    }
+
+    return inputs;
+  };
+
   return (
     <>
       <Navbar />
@@ -135,7 +135,7 @@ const CreateRecipe = () => {
                 </div>
               </div>
 
-              <div className="col-12 col-lg-10 offset-lg-1 offset-md-1 mt-4">
+              <div className="col-12 col-lg-10 offset-lg-1 mt-4">
                 <InputFormAddRecipe value={data.title} type={'text'} title={'Title'} name={'title'} onchange={(e) => changeHandler(e)} />
               </div>
 

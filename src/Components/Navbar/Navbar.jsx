@@ -33,8 +33,6 @@ const Navbar = () => {
       changeColorMenu();
       changeBackgroundNavbar();
     });
-
-    console.log(pathname);
   }, [pathname]);
 
   return (
@@ -64,18 +62,18 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
-          <form className="d-flex" role="search">
+          <div className="d-flex justify-content-end">
             <Link to="/login" className={`${style.textWhite} text-decoration-none text-dark d-none d-md-flex align-items-center`}>
               <span className={`${style.iconLogin} d-md-flex align-items-center me-2 justify-content-center rounded-circle border border-1`}>
                 <FontAwesomeIcon icon={faUser} />
               </span>
               <span className={`${pathname == '/' ? 'text-light' : 'text-dark'}`}>Login</span>
             </Link>
-            <Link to="/login" className="text-decoration-none text-dark d-flex d-md-none align-items-center">
+            <Link to="/login" className="text-decoration-none text-dark d-flex d-md-none align-items-center  ">
               <FontAwesomeIcon className={`${style.textWhite} me-2`} icon={faUser} />
-              <span className={`${style.textWhite} `}>Login</span>
+              <span className={`${style.textWhite} d-block`}>Login</span>
             </Link>
-          </form>
+          </div>
         </div>
       </div>
     </nav>
