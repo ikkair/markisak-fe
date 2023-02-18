@@ -6,17 +6,19 @@ const recipeApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllRecipe: builder.query({
       query: () => ({
-        url: 'recipes',
+        url: 'recipe',
       }),
       providesTags: (result, error, arg) => (result ? [...result.map((data) => ({ type: 'Recipe', data }))] : ['Recipe']),
-      transformResponse: (response, meta, arg) => response,
+      transformResponse: (response, meta, arg) => response.data,
     }),
 
     getRecipeById: builder.query({
       query: (id) => ({
-        url: `recipes/${id}`,
+        url: `recipe/${id}`,
       }),
-      transformResponse: (response, meta, arg) => response,
+      transformResponse: (response, meta, arg) => {
+        return response.data[0];
+      },
     }),
 
     createRecipe: builder.mutation({
