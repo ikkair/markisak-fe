@@ -1,39 +1,17 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
-import img from '../../assets/Profile/img1.png'
-import img2 from "../../assets/Profile/img2.png";
-import style from './style.module.css'
 
-let Cards = [
-    {
-        name: "Bomb Chicken",
-        photo: `${img}`
-    },
-    {
-        name: "Bananas Pancake",
-        photo: `${img2}`
-    }
-];
+import style from './style.module.css';
 
-const Card = () => {
-    return (
-        <div>
-            <div className='container mb-5'>
-                <div className='d-flex'>
-                    {Cards.map((item) => (
-                        <>
-                            <Link class={`mx-2 ${style.card}`} to="#">
-                                <img src={item.photo} class="card-img-top" alt="..." />
-                                <div class={`card-body ${style.cardBody}`}>
-                                    <h5 class="card-title">{item.name}</h5>
-                                </div>
-                            </Link>
-                        </>
-                    ))}
-                </div>
-            </div>
-        </div>
-    )
-}
+const Card = ({ item }) => {
+  return (
+    <Link to={`/recipes/${item.id}`} className={`${style.card}`}>
+      <img src={`https://source.unsplash.com/300x30${item.id}/?food`} className={`card-img-top ${style.img}`} alt="..." />
+      <div className={`card-body ${style.cardBody}`}>
+        <h5 className={`card-title ${style.cardTitle}`}>{item?.title}</h5>
+      </div>
+    </Link>
+  );
+};
 
-export default Card
+export default Card;
