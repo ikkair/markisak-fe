@@ -51,8 +51,9 @@
     box-shadow: 0px 0px 5px 1px rgb(226, 226, 226);
     transition: transform .2s;
 }
-.commentList:hover {
-    background-color: rgb(237, 237, 237);
+.commentList:hover .delete {
+    color: red !important;
+    background-color: rgb(237, 237, 237) !important;
     transform: scale(1.01);
     cursor: pointer;
 }
@@ -67,6 +68,18 @@
 .commentList img {
     width: 50px;
 }
+
+.delete {
+    color:  rgb(0, 0, 0) !important;
+    right: 30px;
+    top:28px;
+    font-size: 14px !important;
+    background-color: transparent !important;
+    border: none !important;
+}
+/* .delete:hover {
+    color: red !important;
+} */
 
 @media screen and (max-width: 600px) {
     .imageDetail {
