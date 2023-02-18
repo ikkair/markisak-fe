@@ -98,14 +98,14 @@ const Home = () => {
           <div className="col-12 col-sm-6 d-grid align-items-center">
             <div className="row main-title d-inline-block d-md-flex flex-column align-items-end">
               <div className={`col-10 pe-3`}>
-                <span className={`${style.sectionTitleContent} d-block fw-semibold fs-2`}>{recipes?.data?.title}</span>
+                <span className={`${style.sectionTitleContent} d-block fw-semibold fs-2`}>{recipes?.data[0]?.title}</span>
                 <span className={`${style.underlineTitleRecipe} d-none d-md-block  mt-1`}></span>
               </div>
               <div className={`col-12 col-md-10 mt-3 text-secondary ${style.sectionDesc}`}>
                 <span>Quick + Easy Chicken Bone Broth Ramen- Healthy chicken ramen in a hurry? That’s right!</span>
               </div>
               <div className="col-10 ">
-                <Link to={`/recipes/${recipes?.data?.id}`} className={`btn btn-warning text-light mt-3 ${style.btnLearnMore}`}>
+                <Link to={`/recipes/${recipes?.data[0]?.id}`} className={`btn btn-warning text-light mt-3 ${style.btnLearnMore}`}>
                   Learn More
                 </Link>
               </div>
