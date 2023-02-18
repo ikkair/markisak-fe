@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Footer from '../../Components/Footer/MainFooter';
 import MainLayout from '../../Components/Layout/MainLayout/MainLayout';
 import Navbar from './../../Components/Navbar/Navbar';
@@ -11,7 +11,7 @@ import imgFood2 from '../../assets/Home/food2.png';
 import imgFood3 from '../../assets/Home/food3.png';
 import LandingPageSection from './../../Components/Section/LandingPageSection/LandingPageSection';
 import { useGetAllRecipeQuery, useGetRecipeByIdQuery } from '../../Features/recipe/recipeApi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
@@ -22,11 +22,17 @@ import './style.css';
 
 // import required modules
 import { EffectCoverflow, Pagination } from 'swiper';
-import { useSelector } from 'react-redux';
 
 const Home = () => {
-  const { data: recipes, isLoading, error } = useGetAllRecipeQuery();
-  const user = useSelector((state) => state.auth.token);
+  const navigate = useNavigate();
+  const [search, setSearch] = useState('');
+  const { data: recipes, isLoading, error } = useGetAllRecipeQuery({});
+
+  function enterHandlerSearch(e) {
+    if (e.code == 'Enter') {
+      navigate(`/recipes?search=${search}&page=1&limit=12`);
+    }
+  }
 
   const chat = document.querySelector('#chat');
   const closeChat = document.querySelector('#closeChat');
@@ -59,7 +65,15 @@ const Home = () => {
               <div className={`col-9 col-md-7`}>
                 <div className={`${style.inputBackground} py-1 d-flex align-items-center gap-1 ps-4 rounded`}>
                   <FontAwesomeIcon className={style.inputSearch} type="text" icon={faSearch} />
-                  <input className={`${style.inputSearch} form-control bg-transparent border-0  shadow-none`} type="text" name="search" placeholder="Search here" />
+                  <input
+                    className={`${style.inputSearch} form-control bg-transparent border-0  shadow-none`}
+                    type="text"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    onKeyDown={enterHandlerSearch}
+                    name="search"
+                    placeholder="Search here"
+                  />
                 </div>
               </div>
             </div>
@@ -84,14 +98,14 @@ const Home = () => {
           <div className="col-12 col-sm-6 d-grid align-items-center">
             <div className="row main-title d-inline-block d-md-flex flex-column align-items-end">
               <div className={`col-10 pe-3`}>
-                <span className={`${style.sectionTitleContent} d-block fw-semibold fs-2`}>{recipes[0]?.title}</span>
+                <span className={`${style.sectionTitleContent} d-block fw-semibold fs-2`}>{recipes?.data?.title}</span>
                 <span className={`${style.underlineTitleRecipe} d-none d-md-block  mt-1`}></span>
               </div>
               <div className={`col-12 col-md-10 mt-3 text-secondary ${style.sectionDesc}`}>
                 <span>Quick + Easy Chicken Bone Broth Ramen- Healthy chicken ramen in a hurry? That’s right!</span>
               </div>
               <div className="col-10 ">
-                <Link to={`/recipes/${recipes[0]?.id}`} className={`btn btn-warning text-light mt-3 ${style.btnLearnMore}`}>
+                <Link to={`/recipes/${recipes?.data?.id}`} className={`btn btn-warning text-light mt-3 ${style.btnLearnMore}`}>
                   Learn More
                 </Link>
               </div>
@@ -151,7 +165,7 @@ const Home = () => {
             >
               {isLoading
                 ? 'Loading...'
-                : recipes?.map((recipe, i) => (
+                : recipes?.data?.map((recipe, i) => (
                     <SwiperSlide key={i}>
                       <Link to={`/recipes/${recipe.id}`} className={'position-relative'}>
                         <img className={`${style.imgSwipper}`} src={`https://source.unsplash.com/300x30${i}/?food`} />
