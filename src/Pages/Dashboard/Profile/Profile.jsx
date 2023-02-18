@@ -7,7 +7,7 @@ import Card from '../../../Components/Profile/Card';
 import style from './style.module.css';
 import img from '../../../assets/Profile/img1.png';
 import img2 from '../../../assets/Profile/img2.png';
-import { useGetAllRecipeQuery } from '../../../Features/recipe/recipeApi'
+import { useGetAllRecipeQuery, useDeleteRecipeByIdMutation } from '../../../Features/recipe/recipeApi'
 import edit from '../../../assets/Profile/vector.png'
 
 const Profile = () => {
@@ -37,6 +37,8 @@ const Profile = () => {
   // ];
 
   const { data: recipes, isLoading, error } = useGetAllRecipeQuery();
+  const [ deleteRecipeById ] =useDeleteRecipeByIdMutation();
+  
   console.log(recipes);
   return (
     <div>
@@ -45,7 +47,7 @@ const Profile = () => {
         <div className="row">
           <div className="profil text-center py-5">
             <img className="rounded-circle mb-3" width={95} height={90} src={profile} alt="img" />
-            <Link className={style.edit} to="#">
+            <Link to="/dashboard/my-recipe/:id">
               <img className="mt-5" src={edit} alt="" />
             </Link>
             <h3>Garneta Sharina</h3>

@@ -41,7 +41,7 @@ const DetailResep = () => {
 
   const createHandler = async () => {
     // console.log({ message, id_recipe: id, id_user: "1" });
-    await createComment({ message, id_recipe : id });
+    await createComment({ message, id_recipe: id });
     if (isSucces) {
       MySwal.fire({
         title: <p>Product add to Cart!</p>,
@@ -57,7 +57,7 @@ const DetailResep = () => {
   };
 
   const onClickSave = async () => {
-    await createSavedRecipe({ id_recipe: id});
+    await createSavedRecipe({ id_recipe: id });
   };
 
   return (
@@ -91,24 +91,24 @@ const DetailResep = () => {
               <h4 className="fw-semibold">Step Video</h4>
               <div className="row">
 
-              {recipe?.videos?.map((video,index) => (
-                <>
-                {/* console.log(video.url_video); */}
-                
-                <div className="col-md-12 col-6">
-                  <ul className="list-unstyled">
-                    <li className="list-group-item">
-                      {/* <p>Step {index + 1}. </p> */}
-                      <MyVerticallyCenteredModal
-                      link={video.url_video}
-                      step={`STEP ${index + 1}`}
-                      />
-                    </li>
-                  </ul>
-                </div>
-                </>
-              ))}
-       
+                {recipe?.videos?.map((video, index) => (
+                  <>
+                    {/* console.log(video.url_video); */}
+
+                    <div className="col-md-12 col-6">
+                      <ul className="list-unstyled">
+                        <li className="list-group-item">
+                          {/* <p>Step {index + 1}. </p> */}
+                          <MyVerticallyCenteredModal
+                            link={video.url_video}
+                            step={`STEP ${index + 1}`}
+                          />
+                        </li>
+                      </ul>
+                    </div>
+                  </>
+                ))}
+
               </div>
             </div>
           </div>
@@ -131,24 +131,24 @@ const DetailResep = () => {
             {/* <h1>{recipe.message}</h1> */}
 
             {recipe?.comments.map(comment => (
-                        // console.log(comment.id)
-                        // console.log(recipe.id)
-                        <div className={`${style.commentList} mt-4 position-relative`}>
-                            <img crossOrigin='Anonymous' src={profil} alt="" />
-                            <div className={`${style.data} ms-4`}>
-                                <p className={`${style.name} fw-bold`}>{comment.name}</p>
-                                <p>{comment.message}</p>
-                                <ModalDelete
-                                id={comment.id}
-                                idRecipe ={recipe.id}
-                                >
-                                  Delete
-                                </ModalDelete>
+              // console.log(comment.id)
+              // console.log(recipe.id)
+              <div className={`${style.commentList} mt-4 position-relative`}>
+                <img crossOrigin='Anonymous' src={profil} alt="" />
+                <div className={`${style.data} ms-4`}>
+                  <p className={`${style.name} fw-bold`}>{comment.name}</p>
+                  <p>{comment.message}</p>
+                  <ModalDelete
+                    id={comment.id}
+                    idRecipe={recipe.id}
+                  >
+                    Delete
+                  </ModalDelete>
 
-                                {/* <button className={`position-absolute ${style.delete}`}>Delete</button> */}
-                            </div>
-                        </div>
-            ))} 
+                  {/* <button className={`position-absolute ${style.delete}`}>Delete</button> */}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </main>
