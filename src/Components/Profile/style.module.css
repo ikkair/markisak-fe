@@ -1,22 +1,22 @@
 .card {
-    position: relative;
-    width: 18rem;
-    border-radius: 20px;
+  position: relative;
+  width: 18rem;
+  border-radius: 20px;
 }
 
 .cardBody h5 {
-    position: absolute;
-    color: white;
-    bottom: 20px;
-    left: 20px;
-    /* width: 195px; */
+  position: absolute;
+  color: white;
+  bottom: 20px;
+  left: 20px;
+  /* width: 195px; */
 }
 
 .cardAction {
-    position: absolute;
-    bottom: 145px;
-    left: 210px;
-    /* width: 195px; */
+  position: absolute;
+  bottom: 145px;
+  left: 210px;
+  /* width: 195px; */
 }
 
 /* @media only screen and (max-width: 600px) {
@@ -28,43 +28,44 @@
 } */
 
 .cardEdit {
-    position: absolute;
-    top: 5px;
-    right: 45px;
-    color: white !important;
-    padding: 5px;
-    border-radius: 8px;
+  position: absolute;
+  top: 5px;
+  right: 45px;
+  color: white !important;
+  padding: 5px;
+  border-radius: 8px;
 }
 
 .cardDelete {
-    position: absolute;
-    top: 5px;
-    right: 15px;
-    color: white !important;
-    padding: 5px;
-    border-radius: 8px;
-    height: 15px;
+  position: absolute;
+  top: 5px;
+  z-index: 50;
+  right: 15px;
+  color: white !important;
+  padding: 5px;
+  border-radius: 8px;
+  height: 15px;
 }
 
 .cardEdit:hover {
-    background-color: transparent !important;
-    height: 22px;
+  background-color: transparent !important;
+  height: 22px;
 }
 
 .cardDelete:hover {
-    background-color: transparent !important;
-    height: 20px;
+  background-color: transparent !important;
+  height: 20px;
 }
 
 .img {
-    filter: brightness(50%);
-    border-radius: 15px !important;
+  filter: brightness(50%);
+  border-radius: 15px !important;
 }
 
 .img:hover {
-    filter: brightness(100%);
+  filter: brightness(100%);
 }
 
 .edit:hover {
-    height: 200px;
+  height: 200px;
 }

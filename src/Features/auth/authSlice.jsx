@@ -13,6 +13,7 @@ const authSlice = createSlice({
     setCredentials: (state, { payload }) => {
       localStorage.setItem('access_token', payload.token);
       localStorage.setItem('refresh_token', payload.refreshToken);
+      localStorage.setItem('id_user', payload.data.id);
 
       state.user = payload.data;
       state.accessToken = payload.token;
