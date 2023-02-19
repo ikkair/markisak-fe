@@ -21,6 +21,15 @@ const authApi = apiSlice.injectEndpoints({
 
       transformResponse: (response, meta, args) => response,
     }),
+    registerUser: builder.mutation({
+      query: (data) => ({
+        url: 'user/refresh-token',
+        method: 'POST',
+        body: data,
+      }),
+
+      transformResponse: (response, meta, args) => response,
+    }),
   }),
 });
 

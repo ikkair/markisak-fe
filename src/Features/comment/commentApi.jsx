@@ -1,6 +1,6 @@
 import { apiSlice } from '../../Api/authApi';
 
-apiSlice.enhanceEndpoints({ addTagTypes: ['Comment'] });
+apiSlice.enhanceEndpoints({ addTagTypes: ['Comment', 'Recipe'] });
 
 const commentApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
