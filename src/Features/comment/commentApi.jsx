@@ -1,6 +1,6 @@
 import { apiSlice } from '../../Api/authApi';
 
-apiSlice.enhanceEndpoints({ addTagTypes: ['Comment'] });
+apiSlice.enhanceEndpoints({ addTagTypes: ['Comment', 'Recipe'] });
 
 const commentApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -52,6 +52,7 @@ const commentApi = apiSlice.injectEndpoints({
         method: 'DELETE',
       }),
 
+      invalidatesTags: ['Recipe'],
       transformResponse: (response, meta, arg) => response,
     }),
   }),

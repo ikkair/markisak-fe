@@ -9,11 +9,13 @@ import withReactContent from 'sweetalert2-react-content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import MainFooter from '../../../Components/Footer/MainFooter';
+import { useCreateVideoMutation } from '../../../Features/video/videoApi';
 
 const CreateRecipe = () => {
   const MySwal = withReactContent(Swal);
 
-  const [createRecipe, { isLoading, error }] = useCreateRecipeMutation();
+  const [createRecipe, { isLoading, error, isSuccess }] = useCreateRecipeMutation();
+  const [createVideo, { isLoading: isLoadingCreateVideo, error: errorCreateVideo, isSuccess: isSuccessCreateVideo }] = useCreateVideoMutation();
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
   const [stepVideo, setStepVideo] = useState(1);
@@ -24,11 +26,30 @@ const CreateRecipe = () => {
     },
   ]);
 
+  const insertAllVideo = (id_recipe) => {
+    return Promise.all(
+      videos?.map(async (video) => {
+        console.log(video);
+        await createVideo({ id_recipe, step: video.step, url_video: video.url });
+      })
+    );
+  };
+
   const [data, setData] = useState({
     title: '',
     photo: '',
     ingredients: '',
+    description: '',
   });
+
+  const changeHandler = (e) => {
+    setData((prev) => {
+      return {
+        ...prev,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
 
   const changeVideoHandler = (e, i) => {
     videos[i].url = e.target.value;
@@ -44,30 +65,27 @@ const CreateRecipe = () => {
     setVideos((prev) => [...prev, { step: stepVideo + 1, url: '' }]);
   };
 
-  const changeHandler = (e) => {
-    setData((prev) => {
-      return {
-        ...prev,
-        [e.target.name]: e.target.value,
-      };
-    });
-  };
-
   const createHandler = async () => {
-    await createRecipe({ ...data, photo: preview });
-    if (!error) {
-      MySwal.fire({
-        title: <p>Product add to Cart!</p>,
-        icon: 'success',
-      });
-
-      setData({
-        title: '',
-        photo: '',
-        ingredients: '',
-        video: '',
-      });
+    const formData = new FormData();
+    for (let attr in data) {
+      formData.append(attr, data[attr]);
     }
+
+    const response = await createRecipe(formData);
+    const idRecipe = response.data.data[0].id;
+    await insertAllVideo(idRecipe);
+
+    MySwal.fire({
+      title: <p>Success create recipe!</p>,
+      icon: 'success',
+    });
+
+    setData({
+      title: '',
+      photo: '',
+      ingredients: '',
+      video: '',
+    });
   };
 
   function imageClickHandler(e) {
@@ -82,6 +100,12 @@ const CreateRecipe = () => {
     }
 
     setSelectedFile(e.target.files[0]);
+    setData((prev) => {
+      return {
+        ...prev,
+        photo: e.target.files[0],
+      };
+    });
   };
 
   useEffect(() => {
@@ -141,6 +165,10 @@ const CreateRecipe = () => {
 
               <div className="col-12 col-lg-10 offset-lg-1 mt-4">
                 <InputFormAddRecipe value={data.ingredients} type={'textarea'} title={'Ingredients'} name={'ingredients'} onchange={(e) => changeHandler(e)} />
+              </div>
+
+              <div className="col-12 col-lg-10 offset-lg-1 mt-4">
+                <InputFormAddRecipe value={data.description} type={'textarea'} title={'Description'} name={'description'} onchange={(e) => changeHandler(e)} />
               </div>
 
               <div className="col-12 col-lg-10 offset-lg-1 mt-4">

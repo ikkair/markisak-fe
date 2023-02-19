@@ -8,7 +8,6 @@ const authApi = apiSlice.injectEndpoints({
         method: 'POST',
         body: data,
       }),
-
       transformResponse: (response, meta, args) => response,
     }),
 
@@ -21,7 +20,16 @@ const authApi = apiSlice.injectEndpoints({
 
       transformResponse: (response, meta, args) => response,
     }),
+    refreshToken: builder.mutation({
+      query: (data) => ({
+        url: 'user/refresh-token',
+        method: 'POST',
+        body: data,
+      }),
+
+      transformResponse: (response, meta, args) => response,
+    }),
   }),
 });
 
-export const { useLoginUserMutation, useRegisterUserMutation } = authApi;
+export const { useLoginUserMutation, useRegisterUserMutation, useRefreshTokenMutation } = authApi;
