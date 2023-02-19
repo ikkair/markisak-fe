@@ -45,6 +45,7 @@
   padding: 5px;
   border-radius: 8px;
   height: 15px;
+  cursor: pointer;
 }
 
 .cardEdit:hover {

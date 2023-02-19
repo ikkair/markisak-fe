@@ -11,11 +11,12 @@ import { useGetAllRecipeQuery, useDeleteRecipeByIdMutation, useGetRecipeByIdQuer
 import edit from '../../../assets/Profile/vector.png';
 import { useGetLikedRecipeByIdUserQuery } from '../../../Features/likedRecipe/likedRecipeApi';
 import { useGetUserDetailQuery } from '../../../Features/user/userApi';
+import ModalEditProfile from '../../../Components/Profile/ModalEditProfile';
 
 const Profile = () => {
   const { data: user, isLoading } = useGetUserDetailQuery(localStorage.getItem('id_user'));
 
-  console.log(user);
+  // console.log(user);
   return (
     <div>
       <Navbar />
@@ -27,6 +28,7 @@ const Profile = () => {
               <img className="mt-5" src={edit} alt="" />
             </Link>
             <h3>{user?.name}</h3>
+            <ModalEditProfile />
           </div>
 
           <div className="text-secondary">
