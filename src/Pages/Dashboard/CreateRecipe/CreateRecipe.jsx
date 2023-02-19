@@ -75,19 +75,17 @@ const CreateRecipe = () => {
     const idRecipe = response.data.data[0].id;
     await insertAllVideo(idRecipe);
 
-    if (isSuccess) {
-      MySwal.fire({
-        title: <p>Success create recipe!</p>,
-        icon: 'success',
-      });
+    MySwal.fire({
+      title: <p>Success create recipe!</p>,
+      icon: 'success',
+    });
 
-      setData({
-        title: '',
-        photo: '',
-        ingredients: '',
-        video: '',
-      });
-    }
+    setData({
+      title: '',
+      photo: '',
+      ingredients: '',
+      video: '',
+    });
   };
 
   function imageClickHandler(e) {
