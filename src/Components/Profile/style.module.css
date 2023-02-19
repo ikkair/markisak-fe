@@ -106,4 +106,7 @@
   .cardTitle {
     font-size: 0.9em;
   }
+  .img {
+    min-height: 102px !important;
+  }
 }
