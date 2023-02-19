@@ -36,7 +36,7 @@ const Profile = () => {
   //   },
   // ];
 
-  const { data: recipes, isLoading, error } = useGetAllRecipeQuery();
+  const { data: recipes, isLoading, error } = useGetAllRecipeQuery({});
   const [ deleteRecipeById ] =useDeleteRecipeByIdMutation();
   
   console.log(recipes);
@@ -75,7 +75,7 @@ const Profile = () => {
           <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-4 g-3">
             {isLoading
               ? 'Loading...'
-              : recipes?.map((recipe, i) => (
+              : recipes?.data?.map((recipe, i) => (
                 <Card key={i} item={recipe} />
               ))}
           </div>

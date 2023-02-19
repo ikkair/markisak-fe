@@ -7,7 +7,7 @@ import home from '../../assets/page404/home.png'
 const NotFound = () => {
     return (
         <div>
-            <div class="circles">
+            <div class="circles min-vh-100 text-center">
                 <img src={logo} alt="" style={{ marginTop: "100px" }} />
                 <p>404<br />
                     <small>PAGE NOT FOUND<br />
@@ -19,9 +19,8 @@ const NotFound = () => {
                 <span class="circle big"></span>
                 <span class="circle med"></span>
                 <span class="circle small"></span>
-                <div className="footer"></div>
-
             </div>
+            <div className="footer"></div>
         </div>
     )
 }
