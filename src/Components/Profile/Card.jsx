@@ -26,9 +26,7 @@ const Card = ({ item, onclick }) => {
       <Link to={`/dashboard/my-recipe/${item.id}`}>
         <FontAwesomeIcon className={`card-title mx-1 bg-success ${style.cardEdit}`} icon={faPenToSquare} />
       </Link>
-      {/* <button className="btn"> */}
-        <FontAwesomeIcon className={`card-title mx-1 bg-danger ${style.cardDelete}`} icon={faTrash} onClick={deleteHandler} />
-      {/* </button> */}
+      <FontAwesomeIcon className={`card-title mx-1 bg-danger ${style.cardDelete}`} icon={faTrash} onClick={deleteHandler} />
       <div className={`card-body ${style.cardBody}`}>
         <h5 className="card-title">{item?.title}</h5>
       </div>

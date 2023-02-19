@@ -39,7 +39,7 @@ const Navbar = () => {
   useEffect(() => {
     if (!user) {
       if (isSuccess) {
-        dispatch(setCredentials({ accessToken, refreshToken, data: userLogin }));
+        dispatch(setCredentials({ token: accessToken, refreshToken, data: userLogin }));
       }
     }
   }, [userLogin]);
@@ -107,7 +107,7 @@ const Navbar = () => {
                     <FontAwesomeIcon icon={faUser} />
                   </span>
                   <div className="btn-group d-flex align-items-center">
-                    <button type="button" className={`${style.userName} border-0 bg-transparent dropdown-toggle ${pathname != '/' ? 'text-dark' : 'text-white'}`} data-bs-toggle="dropdown" aria-expanded="false">
+                    <button type="button" className={`${style.userName} border-0 bg-transparent dropdown-toggle ${pathname != '/' ? 'text-dark' : ''}`} data-bs-toggle="dropdown" aria-expanded="false">
                       {user?.name}
                     </button>
 
