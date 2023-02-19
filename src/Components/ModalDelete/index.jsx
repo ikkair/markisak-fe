@@ -14,6 +14,8 @@ const ModalDelete = ({id, idRecipe, children}) => {
 
   const handleDelete = async () => {
     await deleteComments({id, id_recipe: idRecipe})
+    console.log(id);
+    console.log(idRecipe);
   }
 
   return (
