@@ -168,7 +168,7 @@ const Home = () => {
                 : recipes?.data?.map((recipe, i) => (
                     <SwiperSlide key={i}>
                       <Link to={`/recipes/${recipe.id}`} className={'position-relative'}>
-                        <img className={`${style.imgSwipper}`} src={`https://source.unsplash.com/300x30${i}/?food`} />
+                        <img className={`${style.imgSwipper}`} src={recipe.photo} crossOrigin={'anonymous'} />
                         <span className={`${style.titleSwipper} fs-4 position-absolute text-light`}>{recipe?.title}</span>
                       </Link>
                     </SwiperSlide>
