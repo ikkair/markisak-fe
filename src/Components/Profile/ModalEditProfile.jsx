@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import edit from '../../assets/Profile/vector.png'
 
 const ModalEditProfile = ({ user, onchange }) => {
   const [show, setShow] = useState(false);
@@ -26,8 +27,8 @@ const ModalEditProfile = ({ user, onchange }) => {
   return (
     <div>
       <>
-        <button className="btn btn-secondary btn-sm" style={{ marginRight: '10px' }} onClick={handleShow}>
-          Edit Profile
+        <button className="btn mt-5" onClick={handleShow}>
+        <img className="" src={edit} alt="" />
         </button>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
