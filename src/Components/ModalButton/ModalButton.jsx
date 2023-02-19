@@ -27,7 +27,7 @@ function MyVerticallyCenteredModal(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <CardDetailVideo url={props.link} title={'MUKBANG 7 BUNGKUS NASI PADANG PORSI JUMB0!!'} time={'3 Months ago'} />
+          <CardDetailVideo url={props.link} title={props.nameRecipe} time={props.step} />
         </Modal.Body>
         <Modal.Footer>
           {/* <Button onClick={props.onHide}>Close</Button> */}

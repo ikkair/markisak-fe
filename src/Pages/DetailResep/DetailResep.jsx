@@ -28,7 +28,7 @@ const DetailResep = () => {
 
   // const { data : comment } = useGetAllCommentQuery(id)
   // console.log(recipe?.id_user)
-  // console.log(recipe?.comments);
+  console.log(recipe?.comments);
 
 
   const [message, setMessage] = useState('');
@@ -42,14 +42,14 @@ const DetailResep = () => {
   const createHandler = async () => {
     // console.log({ message, id_recipe: id, id_user: "1" });
     await createComment({ message, id_recipe: id });
-    if (isSucces) {
-      MySwal.fire({
-        title: <p>Product add to Cart!</p>,
-        icon: 'success',
-      });
 
-      setMessage('');
-    }
+    MySwal.fire({
+      title: <p>Comment added!</p>,
+      icon: 'success',
+    });
+
+    setMessage('');
+
   };
 
   const onClickLike = async () => {
@@ -102,6 +102,7 @@ const DetailResep = () => {
                           <MyVerticallyCenteredModal
                             link={video.url_video}
                             step={`STEP ${index + 1}`}
+                            nameRecipe = {recipe.title}
                           />
                         </li>
                       </ul>
@@ -116,7 +117,7 @@ const DetailResep = () => {
 
         <div className="row justify-content-center">
           <div className="col-md-10 mb-5">
-            <InputFormAddRecipe value={message} type={'textarea'} title={'Comment :'} name={'comment'} onchange={(e) => changeHandler(e)} />
+            <InputFormAddRecipe value={message} type={'textarea'} title={'Comment :'} name={'comment'} placeholder={'Comment here'} onchange={(e) => changeHandler(e)} />
             {/* <div class="mb-3">
                             <textarea class={`form-control ${style.comment}`} id="exampleFormControlTextarea1" rows="3" placeholder='Comment :'></textarea>
                         </div> */}
@@ -127,25 +128,45 @@ const DetailResep = () => {
               </button>
             </div>
 
-            <h1>Comments</h1>
+
+            {recipe?.comments.length <= 0 ? (
+              <h1 style={{ visibility: "hidden" }}></h1>
+            ) : (
+              <h1>Comments</h1>
+            )}
+
             {/* <h1>{recipe.message}</h1> */}
 
             {recipe?.comments.map(comment => (
               // console.log(comment.id)
               // console.log(recipe.id)
-              <div className={`${style.commentList} mt-4 position-relative`}>
-                <img crossOrigin='Anonymous' src={profil} alt="" />
-                <div className={`${style.data} ms-4`}>
-                  <p className={`${style.name} fw-bold`}>{comment.name}</p>
-                  <p>{comment.message}</p>
-                  <ModalDelete
-                    id={comment.id}
-                    idRecipe={recipe.id}
-                  >
-                    Delete
-                  </ModalDelete>
+              <div className={`${style.commentList} mt-4`}>
+                <div className="row">
+                  <div className="col-1 d-flex align-items-center">
+                    <img crossOrigin='Anonymous' src={profil} alt="" />
+                  </div>
 
-                  {/* <button className={`position-absolute ${style.delete}`}>Delete</button> */}
+                  <div className="col-xxl-10 col-md-9 col-11 text-start d-grid align-items-center">
+                    <div className={`${style.data} ms-4 text-wrap flex-wrap`}>
+                      <p className={`${style.name} fw-bold`}>{comment.name}</p>
+                      <p className=''>{comment?.message}</p>
+
+
+                      {/* <button className={`position-absolute ${style.delete}`}>Delete</button> */}
+                    </div>
+                  </div>
+                  
+                  <div className={`col-3 col-md-2 col-xxl-1 d-grid align-items-center ${style.del}`}>
+                    <ModalDelete
+                      id={comment.id}
+                      idRecipe={recipe.id}
+                    >
+                      Delete
+                    </ModalDelete>
+                  </div>
+
+
+
                 </div>
               </div>
             ))}
