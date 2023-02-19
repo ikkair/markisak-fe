@@ -8,8 +8,6 @@ import withReactContent from 'sweetalert2-react-content';
 import CardRecipe from '../../Components/Cards/CardRecipe/CardRecipe';
 
 const Recipes = () => {
-  const MySwal = withReactContent(Swal);
-
   const [searchParams, setSearchParams] = useSearchParams();
   const [utils, setUtils] = useState({
     search: searchParams.get('search'),
@@ -21,7 +19,6 @@ const Recipes = () => {
 
   const { data: recipes, isLoading } = useGetAllRecipeQuery({ search: utils.search, page: utils.page, limit: utils.limit, sortBy: utils.sortBy, sort: utils.sort });
 
-  console.log(recipes);
   function showLoading() {
     Swal.fire({
       title: 'Loading...',
@@ -39,7 +36,7 @@ const Recipes = () => {
 
     for (let i = 1; i <= recipes?.pagination?.totalPage; i++) {
       btn.push(
-        <button key={i} className={`btn btn-transparent ${recipes?.pagination?.currentPage == i ? 'bg-secondary text-light' : ''}`} onClick={() => window.location.replace(`/recipes?page=${i}`)}>
+        <button key={i} className={`btn btn-transparent ${recipes?.pagination?.currentPage == i ? 'bg-secondary text-light' : ''}`} onClick={() => window.location.replace(`/recipes?page=${i}&limit=${utils.limit}`)}>
           {i}
         </button>
       );
@@ -89,11 +86,11 @@ const Recipes = () => {
               }
 
               <div className="pagination d-flex justify-content-center mt-4 gap-3">
-                <button className="prev-btn btn btn-secondary" onClick={() => window.location.replace(`/recipes?page=${utils?.page - 1}`)} disabled={utils?.page == 1}>
+                <button className="prev-btn btn btn-secondary" onClick={() => window.location.replace(`/recipes?page=${utils?.page - 1}&limit=${utils.limit}`)} disabled={utils?.page == 1}>
                   Prev
                 </button>
                 <span className="d-flex">{isLoading ? 'Loading....' : generatePagination().map((page, i) => i < 5 && page)}</span>
-                <button className="prev-btn btn btn-primary" onClick={() => window.location.replace(`/recipes?page=${Number(utils?.page) + 1}`)} disabled={utils?.page == recipes?.pagination?.totalPage}>
+                <button className="prev-btn btn btn-primary" onClick={() => window.location.replace(`/recipes?page=${Number(utils?.page) + 1}&limit=${utils.limit}`)} disabled={utils?.page == recipes?.pagination?.totalPage}>
                   Next
                 </button>
               </div>

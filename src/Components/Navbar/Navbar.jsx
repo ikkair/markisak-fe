@@ -5,15 +5,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import style from './style.module.css';
 import photoDefault from '../../assets/Profile/photo.png';
-import { logout } from '../../Features/auth/authSlice';
+import { logout, setCredentials } from '../../Features/auth/authSlice';
+import { useGetUserDetailQuery } from '../../Features/user/userApi';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 const Navbar = () => {
+  const MySwal = withReactContent(Swal);
+
   const { pathname } = useLocation();
   const user = useSelector((state) => state.auth.user);
+  const { data: userLogin, isLoading, isSuccess } = useGetUserDetailQuery(localStorage.getItem('id_user'));
+  const accessToken = localStorage.getItem('access_token');
+  const refreshToken = localStorage.getItem('refresh_token');
   const dispatch = useDispatch();
 
   function logoutHandler() {
     dispatch(logout());
+    MySwal.fire({
+      title: <p>Logout Success!</p>,
+      icon: 'success',
+    });
   }
 
   function profileUser() {
@@ -23,6 +35,14 @@ const Navbar = () => {
 
     return user.photo;
   }
+
+  useEffect(() => {
+    if (!user) {
+      if (isSuccess) {
+        dispatch(setCredentials({ accessToken, refreshToken, data: userLogin }));
+      }
+    }
+  }, [userLogin]);
 
   useEffect(() => {
     const navbar = document.querySelector('#navbar');
@@ -86,12 +106,12 @@ const Navbar = () => {
                   <span className={`${style.iconLogin} d-flex align-items-center justify-content-center rounded-circle border border-1 me-2`}>
                     <FontAwesomeIcon icon={faUser} />
                   </span>
-                  <div class="btn-group d-flex align-items-center">
-                    <button type="button" class={`${style.userName} border-0 bg-transparent dropdown-toggle ${pathname != '/' ? 'text-dark' : 'text-white'}`} data-bs-toggle="dropdown" aria-expanded="false">
+                  <div className="btn-group d-flex align-items-center">
+                    <button type="button" className={`${style.userName} border-0 bg-transparent dropdown-toggle ${pathname != '/' ? 'text-dark' : 'text-white'}`} data-bs-toggle="dropdown" aria-expanded="false">
                       {user?.name}
                     </button>
 
-                    <ul class="dropdown-menu">
+                    <ul className="dropdown-menu">
                       <li className="dropdown-item" onClick={logoutHandler}>
                         <FontAwesomeIcon className="text-danger" icon={faRightFromBracket} /> Logout
                       </li>
