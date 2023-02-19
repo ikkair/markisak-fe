@@ -99,10 +99,10 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
-          <div className="d-flex justify-content-end">
+          <div className="d-flex">
             {user ? (
               <>
-                <Link to="#" className={`${style.textWhite} text-decoration-none text-dark d-flex align-items-center`}>
+                <Link to="#" className={`${style.textWhite} text-decoration-none text-dark d-flex align-items-center `}>
                   <span className={`${style.iconLogin} d-flex align-items-center justify-content-center rounded-circle border border-1 me-2`}>
                     <FontAwesomeIcon icon={faUser} />
                   </span>
@@ -121,10 +121,10 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <Link to="/login" className={` text-dark text-decoration-none fw-semibold me-2`}>
+                <Link to="/login" className={`${style.authLink} ${pathname != '/' ? 'text-dark' : ''} text-decoration-none fw-semibold me-2`}>
                   Login /
                 </Link>
-                <Link to="/register" className={` text-dark text-decoration-none fw-semibold `}>
+                <Link to="/register" className={`${style.authLink} ${pathname != '/' ? 'text-dark' : ''} text-decoration-none fw-semibold `}>
                   Register
                 </Link>
               </>

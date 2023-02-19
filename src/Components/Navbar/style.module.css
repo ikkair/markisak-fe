@@ -21,7 +21,15 @@
   color: #ffffff;
 }
 
+.authLink {
+  color: #ffffff !important;
+}
+
 @media (max-width: 990px) {
+  .authLink {
+    color: #000000 !important;
+  }
+
   .textWhite {
     margin-right: 2em;
   }
@@ -40,6 +48,10 @@
   .mainNavbar {
     background: #efc81a !important;
     padding: 20px;
+  }
+
+  .authLink {
+    color: #ffffff !important;
   }
 
   .textWhite {
