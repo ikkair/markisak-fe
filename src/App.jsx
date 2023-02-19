@@ -14,6 +14,7 @@ import DetailResep from './Pages/DetailResep/DetailResep';
 import AuthMiddleware from './Middleware/AuthMiddleware';
 import UpdateRecipe from './Pages/Dashboard/UpdateRecipe/UpdateRecipe';
 import Recipes from './Pages/Recipes/Recipes';
+import AdminLogin from './Pages/AdminLogin/AdminLogin';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
       />
       <Route path="/dashboard/my-recipe/:id" element={<UpdateRecipe />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/login/admin" element={<AdminLogin />} />
       <Route path="/register" element={<Register />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/code-reset-password" element={<CodeResetPassword />} />

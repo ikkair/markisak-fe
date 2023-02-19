@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useCreateRecipeMutation } from '../../../Features/recipe/recipeApi';
+import { useCreateRecipeMutation, useGetRecipeByIdQuery } from '../../../Features/recipe/recipeApi';
 import Navbar from './../../../Components/Navbar/Navbar';
 import photoLogo from '../../../assets/createRecipe/image.png';
 import style from './style.module.css';
@@ -9,29 +9,59 @@ import withReactContent from 'sweetalert2-react-content';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import MainFooter from '../../../Components/Footer/MainFooter';
+import { useParams } from 'react-router-dom';
 
 const UpdateRecipe = () => {
   const MySwal = withReactContent(Swal);
+  const { id } = useParams();
 
-  const [createRecipe, { isLoading, error }] = useCreateRecipeMutation();
   const [selectedFile, setSelectedFile] = useState();
+  const { data: recipe, isLoading, error, isSuccess } = useGetRecipeByIdQuery(id);
   const [preview, setPreview] = useState();
   const [stepVideo, setStepVideo] = useState(1);
-  const [videos, setVideos] = useState([
-    {
-      step: stepVideo,
-      url: '',
-    },
-  ]);
-
+  const [videos, setVideos] = useState([]);
   const [data, setData] = useState({
     title: '',
     photo: '',
     ingredients: '',
   });
 
+  useEffect(() => {
+    if (isSuccess) {
+      for (let i = 0; i < recipe?.videos?.length; i++) {
+        setVideos((prev) => {
+          return [
+            ...prev,
+            {
+              step: recipe?.videos[i].step,
+              url_video: recipe?.videos[i].url_video,
+            },
+          ];
+        });
+      }
+
+      for (let attr in recipe) {
+        if (attr == 'title' || attr == 'ingredients' || attr == 'photo' || attr == 'description') {
+          setData((prev) => {
+            return {
+              ...prev,
+              [attr]: recipe[attr],
+            };
+          });
+        }
+      }
+    }
+  }, [isSuccess]);
+
+  console.log(data);
   const changeVideoHandler = (e, i) => {
-    videos[i].url = e.target.value;
+    setVideos((prev) => {
+      const data = {
+        ...prev[i],
+        url_video: e.target.value,
+      };
+      return data;
+    });
   };
 
   const inputDeleteHandler = (i) => {
@@ -53,22 +83,22 @@ const UpdateRecipe = () => {
     });
   };
 
-  const createHandler = async () => {
-    await createRecipe({ ...data, photo: preview });
-    if (!error) {
-      MySwal.fire({
-        title: <p>Product add to Cart!</p>,
-        icon: 'success',
-      });
+  // const createHandler = async () => {
+  //   await createRecipe({ ...data, photo: preview });
+  //   if (!error) {
+  //     MySwal.fire({
+  //       title: <p>Product add to Cart!</p>,
+  //       icon: 'success',
+  //     });
 
-      setData({
-        title: '',
-        photo: '',
-        ingredients: '',
-        video: '',
-      });
-    }
-  };
+  //     setData({
+  //       title: '',
+  //       photo: '',
+  //       ingredients: '',
+  //       video: '',
+  //     });
+  //   }
+  // };
 
   function imageClickHandler(e) {
     const inputImg = document.querySelector(`#photo`);
@@ -99,18 +129,18 @@ const UpdateRecipe = () => {
 
   const renderInputVideo = () => {
     const inputs = [];
-    for (let i = 1; i < stepVideo; i++) {
+    for (let i = 0; i < videos?.length - 1; i++) {
       inputs.push(
         <>
           <div className="col-6 col-md-3 col-lg-2 d-flex gap-2">
             <span className="text-secondary mt-2 text-nowrap text-dark fw-semibold">Step :</span>
-            <input type="number" className="text-center text-secondary form-control bg-transparent border-0 border-bottom rounded-0 outline-none" name="video" value={i + 1} disabled />
+            <input type="number" className="text-center text-secondary form-control bg-transparent border-0 border-bottom rounded-0 outline-none" name="video" value={videos[i + 1]?.step} disabled />
           </div>
           <div className="col-12 col-md-9 col-lg-10 d-flex gap-2">
             <span className="text-secondary mt-2 text-nowrap text-dark fw-semibold">Link : </span>
-            <input type="text" className="text-secondary form-control bg-transparent border-0 border-bottom rounded-0 outline-none" name="video" onChange={(e) => changeVideoHandler(e, i)} />
+            <input type="text" className="text-secondary form-control bg-transparent border-0 border-bottom rounded-0 outline-none" value={videos[i + 1]?.url_video} name="video" onChange={(e) => changeVideoHandler(e, i)} disabled={true} />
 
-            {i == stepVideo - 1 && <FontAwesomeIcon className={`${style.addVideo} bg-light text-secondary rounded-circle p-2`} onClick={() => inputDeleteHandler(i)} icon={faMinus} />}
+            {/* {i == stepVideo - 1 && <FontAwesomeIcon className={`${style.addVideo} bg-light text-secondary rounded-circle p-2`} onClick={() => inputDeleteHandler(i)} icon={faMinus} />} */}
           </div>
         </>
       );
@@ -136,11 +166,15 @@ const UpdateRecipe = () => {
               </div>
 
               <div className="col-12 col-lg-10 offset-lg-1 mt-4">
-                <InputFormAddRecipe value={data.title} type={'text'} title={'Title'} name={'title'} onchange={(e) => changeHandler(e)} />
+                <InputFormAddRecipe value={data?.title} type={'text'} title={'Title'} name={'title'} onchange={(e) => changeHandler(e)} />
               </div>
 
               <div className="col-12 col-lg-10 offset-lg-1 mt-4">
-                <InputFormAddRecipe value={data.ingredients} type={'textarea'} title={'Ingredients'} name={'ingredients'} onchange={(e) => changeHandler(e)} />
+                <InputFormAddRecipe value={data?.ingredients} type={'textarea'} title={'Ingredients'} name={'ingredients'} onchange={(e) => changeHandler(e)} />
+              </div>
+
+              <div className="col-12 col-lg-10 offset-lg-1 mt-4">
+                <InputFormAddRecipe value={data?.description} type={'textarea'} title={'Description'} name={'description'} onchange={(e) => changeHandler(e)} />
               </div>
 
               <div className="col-12 col-lg-10 offset-lg-1 mt-4">
@@ -151,13 +185,14 @@ const UpdateRecipe = () => {
                       type="text"
                       className="form-control bg-transparent border-0 border-bottom rounded-0 outline-none"
                       name="video"
+                      value={videos[0]?.url_video}
                       onChange={(e) => {
-                        console.log(videos);
-                        videos[0].url = e.target.value;
+                        changeHandler(e, 0);
                       }}
+                      disabled={true}
                     />
 
-                    <FontAwesomeIcon className={`${style.addVideo} bg-light text-secondary rounded-circle p-2`} onClick={() => incrementVideos()} icon={faPlus} />
+                    {/* <FontAwesomeIcon className={`${style.addVideo} bg-light text-secondary rounded-circle p-2`} onClick={() => incrementVideos()} icon={faPlus} /> */}
                   </div>
 
                   <div className="row">{renderInputVideo()?.map((input) => input)}</div>
@@ -165,9 +200,7 @@ const UpdateRecipe = () => {
               </div>
 
               <div className="col-12 col-lg-10 offset-lg-1 mt-5 d-flex justify-content-center">
-                <button className="btn btn-warning w-50 text-light" onClick={createHandler}>
-                  Post
-                </button>
+                <button className="btn btn-warning w-50 text-light">Post</button>
               </div>
             </div>
           </div>

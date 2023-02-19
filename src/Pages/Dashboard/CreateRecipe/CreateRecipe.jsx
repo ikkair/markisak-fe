@@ -28,6 +28,7 @@ const CreateRecipe = () => {
     title: '',
     photo: '',
     ingredients: '',
+    description: '',
   });
 
   const changeVideoHandler = (e, i) => {
@@ -141,6 +142,10 @@ const CreateRecipe = () => {
 
               <div className="col-12 col-lg-10 offset-lg-1 mt-4">
                 <InputFormAddRecipe value={data.ingredients} type={'textarea'} title={'Ingredients'} name={'ingredients'} onchange={(e) => changeHandler(e)} />
+              </div>
+
+              <div className="col-12 col-lg-10 offset-lg-1 mt-4">
+                <InputFormAddRecipe value={data.ingredients} type={'textarea'} title={'Description'} name={'description'} onchange={(e) => changeHandler(e)} />
               </div>
 
               <div className="col-12 col-lg-10 offset-lg-1 mt-4">
