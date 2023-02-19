@@ -4,6 +4,12 @@
   font-family: 'MetropolisNF', sans-serif;
 }
 
+/* Auth COntainer */
+.authContainer {
+  height: 100% !important;
+  min-height: 100vh;
+}
+
 /* SideLeft */
 
 .sideLeft {

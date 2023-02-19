@@ -20,7 +20,7 @@ const authApi = apiSlice.injectEndpoints({
 
       transformResponse: (response, meta, args) => response,
     }),
-    registerUser: builder.mutation({
+    refreshToken: builder.mutation({
       query: (data) => ({
         url: 'user/refresh-token',
         method: 'POST',
@@ -32,4 +32,4 @@ const authApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useLoginUserMutation, useRegisterUserMutation } = authApi;
+export const { useLoginUserMutation, useRegisterUserMutation, useRefreshTokenMutation } = authApi;

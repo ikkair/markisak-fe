@@ -1,5 +1,4 @@
 import React from 'react';
-import InputFormAuth from '../../Form/InputFormAuth/InputFormAuth';
 import logo from '../../../assets/Authpage/Group.png';
 import style from './style.module.css';
 
@@ -7,13 +6,13 @@ const AuthLayout = ({ children, title, description }) => {
   return (
     <>
       <main>
-        <div className="container-fluid loginPage vh-100">
+        <div className={`${style.authContainer} container-fluid loginPage`}>
           <div className="row h-100 d-flex ">
-            <div className={`col-md-6 ${style.sideLeft} vh-100 d-md-flex flex-column justify-content-center align-items-center d-none`}>
+            <div className={`col-md-6 ${style.sideLeft} min-vh-100 d-md-flex flex-column justify-content-center align-items-center d-none`}>
               <img src={logo} alt="" />
               <p>Mari Kita Masak.</p>
             </div>
-            <div className={`col-md-6 ${style.sideRight} h-100 text-center d-grid align-items-center`}>
+            <div className={`col-md-6 ${style.sideRight} min-vh-100 text-center d-grid align-items-center`}>
               <div className="inputGroup">
                 {/* <h1 className='text-warning mb- fw-bold mb-4 d-block d-lg-none'>MARKISAK.</h1> */}
                 <div className="row justify-content-center">

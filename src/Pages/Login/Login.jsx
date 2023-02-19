@@ -17,7 +17,6 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const [checkTerms, setCheckTerms] = useState(false);
 
   const loginHandler = async () => {
     const data = await loginUser({ email, password });
@@ -53,12 +52,6 @@ const Login = () => {
     }
   }, [isSuccess]);
 
-  useEffect(() => {
-    if (checkTerms) {
-      setCheckTerms((prev) => !prev);
-    }
-  }, [error]);
-
   return (
     <div>
       <AuthLayout title="Welcome" description="Log in into your exiting account">
@@ -75,21 +68,16 @@ const Login = () => {
             )}
             <InputFormAuth title="Email" value={email} name="email" type="email" onchange={(e) => setEmail(e.target.value)} />
             <InputFormAuth title="Password" name="password" type="password" onchange={(e) => setPassword(e.target.value)} />
-            <div className="form-check mb-3 customCheck">
-              <input className="form-check-input" type="checkbox" onChange={() => setCheckTerms((prev) => !prev)} value="" id={style.flexCheckDefault} />
-              <label className={`form-check-label ${style.formLabel}`} for={style.flexCheckDefault}>
-                I agree to terms & conditions
-              </label>
-            </div>
+
             <div className="d-grid mb-2 mt-3 text-light">
-              <button className="btn btn-warning text-light" type="button" onClick={loginHandler} disabled={!checkTerms}>
+              <button className="btn btn-warning text-light" type="button" onClick={loginHandler}>
                 Login
               </button>
             </div>
             <div className="forgotPassword text-end mb-3">
-              <a className={`link-dark text-decoration-none ${style.formLabel}`} style={{ fontSize: '14px' }} href="">
+              <Link to={'/forgot-password'} className={`link-dark text-decoration-none ${style.formLabel}`} style={{ fontSize: '14px' }} href="">
                 Forgot Password?
-              </a>
+              </Link>
             </div>
             <div className={`loginLink text-center mt-3 ${style.formLabel}`}>
               <p>
