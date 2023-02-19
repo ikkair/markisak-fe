@@ -27,11 +27,11 @@ const DetailResep = () => {
   const [createComment, { isLoading: loadingComment, error: errorComment, isSucces }] = useCreateCommentMutation();
 
   // const { data : comment } = useGetAllCommentQuery(id)
-  console.log(recipe?.id_user);
-  console.log(recipe?.comments);
+  // console.log(recipe?.id_user)
+  // console.log(recipe?.comments);
 
   const [message, setMessage] = useState('');
-  console.log(`${message}`);
+  // console.log(`${message}`);
 
   // console.log(errorComment);
   const changeHandler = (e) => {

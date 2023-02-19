@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import profile from '../../../assets/Profile/avatar.png';
 import SecondaryFooter from '../../../Components/Footer/SecondaryFooter';
@@ -10,9 +10,33 @@ import img2 from '../../../assets/Profile/img2.png';
 import { useGetAllRecipeQuery, useDeleteRecipeByIdMutation, useGetRecipeByIdQuery } from '../../../Features/recipe/recipeApi';
 import edit from '../../../assets/Profile/vector.png';
 import { useGetUserDetailQuery } from '../../../Features/user/userApi';
+import ModalEditProfile from '../../../Components/Profile/ModalEditProfile';
 
 const Profile = () => {
-  const { data: user, isLoading } = useGetUserDetailQuery(localStorage.getItem('id_user'));
+  const { data: user, isLoading, isSuccess } = useGetUserDetailQuery(localStorage.getItem('id_user'));
+  const [data, setData] = useState({});
+
+  const changeHandler = (e) => {
+    console.log(data);
+    setData((prev) => {
+      return {
+        ...prev,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      setData((prev) => {
+        let data = {};
+        for (let attr in user) {
+          data = { ...data, [attr]: user[attr] };
+        }
+        return data;
+      });
+    }
+  }, [isSuccess]);
 
   return (
     <div>
@@ -25,6 +49,7 @@ const Profile = () => {
               <img className="mt-5" src={edit} alt="" />
             </Link>
             <h3>{user?.name}</h3>
+            {!isLoading && <ModalEditProfile user={data} onchange={(e) => changeHandler(e)} />}
           </div>
 
           <div className="text-secondary">
