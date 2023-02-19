@@ -27,9 +27,8 @@ const DetailResep = () => {
   const [createComment, { isLoading: loadingComment, error: errorComment, isSucces }] = useCreateCommentMutation();
 
   // const { data : comment } = useGetAllCommentQuery(id)
-  console.log(recipe?.id_user)
+  console.log(recipe?.id_user);
   console.log(recipe?.comments);
-
 
   const [message, setMessage] = useState('');
   console.log(`${message}`);
@@ -74,7 +73,7 @@ const DetailResep = () => {
               </h1>
               <div className="row justify-content-center">
                 <div className="col-12 col-lg-8  position-relative">
-                  <img crossOrigin='Anonymous' src={recipe.photo} className={`img-fluid ${style.imageDetail} d-block mx-auto mt-5 mb-5 `} alt="" />
+                  <img crossOrigin="Anonymous" src={recipe.photo} className={`img-fluid ${style.imageDetail} d-block mx-auto mt-5 mb-5 `} alt="" />
                   <span className={style.action}>
                     <button className={`position-absolute ${style.saved}`} onClick={onClickSave}>
                       <i class="fa-sharp fa-solid fa-bookmark"></i>
@@ -90,25 +89,19 @@ const DetailResep = () => {
               <p className="mb-5">{recipe.ingredients}</p>
               <h4 className="fw-semibold">Step Video</h4>
               <div className="row">
-
                 {recipe?.videos?.map((video, index) => (
                   <>
-                    {/* console.log(video.url_video); */}
-
+                    {console.log(video.url_video)}
                     <div className="col-md-12 col-6">
                       <ul className="list-unstyled">
                         <li className="list-group-item">
                           {/* <p>Step {index + 1}. </p> */}
-                          <MyVerticallyCenteredModal
-                            link={video.url_video}
-                            step={`STEP ${index + 1}`}
-                          />
+                          <MyVerticallyCenteredModal link={video.url_video} step={`STEP ${index + 1}`} />
                         </li>
                       </ul>
                     </div>
                   </>
                 ))}
-
               </div>
             </div>
           </div>
@@ -130,18 +123,15 @@ const DetailResep = () => {
             <h1>Comments</h1>
             {/* <h1>{recipe.message}</h1> */}
 
-            {recipe?.comments.map(comment => (
+            {recipe?.comments.map((comment) => (
               // console.log(comment.id)
               // console.log(recipe.id)
               <div className={`${style.commentList} mt-4 position-relative`}>
-                <img crossOrigin='Anonymous' src={profil} alt="" />
+                <img crossOrigin="Anonymous" src={profil} alt="" />
                 <div className={`${style.data} ms-4`}>
                   <p className={`${style.name} fw-bold`}>{comment.name}</p>
                   <p>{comment.message}</p>
-                  <ModalDelete
-                    id={comment.id}
-                    idRecipe={recipe.id}
-                  >
+                  <ModalDelete id={comment.id} idRecipe={recipe.id}>
                     Delete
                   </ModalDelete>
 

@@ -9,13 +9,11 @@ import img from '../../../assets/Profile/img1.png';
 import img2 from '../../../assets/Profile/img2.png';
 import { useGetAllRecipeQuery, useDeleteRecipeByIdMutation, useGetRecipeByIdQuery } from '../../../Features/recipe/recipeApi';
 import edit from '../../../assets/Profile/vector.png';
-import { useGetLikedRecipeByIdUserQuery } from '../../../Features/likedRecipe/likedRecipeApi';
 import { useGetUserDetailQuery } from '../../../Features/user/userApi';
 
 const Profile = () => {
   const { data: user, isLoading } = useGetUserDetailQuery(localStorage.getItem('id_user'));
 
-  console.log(user);
   return (
     <div>
       <Navbar />
@@ -48,7 +46,15 @@ const Profile = () => {
               </li>
             </ul>
           </div>
-          <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-4 g-3">{isLoading ? 'Loading...' : user?.recipes?.map((recipe, i) => <Card key={i} item={recipe} />)}</div>
+          <div className="row mx-auto justfy-content-between">
+            {isLoading
+              ? 'Loading...'
+              : user?.recipes?.map((recipe, i) => (
+                  <div className="col-6 px-1 col-md-3 mb-2">
+                    <Card key={i} item={recipe} />
+                  </div>
+                ))}
+          </div>
         </div>
       </div>
       <SecondaryFooter />
