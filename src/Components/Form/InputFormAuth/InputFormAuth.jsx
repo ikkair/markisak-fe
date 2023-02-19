@@ -7,7 +7,7 @@ const InputFormAuth = (props) => {
   };
   return (
     <>
-      <div class="mb-3">
+      <div className="mb-3">
         <label for={name} className={`form-label ${style.formLabel}`}>
           {props.title}
         </label>

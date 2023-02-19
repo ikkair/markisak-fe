@@ -90,9 +90,7 @@ const DetailResep = () => {
               <h4 className="fw-semibold">Step Video</h4>
               <div className="row">
                 {recipe?.videos?.map((video, index) => (
-                  <>
-                    {console.log(video.url_video)}
-                    <div className="col-md-12 col-6">
+                    <div key={index} className="col-md-12 col-6">
                       <ul className="list-unstyled">
                         <li className="list-group-item">
                           {/* <p>Step {index + 1}. </p> */}
@@ -104,7 +102,6 @@ const DetailResep = () => {
                         </li>
                       </ul>
                     </div>
-                  </>
                 ))}
               </div>
             </div>
@@ -133,10 +130,10 @@ const DetailResep = () => {
 
             {/* <h1>{recipe.message}</h1> */}
 
-            {recipe?.comments.map((comment) => (
+            {recipe?.comments.map((comment,i) => (
               // console.log(comment.id)
               // console.log(recipe.id)
-              <div className={`${style.commentList} mt-4`}>
+              <div key={i} className={`${style.commentList} mt-4`}>
                 <div className="row">
                   <div className="col-1 d-flex align-items-center">
                     <img crossOrigin='Anonymous' src={profil} alt="" />
@@ -160,8 +157,6 @@ const DetailResep = () => {
                       Delete
                     </ModalDelete>
                   </div>
-
-
 
                 </div>
               </div>
