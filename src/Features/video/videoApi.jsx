@@ -21,8 +21,8 @@ const videoApi = apiSlice.injectEndpoints({
     }),
 
     createVideo: builder.mutation({
-      query: (data) => ({
-        url: `videos`,
+      query: ({ id_recipe, ...data }) => ({
+        url: `recipe/${id_recipe}/video`,
         method: 'POST',
         body: data,
       }),

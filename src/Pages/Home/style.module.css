@@ -147,6 +147,8 @@
 
 .imgSwipper {
   filter: brightness(50%);
+  height: 300px;
+  width: 300px;
 }
 
 .imgSwipper:hover {

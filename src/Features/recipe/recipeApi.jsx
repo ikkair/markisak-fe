@@ -33,18 +33,18 @@ const recipeApi = apiSlice.injectEndpoints({
 
     createRecipe: builder.mutation({
       query: (data) => ({
-        url: `recipes`,
+        url: `recipe`,
         method: 'POST',
         body: data,
       }),
 
-      invalidatesTags: ['Recipe'],
+      invalidatesTags: ['Recipe', 'User'],
       transformResponse: (response, meta, arg) => response,
     }),
 
     updateRecipeById: builder.mutation({
       query: ({ id, data }) => ({
-        url: `recipes/${id}`,
+        url: `recipe/${id}`,
         method: 'PUT',
         body: data,
       }),
@@ -55,10 +55,10 @@ const recipeApi = apiSlice.injectEndpoints({
 
     deleteRecipeById: builder.mutation({
       query: (id) => ({
-        url: `recipes/${id}`,
+        url: `recipe/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Recipe'],
+      invalidatesTags: ['Recipe', 'User'],
       transformResponse: (response, meta, arg) => response,
     }),
   }),

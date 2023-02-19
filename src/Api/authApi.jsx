@@ -7,7 +7,9 @@ const baseQuery = fetchBaseQuery({
     if (getState().auth.accessToken) {
       const token = getState().auth.accessToken;
       headers.set('authorization', `Bearer ${token}`);
-    } else {
+    }
+    if (localStorage.getItem('access_token')) {
+      console.log('tes');
       headers.set('authorization', `Bearer ${localStorage.getItem('access_token')}`);
     }
 
@@ -34,7 +36,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     );
     if (refreshResult?.data) {
       const dataUser = api.getState().auth;
-      console.log(dataUser);
+      console.log('tes', dataUser);
       const { iat, exp, ...other } = refreshResult.data.data.data;
       api.dispatch(setCredentials({ user: other, token: refreshResult.data.data.token }));
 

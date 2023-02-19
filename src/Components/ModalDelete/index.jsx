@@ -1,28 +1,24 @@
-import React, { Fragment, useState } from "react";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import { useDeleteCommentsMutation } from "../../Features/comment/commentApi";
-import style from '../../Pages/DetailResep/style.module.css'
+import React, { Fragment, useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import { useDeleteCommentsMutation } from '../../Features/comment/commentApi';
+import style from '../../Pages/DetailResep/style.module.css';
 
-
-
-const ModalDelete = ({id, idRecipe, children}) => {
+const ModalDelete = ({ id, idRecipe, children }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [deleteComments] = useDeleteCommentsMutation(id)
+  const [deleteComments] = useDeleteCommentsMutation();
 
   const handleDelete = async () => {
-    await deleteComments({id, id_recipe: idRecipe})
-    console.log(id);
-    console.log(idRecipe);
-  }
+    await deleteComments({ id, id_recipe: idRecipe });
+  };
 
   return (
     <Fragment>
       <button
         // className="btn btn-danger text-light mt-1 ms-2"
-        style={{ marginRight: "10px" }}
+        style={{ marginRight: '10px' }}
         onClick={handleShow}
         className={`btn btn-danger mt-1 ms-2 position-absolute ${style.delete}`}
       >
@@ -37,7 +33,13 @@ const ModalDelete = ({id, idRecipe, children}) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="danger" onClick={() => {handleDelete(); handleClose()}}>
+          <Button
+            variant="danger"
+            onClick={() => {
+              handleDelete();
+              handleClose();
+            }}
+          >
             {children}
           </Button>
         </Modal.Footer>
