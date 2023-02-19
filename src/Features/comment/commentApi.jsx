@@ -52,6 +52,7 @@ const commentApi = apiSlice.injectEndpoints({
         method: 'DELETE',
       }),
 
+      invalidatesTags: ['Recipe'],
       transformResponse: (response, meta, arg) => response,
     }),
   }),

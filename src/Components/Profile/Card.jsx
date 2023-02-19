@@ -23,7 +23,7 @@ const Card = ({ item, onclick }) => {
         <img src={`https://source.unsplash.com/300x30${item.id}/?food`} className={`card-img-top ${style.img}`} alt="..." />
       </Link>
 
-      <Link>
+      <Link to={`/dashboard/my-recipe/${item.id}`}>
         <FontAwesomeIcon className={`card-title mx-1 bg-success ${style.cardEdit}`} icon={faPenToSquare} />
       </Link>
       <button>

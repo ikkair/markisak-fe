@@ -30,7 +30,7 @@ const CreateRecipe = () => {
     return Promise.all(
       videos?.map(async (video) => {
         console.log(video);
-        // await createVideo({ id_recipe, step: video.step, url_video: video.url });
+        await createVideo({ id_recipe, step: video.step, url_video: video.url });
       })
     );
   };
@@ -43,8 +43,6 @@ const CreateRecipe = () => {
   });
 
   const changeHandler = (e) => {
-    console.log(data);
-    console.log(videos);
     setData((prev) => {
       return {
         ...prev,
@@ -68,7 +66,6 @@ const CreateRecipe = () => {
   };
 
   const createHandler = async () => {
-    await insertAllVideo(idRecipe);
     const formData = new FormData();
     for (let attr in data) {
       formData.append(attr, data[attr]);
@@ -76,10 +73,11 @@ const CreateRecipe = () => {
 
     const response = await createRecipe(formData);
     const idRecipe = response.data.data[0].id;
+    await insertAllVideo(idRecipe);
 
     if (isSuccess) {
       MySwal.fire({
-        title: <p>Product add to Cart!</p>,
+        title: <p>Success create recipe!</p>,
         icon: 'success',
       });
 

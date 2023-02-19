@@ -8,7 +8,6 @@ const authApi = apiSlice.injectEndpoints({
         method: 'POST',
         body: data,
       }),
-
       transformResponse: (response, meta, args) => response,
     }),
 
