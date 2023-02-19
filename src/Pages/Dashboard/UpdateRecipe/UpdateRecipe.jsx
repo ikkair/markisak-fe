@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useCreateRecipeMutation, useGetRecipeByIdQuery } from '../../../Features/recipe/recipeApi';
+import { useCreateRecipeMutation, useGetRecipeByIdQuery, useUpdateRecipeByIdMutation } from '../../../Features/recipe/recipeApi';
 import Navbar from './../../../Components/Navbar/Navbar';
 import photoLogo from '../../../assets/createRecipe/image.png';
 import style from './style.module.css';
@@ -17,6 +17,7 @@ const UpdateRecipe = () => {
 
   const [selectedFile, setSelectedFile] = useState();
   const { data: recipe, isLoading, error, isSuccess } = useGetRecipeByIdQuery(id);
+  const [updateRecipeById, { isSuccess: isSuccessUpdate }] = useUpdateRecipeByIdMutation();
   const [preview, setPreview] = useState();
   const [stepVideo, setStepVideo] = useState(1);
   const [videos, setVideos] = useState([]);
@@ -24,6 +25,7 @@ const UpdateRecipe = () => {
     title: '',
     photo: '',
     ingredients: '',
+    description: '',
   });
 
   useEffect(() => {
@@ -53,7 +55,6 @@ const UpdateRecipe = () => {
     }
   }, [isSuccess]);
 
-  console.log(data);
   const changeVideoHandler = (e, i) => {
     setVideos((prev) => {
       const data = {
@@ -62,6 +63,22 @@ const UpdateRecipe = () => {
       };
       return data;
     });
+  };
+
+  const updateHandler = async () => {
+    const formData = new FormData();
+    for (let attr in data) {
+      formData.append(attr, data[attr]);
+    }
+
+    await updateRecipeById({ id, data: formData });
+
+    if (isSuccessUpdate) {
+      MySwal.fire({
+        title: <p>Recipe updated!</p>,
+        icon: 'success',
+      });
+    }
   };
 
   const inputDeleteHandler = (i) => {
@@ -112,6 +129,12 @@ const UpdateRecipe = () => {
     }
 
     setSelectedFile(e.target.files[0]);
+    setData((prev) => {
+      return {
+        ...prev,
+        photo: e.target.files[0],
+      };
+    });
   };
 
   useEffect(() => {
@@ -200,7 +223,9 @@ const UpdateRecipe = () => {
               </div>
 
               <div className="col-12 col-lg-10 offset-lg-1 mt-5 d-flex justify-content-center">
-                <button className="btn btn-warning w-50 text-light">Post</button>
+                <button className="btn btn-warning w-50 text-light" onClick={updateHandler}>
+                  Update Recipe
+                </button>
               </div>
             </div>
           </div>

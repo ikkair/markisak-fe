@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import profile from '../../../assets/Profile/avatar.png';
 import SecondaryFooter from '../../../Components/Footer/SecondaryFooter';
@@ -9,14 +9,35 @@ import img from '../../../assets/Profile/img1.png';
 import img2 from '../../../assets/Profile/img2.png';
 import { useGetAllRecipeQuery, useDeleteRecipeByIdMutation, useGetRecipeByIdQuery } from '../../../Features/recipe/recipeApi';
 import edit from '../../../assets/Profile/vector.png';
-import { useGetLikedRecipeByIdUserQuery } from '../../../Features/likedRecipe/likedRecipeApi';
 import { useGetUserDetailQuery } from '../../../Features/user/userApi';
 import ModalEditProfile from '../../../Components/Profile/ModalEditProfile';
 
 const Profile = () => {
-  const { data: user, isLoading } = useGetUserDetailQuery(localStorage.getItem('id_user'));
+  const { data: user, isLoading, isSuccess } = useGetUserDetailQuery(localStorage.getItem('id_user'));
+  const [data, setData] = useState({});
 
-  // console.log(user);
+  const changeHandler = (e) => {
+    console.log(data);
+    setData((prev) => {
+      return {
+        ...prev,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      setData((prev) => {
+        let data = {};
+        for (let attr in user) {
+          data = { ...data, [attr]: user[attr] };
+        }
+        return data;
+      });
+    }
+  }, [isSuccess]);
+
   return (
     <div>
       <Navbar />
@@ -28,7 +49,7 @@ const Profile = () => {
               <img className="mt-5" src={edit} alt="" />
             </Link>
             <h3>{user?.name}</h3>
-            <ModalEditProfile />
+            {!isLoading && <ModalEditProfile user={data} onchange={(e) => changeHandler(e)} />}
           </div>
 
           <div className="text-secondary">
@@ -50,7 +71,15 @@ const Profile = () => {
               </li>
             </ul>
           </div>
-          <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-4 g-3">{isLoading ? 'Loading...' : user?.recipes?.map((recipe, i) => <Card key={i} item={recipe} />)}</div>
+          <div className="row mx-auto justfy-content-between">
+            {isLoading
+              ? 'Loading...'
+              : user?.recipes?.map((recipe, i) => (
+                  <div className="col-6 px-1 col-md-3 mb-2">
+                    <Card key={i} item={recipe} />
+                  </div>
+                ))}
+          </div>
         </div>
       </div>
       <SecondaryFooter />

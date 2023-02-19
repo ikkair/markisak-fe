@@ -14,8 +14,9 @@ import { useCreateVideoMutation } from '../../../Features/video/videoApi';
 const CreateRecipe = () => {
   const MySwal = withReactContent(Swal);
 
-  const [createRecipe, { isLoading, error, isSuccess }] = useCreateRecipeMutation();
-  const [createVideo, { isLoading: isLoadingCreateVideo, error: errorCreateVideo, isSuccess: isSuccessCreateVideo }] = useCreateVideoMutation();
+  const [createRecipe, { error, isSuccess, isError: isErrorCreateRecipe, error: errorCreateRecipe }] = useCreateRecipeMutation();
+  const [createVideo, { isLoading: isLoadingCreateVideo, error: errorCreateVideo, isSuccess: isSuccessCreateVideo, isError: isErrorCreateVideo }] = useCreateVideoMutation();
+  const [loading, setLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
   const [stepVideo, setStepVideo] = useState(1);
@@ -66,6 +67,8 @@ const CreateRecipe = () => {
   };
 
   const createHandler = async () => {
+    setLoading(true);
+
     const formData = new FormData();
     for (let attr in data) {
       formData.append(attr, data[attr]);
@@ -74,11 +77,7 @@ const CreateRecipe = () => {
     const response = await createRecipe(formData);
     const idRecipe = response.data.data[0].id;
     await insertAllVideo(idRecipe);
-
-    MySwal.fire({
-      title: <p>Success create recipe!</p>,
-      icon: 'success',
-    });
+    setLoading(false);
 
     setData({
       title: '',
@@ -87,6 +86,40 @@ const CreateRecipe = () => {
       video: '',
     });
   };
+
+  useEffect(() => {
+    if (loading) {
+      Swal.fire({
+        title: 'Loading...',
+        html: 'Recipe was create, Please wait...',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+    }
+
+    if (isSuccess) {
+      Swal.close();
+      MySwal.fire({
+        title: <p>Success create recipe!</p>,
+        icon: 'success',
+      });
+    }
+
+    if (isErrorCreateRecipe && isErrorCreateVideo) {
+      Swal.close();
+      MySwal.fire({
+        title: (
+          <p>
+            {errorCreateVideo.message} or {errorCreateMessage.message}
+          </p>
+        ),
+        icon: 'failed',
+      });
+    }
+  }, [loading]);
 
   function imageClickHandler(e) {
     const inputImg = document.querySelector(`#photo`);
