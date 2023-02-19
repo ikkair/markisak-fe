@@ -7,8 +7,12 @@ import style from './style.module.css';
 import photoDefault from '../../assets/Profile/photo.png';
 import { logout, setCredentials } from '../../Features/auth/authSlice';
 import { useGetUserDetailQuery } from '../../Features/user/userApi';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 const Navbar = () => {
+  const MySwal = withReactContent(Swal);
+
   const { pathname } = useLocation();
   const user = useSelector((state) => state.auth.user);
   const { data: userLogin, isLoading, isSuccess } = useGetUserDetailQuery(localStorage.getItem('id_user'));
@@ -19,7 +23,7 @@ const Navbar = () => {
   function logoutHandler() {
     dispatch(logout());
     MySwal.fire({
-      title: <p>Success create recipe!</p>,
+      title: <p>Logout Success!</p>,
       icon: 'success',
     });
   }
