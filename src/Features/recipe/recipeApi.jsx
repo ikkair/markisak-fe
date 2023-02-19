@@ -38,13 +38,13 @@ const recipeApi = apiSlice.injectEndpoints({
         body: data,
       }),
 
-      invalidatesTags: ['Recipe'],
+      invalidatesTags: ['Recipe', 'User'],
       transformResponse: (response, meta, arg) => response,
     }),
 
     updateRecipeById: builder.mutation({
       query: ({ id, data }) => ({
-        url: `recipes/${id}`,
+        url: `recipe/${id}`,
         method: 'PUT',
         body: data,
       }),
