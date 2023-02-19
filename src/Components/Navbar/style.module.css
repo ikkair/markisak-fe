@@ -40,7 +40,7 @@
     margin-right: 1.5em;
   }
   .userName {
-    color: #000000;
+    color: #000000 !important;
   }
 }
 
