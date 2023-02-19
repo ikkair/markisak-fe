@@ -20,7 +20,7 @@ const Card = ({ item, onclick }) => {
   return (
     <div className={`${style.card}`}>
       <Link to={`/recipes/${item.id}`}>
-        <img src={`https://source.unsplash.com/300x30${item.id}/?food`} className={`card-img-top ${style.img}`} alt="..." />
+        <img src={item.photo} crossOrigin={'anonymous'} className={`card-img-top ${style.img}`} alt="..." />
       </Link>
 
       <Link to={`/dashboard/my-recipe/${item.id}`}>

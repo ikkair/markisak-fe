@@ -80,7 +80,7 @@ const Register = () => {
       <InputFormAuth title="Email Address" value={data.email} name="email" type="text" onchange={(e) => changeHandler(e)} />
       <InputFormAuth title="Phone Number" value={data.phone_number} name="phone_number" type="number" onchange={(e) => changeHandler(e)} />
       <InputFormAuth title="Password" name="password" value={data.password} type="password" onchange={(e) => changeHandler(e)} />
-      <InputFormAuth title="Confirm Password" value={data.password} name="confirmPassword" type="password" onchange={(e) => setPasswordConfirm(e.target.value)} />
+      <InputFormAuth title="Confirm Password" name="confirmPassword" type="password" onchange={(e) => setPasswordConfirm(e.target.value)} />
 
       {passwordError ? <h1>{passwordError}</h1> : ''}
 
