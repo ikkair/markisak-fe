@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Card from '../../Components/Profile/Card';
 import { useGetAllRecipeQuery } from '../../Features/recipe/recipeApi';
 import MainLayout from './../../Components/Layout/MainLayout/MainLayout';
 import { useSearchParams } from 'react-router-dom';
 import style from './style.module.css';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import CardRecipe from '../../Components/Cards/CardRecipe/CardRecipe';
 
 const Recipes = () => {
   const MySwal = withReactContent(Swal);
@@ -82,8 +82,8 @@ const Recipes = () => {
               {
                 (isLoading ? showLoading() : Swal.close(),
                 recipes?.data?.map((recipe) => (
-                  <div key={recipe.id} className="col-6 col-md-3">
-                    <Card item={recipe} />
+                  <div key={recipe.id} className="col-6 col-md-3 mb-3">
+                    <CardRecipe item={recipe} />
                   </div>
                 )))
               }
