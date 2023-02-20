@@ -7,7 +7,7 @@ import InputFormAddRecipe from '../../Components/Form/InputFormAddRecipe/InputFo
 import profil from '../../assets/detailResep/ProfileComment.png';
 import { useGetRecipeByIdQuery } from '../../Features/recipe/recipeApi';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
@@ -33,15 +33,33 @@ const DetailResep = () => {
   console.log(recipe?.id);
 
   const [message, setMessage] = useState('');
-  // console.log(`${message}`);
 
-  // console.log(errorComment);
+  // Set Color liked and save
+  const [color, setColor] = useState('#EFC81A');
+  const [colorl, setColorl] = useState('transparent');
+
+  // Function setColor like and save
+  const changeColor = () => {
+    if(color=="#EFC81A"){
+      setColor('#ff4646');
+    }else {
+      setColor('#EFC81A');
+    }
+  }
+  const changeColorl = () => {
+    if(colorl=="transparent"){
+      setColorl('#ff4646');
+    }else {
+      setColorl('transparent');
+    }
+  }
+
+  // Change handler
   const changeHandler = (e) => {
     setMessage(e.target.value);
   };
 
   const createHandler = async () => {
-    // console.log({ message, id_recipe: id, id_user: "1" });
     await createComment({ message, id_recipe: id });
 
     MySwal.fire({
@@ -50,16 +68,11 @@ const DetailResep = () => {
     });
 
     setMessage('');
-
   };
 
   const onClickLike = async () => {
     await createLikedRecipe({ id_recipe: id });
   };
-
-  // const onClickDeleteLike = async () => {
-  //   await deleteLikedRecipe({ id });
-  // };
 
   const onClickSave = async () => {
     await createSavedRecipe({ id_recipe: id });
@@ -81,10 +94,10 @@ const DetailResep = () => {
                 <div className="col-12 col-lg-8  position-relative">
                   <img crossOrigin="Anonymous" src={recipe.photo} className={`img-fluid ${style.imageDetail} d-block mx-auto mt-5 mb-5 `} alt="" />
                   <span className={style.action}>
-                    <button className={`position-absolute ${style.saved}`} onClick={onClickSave}>
+                    <button className={`position-absolute ${style.saved}`} style={{backgroundColor : color}} onClick={() => {onClickSave(); changeColor()}}>
                       <i class="fa-sharp fa-solid fa-bookmark"></i>
                     </button>
-                    <button className={`position-absolute ${style.liked}`} onClick={onClickLike}>
+                    <button className={`position-absolute ${style.liked}`} style={{backgroundColor : colorl}} onClick={() => {onClickLike(); changeColorl()}}>
                       <i class="fa-solid fa-thumbs-up"></i>
                     </button>
                   </span>
@@ -96,19 +109,25 @@ const DetailResep = () => {
               <h4 className="fw-semibold">Step Video</h4>
               <div className="row">
                 {recipe?.videos?.map((video, index) => (
-                    <div key={index} className="col-md-12 col-6">
-                      <ul className="list-unstyled">
-                        <li className="list-group-item">
-                          {/* <p>Step {index + 1}. </p> */}
-                          <MyVerticallyCenteredModal
-                            link={video.url_video}
-                            step={`STEP ${index + 1}`}
-                            nameRecipe = {recipe.title}
-                          />
-                        </li>
-                      </ul>
-                    </div>
+                  <div key={index} className="col-md-12 col-6">
+                    <ul className="list-unstyled">
+                      <li className="list-group-item">
+                        {/* <p>Step {index + 1}. </p> */}
+                        <MyVerticallyCenteredModal
+                          link={video.url_video}
+                          step={`STEP ${index + 1}` }
+                          nameRecipe={recipe.title}
+                        />
+                      </li>
+                    </ul>
+                  </div>
                 ))}
+
+              
+                <div className="col-md-6 pe-md-0 col-12">
+                  <Link className='btn btn-primary w-100' to={`/recipes/videos/${recipe.id}`}>Show more</Link>
+                </div>
+
               </div>
             </div>
           </div>
@@ -136,7 +155,7 @@ const DetailResep = () => {
 
             {/* <h1>{recipe.message}</h1> */}
 
-            {recipe?.comments.map((comment,i) => (
+            {recipe?.comments.map((comment, i) => (
               // console.log(comment.id)
               // console.log(recipe.id)
               <div key={i} className={`${style.commentList} mt-4`}>
@@ -154,7 +173,7 @@ const DetailResep = () => {
                       {/* <button className={`position-absolute ${style.delete}`}>Delete</button> */}
                     </div>
                   </div>
-                  
+
                   <div className={`col-3 col-md-2 col-xxl-1 d-grid align-items-center ${style.del}`}>
                     <ModalDelete
                       id={comment.id}
