@@ -10,7 +10,7 @@ const MainFooter = () => {
       <footer className={`container-fluid ${url.pathname == '/recipes' ? '' : 'mt-5'} ${style.footer}`}>
         <div className="row">
           <div className={`text-center ${style.head}`}>
-            <h1>Eat, Cook, Repeat</h1>
+            <h5 className='h1'>Eat, Cook, Repeat</h5>
           </div>
           <p className="text-secondary text-center mt-3">Share your best recipe by uploading here !</p>
           <div className="text-secondary text-center">
@@ -32,12 +32,7 @@ const MainFooter = () => {
               </li>
               <li className="list-inline-item mx-2">
                 <Link className={`list-link ${style.listLink}`} to="#">
-                  Laptop
-                </Link>
-              </li>
-              <li className="list-inline-item mx-2">
-                <Link className={`list-link ${style.listLink}`} to="#">
-                  get in touch
+                  Get In Touch
                 </Link>
               </li>
             </ul>
