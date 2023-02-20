@@ -11,42 +11,46 @@ const likedRecipeApi = apiSlice.injectEndpoints({
 
     getLikedRecipeById: builder.query({
       query: (id) => ({
-        url: `liked-recipes/${id}`,
+        url: `liked-recipe/${id}`,
       }),
       transformResponse: (response, meta, arg) => response,
     }),
 
     getLikedRecipeByIdUser: builder.query({
-      query: (id) => ({
-        url: `liked-recipes/${id}/users`,
+      query: () => ({
+        url: `liked-recipe/user`,
       }),
+      providesTags: 'LikedRecipe',
       transformResponse: (response, meta, arg) => response,
     }),
 
     createLikedRecipe: builder.mutation({
-      query: ({ id_recipe }) => ({
-        url: `recipe/${id_recipe}/liked-recipe`,
-        method: 'POST'
-      }),
+      query: ({ id_recipe }) => {
+        return {
+          url: `recipe/${id_recipe}/liked-recipe`,
+          method: 'POST',
+        };
+      },
 
+      invalidatesTags: ['LikedRecipe', 'User'],
       transformResponse: (response, meta, arg) => response,
     }),
 
     updateLikedRecipe: builder.mutation({
       query: ({ id, data }) => ({
         url: `liked-recipes/${id}`,
-        method: 'PUT'
+        method: 'PUT',
       }),
 
       transformResponse: (response, meta, arg) => response,
     }),
 
     deleteLikedRecipe: builder.mutation({
-      query: (id) => ({
-        url: `liked-recipes/${id}`,
-        method: 'DELETE'
+      query: ({ id }) => ({
+        url: `recipe/${id}/liked-recipe`,
+        method: 'DELETE',
       }),
-
+      invalidatesTags: ['LikedRecipe', 'User'],
       transformResponse: (response, meta, arg) => response,
     }),
   }),

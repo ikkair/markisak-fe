@@ -10,18 +10,28 @@ import img2 from '../../../assets/Profile/img2.png';
 import { useGetAllRecipeQuery, useDeleteRecipeByIdMutation, useGetRecipeByIdQuery } from '../../../Features/recipe/recipeApi';
 import { useGetUserDetailQuery, useUpdateUserByIdMutation } from '../../../Features/user/userApi';
 import ModalEditProfile from '../../../Components/Profile/ModalEditProfile';
+import { useDeleteLikedRecipeMutation } from '../../../Features/likedRecipe/likedRecipeApi';
+import { useDeleteSavedRecipeMutation } from '../../../Features/savedRecipe/savedRecipe';
 
 const Profile = () => {
   const { data: user, isLoading, isSuccess } = useGetUserDetailQuery(localStorage.getItem('id_user'));
   const [updateUserById, {isSuccess: isSuccessUpdate}] = useUpdateUserByIdMutation();
   const [dataRow, setDataRow] = useState('my-recipe');
-  const [loading, setLoading] = useState(false);
-  // const [data, setData] = useState({
-  //   name: '',
-  //   phone_number: '',
-  // });
+  const [data, setData] = useState({});
+  const [deleteRecipeById, { error: errorDeleteRecipeById, isLoading: isLoadingdeleteRecipeById }] = useDeleteRecipeByIdMutation();
+  const [deleteLikedRecipe, { isLoading: isLoadingDeleteLiked, error: errorDeleteLikedRecipe }] = useDeleteLikedRecipeMutation();
+  const [deleteSavedRecipe, { isLoading: isLoadingSavedRecipe, error: errorSavedRecipe }] = useDeleteSavedRecipeMutation();
 
-  
+  const deleteRecipeHandler = async (id) => {
+    await deleteRecipeById(id);
+  };
+
+  const deleteLikedRecipeHandler = async (id) => {
+    await deleteLikedRecipe({ id });
+  };
+  const deleteSavedRecipeHandler = async (id) => {
+    await deleteSavedRecipe({ id });
+  };
 
   // const updateHandler = async () => {
   //   setLoading(true);
@@ -74,18 +84,18 @@ const Profile = () => {
               : dataRow == 'my-recipe'
               ? user?.recipes?.map((recipe, i) => (
                   <div key={i} className="col-6 px-1 col-sm-4 col-md-3 mb-2">
-                    <Card item={recipe} />
+                    <Card item={recipe} ondelete={(id) => deleteRecipeHandler(id)} />
                   </div>
                 ))
               : dataRow == 'saved'
               ? user?.saved?.map((recipe, i) => (
                   <div key={i} className="col-6 px-1 col-sm-4 col-md-3 mb-2">
-                    <Card item={recipe} />
+                    <Card item={recipe} ondelete={(id) => deleteSavedRecipeHandler(id)} />
                   </div>
                 ))
               : user?.likes?.map((recipe, i) => (
                   <div key={i} className="col-6 px-1 col-sm-4 col-md-3 mb-2">
-                    <Card item={recipe} />
+                    <Card item={recipe} ondelete={(id) => deleteLikedRecipeHandler(id)} />
                   </div>
                 ))}
           </div>
