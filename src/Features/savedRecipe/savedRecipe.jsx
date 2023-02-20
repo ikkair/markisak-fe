@@ -16,12 +16,21 @@ const savedRecipeApi = apiSlice.injectEndpoints({
       transformResponse: (response, meta, arg) => response,
     }),
 
+    getSavedRecipeByIdUser: builder.query({
+      query: () => ({
+        url: `saved-recipe/user`,
+      }),
+
+      providesTags: ['SavedRecipe'],
+      transformResponse: (response, meta, arg) => response,
+    }),
+
     createSavedRecipe: builder.mutation({
       query: ({ id_recipe }) => ({
         url: `recipe/${id_recipe}/saved-recipe`,
         method: 'POST',
-      }),
-
+      }),s
+      invalidatesTags: ['SavedRecipe', 'User'],
       transformResponse: (response, meta, arg) => response,
     }),
 
@@ -36,13 +45,13 @@ const savedRecipeApi = apiSlice.injectEndpoints({
 
     deleteSavedRecipe: builder.mutation({
       query: (id) => ({
-        url: `saved-recipes/${id}`,
+        url: `recipe/${id}/saved-recipe`,
         method: 'DELETE',
       }),
-
+      invalidatesTags: ['SavedRecipe', 'User'],
       transformResponse: (response, meta, arg) => response,
     }),
   }),
 });
 
-export const { useGetAllSavedRecipeApiQuery, useGetSavedRecipeByIdQuery, useCreateSavedRecipeMutation, useUpdateSavedRecipeMutation, useDeleteSavedRecipeMutation } = savedRecipeApi;
+export const { useGetAllSavedRecipeApiQuery, useGetSavedRecipeByIdQuery, useGetSavedRecipeByIdUserQuery, useCreateSavedRecipeMutation, useUpdateSavedRecipeMutation, useDeleteSavedRecipeMutation } = savedRecipeApi;
