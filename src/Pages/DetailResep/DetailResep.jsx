@@ -16,7 +16,7 @@ import AOS from 'aos';
 
 // import { useGetAllRecipeQuery } from '../../Features/recipe/recipeApi'
 import { useCreateLikedRecipeMutation, useDeleteLikedRecipeMutation, useGetLikedRecipeByIdQuery, useGetLikedRecipeByIdUserQuery } from '../../Features/likedRecipe/likedRecipeApi';
-import { useCreateSavedRecipeMutation } from '../../Features/savedRecipe/savedRecipe';
+import { useCreateSavedRecipeMutation, useGetSavedRecipeByIdQuery } from '../../Features/savedRecipe/savedRecipe';
 import { useCreateCommentMutation, useGetAllCommentQuery, useGetCommentByIdRecipeQuery } from '../../Features/comment/commentApi';
 import MyVerticallyCenteredModal from '../../Components/ModalButton/ModalButton';
 import ModalDelete from '../../Components/ModalDelete';
@@ -31,12 +31,10 @@ const DetailResep = () => {
   const [createSavedRecipe, { isLoading: loadingSaved, error: errorSaved }] = useCreateSavedRecipeMutation();
   const [createComment, { isLoading: loadingComment, error: errorComment, isSucces }] = useCreateCommentMutation();
   const { data: likedRecipe, isLoading: isLoadingLikedRecipe, error: errorLikeRecipe } = useGetLikedRecipeByIdUserQuery(id);
-  const user = useSelector((state) => state.auth.user);
-
   const [deleteLikedRecipe, { isLoading: isLoadingDeleteLikedRecipe, error: errorDeleteLikedRecipe }] = useDeleteLikedRecipeMutation();
-
-  const { data: userDetail } = useGetUserDetailQuery(localStorage.getItem('id_user'));
-  console.log(recipe);
+  const user = useSelector((state) => state.auth.user);
+  const { data: savedRecipe, error: errorSavedRecipe } = useGetSavedRecipeByIdQuery(id);
+  console.log(savedRecipe);
 
   useEffect(() => {
     AOS.init();
@@ -183,9 +181,6 @@ const DetailResep = () => {
         <div className="row justify-content-center">
           <div className="col-md-10 mb-5" data-aos="zoom-in-down" data-aos-duration="3000">
             <InputFormAddRecipe value={message} type={'textarea'} title={'Comment :'} name={'comment'} placeholder={'Comment here'} onchange={(e) => changeHandler(e)} />
-            {/* <div class="mb-3">
-                            <textarea class={`form-control ${style.comment}`} id="exampleFormControlTextarea1" rows="3" placeholder='Comment :'></textarea>
-                        </div> */}
 
             <div class={`d-flex justify-content-center text-center ${style.button}`}>
               <button class={` btn btn-warning `} type="button" onClick={createHandler}>
