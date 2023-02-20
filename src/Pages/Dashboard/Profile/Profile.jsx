@@ -15,7 +15,7 @@ import { useDeleteSavedRecipeMutation } from '../../../Features/savedRecipe/save
 
 const Profile = () => {
   const { data: user, isLoading, isSuccess } = useGetUserDetailQuery(localStorage.getItem('id_user'));
-  const [updateUserById, {isSuccess: isSuccessUpdate}] = useUpdateUserByIdMutation();
+  const [updateUserById, { isSuccess: isSuccessUpdate }] = useUpdateUserByIdMutation();
   const [dataRow, setDataRow] = useState('my-recipe');
   const [data, setData] = useState({});
   const [deleteRecipeById, { error: errorDeleteRecipeById, isLoading: isLoadingdeleteRecipeById }] = useDeleteRecipeByIdMutation();
@@ -32,18 +32,6 @@ const Profile = () => {
   const deleteSavedRecipeHandler = async (id) => {
     await deleteSavedRecipe({ id });
   };
-
-  // const updateHandler = async () => {
-  //   setLoading(true);
-  //   const formData = new FormData();
-  //   for (let attr in user) {
-  //     formData.append(attr, user[attr]);
-  //   }
-  //   console.log(user.id);
-
-  //   await updateUserById({ id, data: formData });
-  //   setLoading(false);
-  // };
 
   return (
     <div>
@@ -62,17 +50,17 @@ const Profile = () => {
           <div className="text-secondary">
             <ul className="list-inline mt-3 sm-4">
               <li className="list-inline-item mx-3" onClick={() => setDataRow('my-recipe')}>
-                <Link className={`list-link ${style.listProfil}`} to="#">
+                <Link className={`list-link ${dataRow == 'my-recipe' ? 'text-dark fw-semibold' : ''} ${style.listProfil}`} to="#">
                   My Recipe
                 </Link>
               </li>
               <li className="list-inline-item mx-2" onClick={() => setDataRow('saved')}>
-                <Link className={`list-link ${style.listProfil}`} to="#">
+                <Link className={`list-link ${dataRow == 'saved' ? 'text-dark fw-semibold' : ''} ${style.listProfil}`} to="#">
                   Saved Recipe
                 </Link>
               </li>
               <li className="list-inline-item mx-3" onClick={() => setDataRow('likes')}>
-                <Link className={`list-link ${style.listProfil}`} to="#">
+                <Link className={`list-link ${dataRow == 'likes' ? 'text-dark fw-semibold' : ''} ${style.listProfil}`} to="#">
                   Liked Recipe
                 </Link>
               </li>

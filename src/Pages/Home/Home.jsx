@@ -185,10 +185,10 @@ const Home = () => {
             <FontAwesomeIcon id="closeChat" className={`${style.closeIcon} text-light me-1 fs-3 d-sm-none`} icon={faXmark} />
           </div>
           <div className={`col-12 ${style.chatBody} px-4 align-self-start d-flex flex-column justify-content-end bg-light gap-2 pb-2`}>
-            <span className={`${style.chatSection} ${style.leftSideChat} p-2`}>loremlormlorem</span>
-            <span className={`${style.chatSection} ${style.leftSideChat} p-2`}>lorem10asndasldnasldnalsdnasd</span>
-            <span className={`${style.chatSection} ${style.rightSideChat} text-end ms-auto p-2`}>loremlormlorem</span>
-            <span className={`${style.chatSection} ${style.rightSideChat} text-end ms-auto p-2`}>lorem10asndasldnasldnalsdnasd</span>
+            <span className={`${style.chatSection} ${style.leftSideChat} p-2`}>Tolong infokan teman kamu, dia maling kangkung</span>
+            <span className={`${style.chatSection} ${style.leftSideChat} p-2`}>dia akan dikanakan pasal hukum!</span>
+            <span className={`${style.chatSection} ${style.rightSideChat} text-end ms-auto p-2`}>Artinya apa bang admin?</span>
+            <span className={`${style.chatSection} ${style.rightSideChat} text-end ms-auto p-2`}>Hello Min 😜</span>
           </div>
           <div className={`${style.chatFooter} bg-light align-self-end d-flex align-items-center gap-2 col-12 px-4 py-2`}>
             <input type="text" placeholder="chat here.." className="form-control bg-transparent border-0 shadow-none py-0" />
