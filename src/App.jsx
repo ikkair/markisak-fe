@@ -15,6 +15,7 @@ import AuthMiddleware from './Middleware/AuthMiddleware';
 import UpdateRecipe from './Pages/Dashboard/UpdateRecipe/UpdateRecipe';
 import Recipes from './Pages/Recipes/Recipes';
 import UnauthMiddleware from './Middleware/UnauthMiddleware';
+import Verification from './Pages/Login/Verification';
 
 function App() {
   return (
@@ -81,6 +82,7 @@ function App() {
       <Route path="*" element={<NotFound />} />
       <Route path="/recipes/:id" element={<DetailResep />} />
       <Route path="/recipes" element={<Recipes />} />
+      <Route path="/user/verif" element={<Verification />} />
     </Routes>
   );
 }

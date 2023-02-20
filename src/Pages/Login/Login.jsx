@@ -6,7 +6,7 @@ import withReactContent from 'sweetalert2-react-content';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLoginUserMutation } from '../../Features/auth/authApi';
 import style from '../../Components/Layout/AuthLayout/style.module.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setCredentials } from '../../Features/auth/authSlice';
 
 const Login = () => {

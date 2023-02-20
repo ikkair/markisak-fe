@@ -84,16 +84,16 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarScroll">
           <ul className={` navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll`}>
             <li className="nav-item">
-              <a className={`${style.textWhite} ${pathname == '/recipes' ? 'text-light' : ''} nav-link active`} aria-current="page" href="/#home">
+              <Link className={`${style.textWhite} ${pathname == '/recipes' ? 'text-light' : ''} nav-link active`} aria-current="page" to="/#home">
                 Home
-              </a>
+              </Link>
             </li>
             {user ? (
               <>
                 <li className="nav-item">
-                  <a className={`${style.textWhite} ${pathname == '/recipes' ? 'text-light' : ''} nav-link active`} aria-current="page" href="/dashboard/create-recipe/#content">
+                  <Link className={`${style.textWhite} ${pathname == '/recipes' ? 'text-light' : ''} nav-link active`} aria-current="page" to="/dashboard/create-recipe">
                     Add Recipe
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <Link className={`${style.textWhite} ${pathname == '/recipes' ? 'text-light' : ''} nav-link active`} aria-current="page" to="/profile/#content">
@@ -119,13 +119,18 @@ const Navbar = () => {
           <div className="d-flex">
             {user ? (
               <>
-                <Link to="#" className={`${style.textWhite} text-decoration-none text-dark d-flex align-items-center `}>
-                  <span className={`${style.iconLogin} d-flex align-items-center justify-content-center rounded-circle border border-1 me-2`}>
-                    <FontAwesomeIcon icon={faUser} />
+                <Link to="#" className={`${style.textWhite} me-auto text-decoration-none text-dark d-flex align-items-center `}>
+                  <span className={`${style.iconLogin} d-flex align-items-center justify-content-center rounded-circle border border-1 me-2 overflow-hidden`}>
+                    {user.photo == 'photo.jpg' ? <FontAwesomeIcon icon={faUser} /> : <img src={photoDefault} className={'img-fluid'} alt="" />}
                   </span>
                   <div className="btn-group d-flex align-items-center">
-                    <button type="button" className={`${style.userName} border-0 bg-transparent dropdown-toggle ${pathname != '/' && pathname != '/recipes' ? 'text-dark' : ''} `} data-bs-toggle="dropdown" aria-expanded="false">
-                      {user?.name}
+                    <button
+                      type="button"
+                      className={`${style.userName} d-flex bg-transparent align-items-center border-0 dropdown-toggle ${pathname != '/' && pathname != '/recipes' ? 'text-dark' : ''} `}
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <span className={`${style.userSpanName} d-block `}>{user?.name}</span>
                     </button>
 
                     <ul className="dropdown-menu">

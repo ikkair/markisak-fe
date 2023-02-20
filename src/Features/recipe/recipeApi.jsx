@@ -13,7 +13,7 @@ const recipeApi = apiSlice.injectEndpoints({
         }
 
         return {
-          url: `recipe?page=${page || 1}&limit=${limit || 8}&sortBy=${sortBy || 'like_count'}&sort=${sort || 'desc'}`,
+          url: `recipe?page=${page || 1}&limit=${limit || 8}&sortBy=${sortBy || 'created_at'}&sort=${sort || 'desc'}`,
         };
       },
       providesTags: (result, error, arg) => (result ? [...result.data.map((data) => ({ type: 'Recipe', data }))] : ['Recipe']),

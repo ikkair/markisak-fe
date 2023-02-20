@@ -16,9 +16,9 @@ const Profile = () => {
   const [updateUserById, { isSuccess: isSuccessUpdate }] = useUpdateUserByIdMutation();
   const [dataRow, setDataRow] = useState('my-recipe');
   const [data, setData] = useState({});
+  console.log(user);
 
   const changeHandler = (e) => {
-    console.log(data);
     setData((prev) => {
       return {
         ...prev,
@@ -64,17 +64,17 @@ const Profile = () => {
 
           <div className="text-secondary">
             <ul className="list-inline mt-3 sm-4">
-              <li className="list-inline-item mx-3">
+              <li className="list-inline-item mx-3" onClick={() => setDataRow('my-recipe')}>
                 <Link className={`list-link ${style.listProfil}`} to="#">
                   My Recipe
                 </Link>
               </li>
-              <li className="list-inline-item mx-2">
+              <li className="list-inline-item mx-2" onClick={() => setDataRow('saved')}>
                 <Link className={`list-link ${style.listProfil}`} to="#">
                   Saved Recipe
                 </Link>
               </li>
-              <li className="list-inline-item mx-3">
+              <li className="list-inline-item mx-3" onClick={() => setDataRow('likes')}>
                 <Link className={`list-link ${style.listProfil}`} to="#">
                   Liked Recipe
                 </Link>
@@ -84,11 +84,23 @@ const Profile = () => {
           <div className="row mx-auto justfy-content-between">
             {isLoading
               ? 'Loading...'
-              : user?.recipes?.map((recipe, i) => (
-                <div key={i} className="col-6 px-1 col-sm-4 col-md-3 mb-2">
-                  <Card item={recipe} />
-                </div>
-              ))}
+              : dataRow == 'my-recipe'
+              ? user?.recipes?.map((recipe, i) => (
+                  <div key={i} className="col-6 px-1 col-sm-4 col-md-3 mb-2">
+                    <Card item={recipe} />
+                  </div>
+                ))
+              : dataRow == 'saved'
+              ? user?.saved?.map((recipe, i) => (
+                  <div key={i} className="col-6 px-1 col-sm-4 col-md-3 mb-2">
+                    <Card item={recipe} />
+                  </div>
+                ))
+              : user?.likes?.map((recipe, i) => (
+                  <div key={i} className="col-6 px-1 col-sm-4 col-md-3 mb-2">
+                    <Card item={recipe} />
+                  </div>
+                ))}
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@ const savedRecipeApi = apiSlice.injectEndpoints({
     createSavedRecipe: builder.mutation({
       query: ({ id_recipe }) => ({
         url: `recipe/${id_recipe}/saved-recipe`,
-        method: 'POST'
+        method: 'POST',
       }),
 
       transformResponse: (response, meta, arg) => response,
@@ -28,7 +28,7 @@ const savedRecipeApi = apiSlice.injectEndpoints({
     updateSavedRecipe: builder.mutation({
       query: ({ id, data }) => ({
         url: `saved-recipes/${id}`,
-        method: 'PUT'
+        method: 'PUT',
       }),
 
       transformResponse: (response, meta, arg) => response,

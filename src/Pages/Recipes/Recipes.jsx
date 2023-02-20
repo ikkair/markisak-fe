@@ -66,9 +66,6 @@ const Recipes = () => {
                 <div className="row">
                   <div className="col-7 col-md-4">
                     <select className="form-select" name="sort" onChange={handleSorting} aria-label="Default select example">
-                      <option selected disabled>
-                        Sort
-                      </option>
                       <option value="desc">Newest</option>
                       <option value="asc">Oldest</option>
                     </select>
@@ -85,7 +82,7 @@ const Recipes = () => {
                 )))
               }
 
-              <div className="pagination d-flex justify-content-center mt-4 gap-3">
+              <div className="pagination d-flex justify-content-center mt-4 gap-3 mb-3">
                 <button className="prev-btn btn btn-secondary" onClick={() => window.location.replace(`/recipes?page=${utils?.page - 1}&limit=${utils.limit}`)} disabled={utils?.page == 1}>
                   Prev
                 </button>
