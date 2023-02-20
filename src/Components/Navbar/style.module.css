@@ -21,6 +21,11 @@
   color: #ffffff;
 }
 
+.userSpanName {
+  width: 100px;
+  overflow-x: hidden;
+}
+
 .authLink {
   color: #ffffff !important;
 }
@@ -45,6 +50,10 @@
 }
 
 @media (max-width: 576px) {
+  .userSpanName {
+    width: inherit;
+    overflow-x: none;
+  }
   .mainNavbar {
     background: #efc81a !important;
     padding: 20px;

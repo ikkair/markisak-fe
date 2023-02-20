@@ -45,6 +45,8 @@
 .img {
   filter: brightness(50%);
   border-radius: 15px !important;
+  max-height: 145px;
+  width: 100%;
 }
 
 .img:hover {
@@ -53,6 +55,12 @@
 
 .edit:hover {
   height: 200px;
+}
+
+@media (max-width: 990px) {
+  .img {
+    max-height: 105px;
+  }
 }
 
 @media (max-width: 456px) {

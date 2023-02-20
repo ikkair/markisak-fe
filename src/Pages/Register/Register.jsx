@@ -52,7 +52,7 @@ const Register = () => {
   const successLoading = () => {
     Swal.close();
     MySwal.fire({
-      title: <p>Register Success, Please Login!</p>,
+      title: <p>Thanks for register buddy, Please check your email for activation!</p>,
       icon: 'success',
     });
   };

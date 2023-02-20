@@ -57,12 +57,19 @@
 
 /* Custom Checkbox */
 
-#flexCheckDefault:checked,
-#flexCheckDefault:focus {
+#flexCheckDefault:checked {
   background-color: rgb(239, 200, 26) !important;
   border: white !important;
   box-shadow: 0.5px 1px 10px 1px rgb(255, 255, 255) !important;
 }
+
+
+#flexCheckDefault {
+  background-color: silver !important;
+  border: grey !important;
+  box-shadow: 0.5px 1px 10px 1px rgb(255, 255, 255) !important;
+}
+
 
 /* Input */
 .formLabel {
@@ -75,6 +82,15 @@
 .formControl:focus {
   border-color: rgb(239, 200, 26) !important;
   box-shadow: 0.5px 1px 10px 0.5px rgb(213, 213, 213) !important;
+}
+.controlStyle input::-webkit-outer-spin-button,
+.controlStyle input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.controlStyle input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 .formControl::placeholder {
