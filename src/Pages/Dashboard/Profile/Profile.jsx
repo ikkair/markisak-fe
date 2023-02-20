@@ -72,7 +72,7 @@ const Profile = () => {
               : dataRow == 'my-recipe'
               ? user?.recipes?.map((recipe, i) => (
                   <div key={i} className="col-6 px-1 col-sm-4 col-md-3 mb-2">
-                    <Card item={recipe} ondelete={(id) => deleteRecipeHandler(id)} />
+                    <Card type={'my-recipe'} item={recipe} ondelete={(id) => deleteRecipeHandler(id)} />
                   </div>
                 ))
               : dataRow == 'saved'
