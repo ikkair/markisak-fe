@@ -84,9 +84,9 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarScroll">
           <ul className={` navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll`}>
             <li className="nav-item">
-              <a className={`${style.textWhite} ${pathname == '/recipes' ? 'text-light' : ''} nav-link active`} aria-current="page" href="/#home">
+              <Link className={`${style.textWhite} ${pathname == '/recipes' ? 'text-light' : ''} nav-link active`} aria-current="page" to="/#home">
                 Home
-              </a>
+              </Link>
             </li>
             {user ? (
               <>

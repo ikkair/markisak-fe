@@ -27,7 +27,6 @@ const likedRecipeApi = apiSlice.injectEndpoints({
       query: ({ id_recipe }) => ({
         url: `recipe/${id_recipe}/liked-recipe`,
         method: 'POST',
-        body: data,
       }),
 
       transformResponse: (response, meta, arg) => response,

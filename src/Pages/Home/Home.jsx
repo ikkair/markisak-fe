@@ -88,7 +88,7 @@ const Home = () => {
         <div className="col-12 col-sm-6">
           <div className="row">
             <div className={`${style.colImg} col-12 position-relative`}>
-              <img src={imgFood2} className={`${style.sectionImage} img-fluid`} alt="" />
+              <img src={recipes?.data[0]?.photo} crossOrigin="anonymous" className={`${style.sectionImage} img-fluid rounded`} alt="" />
             </div>
           </div>
         </div>
@@ -118,18 +118,18 @@ const Home = () => {
         <div className="col-12 col-sm-6">
           <div className="row">
             <div className={`${style.colImg2} col-12 position-relative`}>
-              <img src={imgFood3} className={`${style.sectionImage} img-fluid`} alt="" />
+              <img src={recipes?.data[1]?.photo} crossOrigin="anonymous" className={`${style.sectionImage} img-flui rounded`} alt="" />
             </div>
           </div>
         </div>
         <div className="col-12 col-sm-6 d-grid align-items-center mb-2">
           <div className="row main-title d-inline-block d-md-flex flex-column align-items-end">
             <div className={`col-10 pe-3`}>
-              <span className={`${style.sectionTitleContent} d-block fw-semibold fs-2`}>Healthy Bone BrothRamen (Quick & Easy)</span>
+              <span className={`${style.sectionTitleContent} d-block fw-semibold fs-2`}>{recipes?.data[1]?.title}</span>
               <span className={`${style.underlineTitleRecipe} d-none d-md-block mt-1`}></span>
             </div>
             <div className={`col-12 col-md-10 mt-3 text-secondary ${style.sectionDesc}`}>
-              <span>Quick + Easy Chicken Bone Broth Ramen- Healthy chicken ramen in a hurry? That’s right!</span>
+              <span>{recipes?.data[1]?.description}</span>
             </div>
             <div className="col-10">
               <button className={`btn btn-warning text-light mt-3 ${style.btnLearnMore}`}>Learn More</button>
