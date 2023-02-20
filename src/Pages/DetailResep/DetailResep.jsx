@@ -54,8 +54,6 @@ const DetailResep = () => {
     AOS.refresh();
   }, []);
 
-  console.log(user?.id.length);
-
   const [message, setMessage] = useState('');
 
   // Change handler
@@ -75,7 +73,7 @@ const DetailResep = () => {
   };
 
   function checkLikeRecipe() {
-    if (errorLikeRecipe?.status == 404) {
+    if (errorLikeRecipe?.status == 404 || errorDeleteLikedRecipe?.status == 404) {
       return undefined;
     }
     return likedRecipe?.data?.filter((recipe) => recipe.id_recipe == id);
@@ -85,7 +83,6 @@ const DetailResep = () => {
     if (errorSavedRecipe?.status == 404) {
       return undefined;
     }
-    console.log(savedRecipe);
     return savedRecipe?.data?.filter((recipe) => recipe.id_recipe == id);
   }
 
@@ -104,7 +101,7 @@ const DetailResep = () => {
     if (!user) {
       return navigate('/login');
     }
-    if (checkSavedRecipe() || checkSavedRecipe()?.length > 0) {
+    if (checkSavedRecipe()) {
       await deleteSavedRecipe({ id });
     } else {
       await createSavedRecipe({ id_recipe: id });
@@ -153,18 +150,18 @@ const DetailResep = () => {
                     </div>
                   </div>
 
-                  <h4 className="ingredients fw-semibold" data-aos="fade-right" data-aos-duration="3000">
+                  <h4 className="ingredients fw-semibold" data-aos="fade-right" data-aos-duration="1000">
                     Ingredients
                   </h4>
-                  <ul type="stripe" data-aos="fade-right" data-aos-duration="3000">
+                  <ul type="stripe" data-aos="fade-right" data-aos-duration="1000">
                     {split.map((item) => (
                       <li>{item}</li>
                     ))}
                   </ul>
-                  <h4 className="fw-semibold" data-aos="fade-right" data-aos-duration="3000">
+                  <h4 className="fw-semibold" data-aos="fade-right" data-aos-duration="1000">
                     Step Video
                   </h4>
-                  <div className="row" data-aos="fade-right" data-aos-duration="3000">
+                  <div className="row" data-aos="fade-right" data-aos-duration="1000">
                     {recipe?.videos?.map((video, index) => {
                       if (index < 3) {
                         return (
@@ -179,33 +176,34 @@ const DetailResep = () => {
                         );
                       }
                     })}
-
-                    <div className="col-md-6 pe-md-0 col-12">
-                      <Link className="btn btn-primary w-100" to={`/recipes/videos/${recipe.id}`}>
-                        Show more
-                      </Link>
-                    </div>
+                    {recipe?.videos?.length != 0 ? (
+                      <div className="col-md-6 pe-md-0 col-12">
+                        <Link className="btn btn-primary w-100" to={`/recipes/videos/${recipe.id}`}>
+                          Show more
+                        </Link>
+                      </div>
+                    ) : (
+                      ''
+                    )}
                   </div>
                 </div>
               </div>
             ))}
 
         <div className="row justify-content-center">
-          <div className="col-md-10 mb-5" data-aos="zoom-in-down" data-aos-duration="3000">
+          <div className="col-md-10 mb-5" data-aos="zoom-in-down" data-aos-duration="1000">
             <InputFormAddRecipe value={message} type={'textarea'} title={'Comment :'} name={'comment'} placeholder={'Comment here'} onchange={(e) => changeHandler(e)} />
 
             <div class={`d-flex justify-content-center text-center ${style.button}`}>
-              {user?.id.length > 0 ? 
-              <button class={` btn btn-warning `} type="button" onClick={createHandler}>
-              Comment
-              </button> :
-              <button class={` btn btn-warning `} type="button" onClick={createHandler} disabled>
-              Comment
-              </button>
-            
-            
-              }
-              
+              {user?.id.length > 0 ? (
+                <button class={` btn btn-warning `} type="button" onClick={createHandler}>
+                  Comment
+                </button>
+              ) : (
+                <button class={` btn btn-warning `} type="button" onClick={createHandler} disabled>
+                  Comment
+                </button>
+              )}
             </div>
 
             {recipe?.comments.length <= 0 ? <h1 style={{ visibility: 'hidden' }}></h1> : <h1>Comments</h1>}
