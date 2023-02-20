@@ -14,6 +14,7 @@ import ModalEditProfile from '../../../Components/Profile/ModalEditProfile';
 
 const Profile = () => {
   const { data: user, isLoading, isSuccess } = useGetUserDetailQuery(localStorage.getItem('id_user'));
+  const [dataRow, setDataRow] = useState('my-recipe');
   const [data, setData] = useState({});
 
   const changeHandler = (e) => {
@@ -77,8 +78,8 @@ const Profile = () => {
             {isLoading
               ? 'Loading...'
               : user?.recipes?.map((recipe, i) => (
-                  <div className="col-6 px-1 col-sm-4 col-md-3 mb-2">
-                    <Card key={i} item={recipe} />
+                  <div key={i} className="col-6 px-1 col-sm-4 col-md-3 mb-2">
+                    <Card item={recipe} />
                   </div>
                 ))}
           </div>
