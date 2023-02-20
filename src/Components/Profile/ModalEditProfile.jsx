@@ -15,6 +15,10 @@ const ModalEditProfile = ({ user, onchange, onclick }) => {
     onchange(e);
   };
 
+  const handleUpdate = (e) => {
+    onclick(e);
+  }
+
   const selectFile = (e) => {
     if (!e.target.files || e.target.files.length === 0) {
       setSelectedFile(undefined);
@@ -46,7 +50,7 @@ const ModalEditProfile = ({ user, onchange, onclick }) => {
               <Button variant="secondary" onClick={handleClose}>
                 Close
               </Button>
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary" onClick={handleUpdate}>
                 Edit
               </button>
             </Modal.Footer>

@@ -31,7 +31,7 @@
 .cardEdit {
   position: absolute;
   top: 5px;
-  right: 45px;
+  right: 35px;
   color: white !important;
   padding: 5px;
   border-radius: 8px;
@@ -41,7 +41,7 @@
   position: absolute;
   top: 5px;
   z-index: 50;
-  right: 15px;
+  right: 5px;
   color: white !important;
   padding: 5px;
   border-radius: 8px;

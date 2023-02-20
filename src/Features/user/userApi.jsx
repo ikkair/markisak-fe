@@ -13,7 +13,7 @@ const authApi = apiSlice.injectEndpoints({
       providesTags: ['User'],
       transformResponse: (response, meta, args) => response.data[0],
     }),
-    updateUserById: builder.query({
+    updateUserById: builder.mutation({
       query: ({ id, data }) => {
         return {
           url: `user/${id}`,
@@ -36,4 +36,4 @@ const authApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useLoginUserMutation, useRegisterUserMutation, useGetUserDetailQuery } = authApi;
+export const { useLoginUserMutation, useRegisterUserMutation, useUpdateUserByIdMutation, useGetUserDetailQuery } = authApi;

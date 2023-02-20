@@ -4,7 +4,6 @@ import MainLayout from './../../Components/Layout/MainLayout/MainLayout';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import style from './style.module.css';
 import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import CardRecipe from '../../Components/Cards/CardRecipe/CardRecipe';
 
 const Recipes = () => {
@@ -37,7 +36,7 @@ const Recipes = () => {
 
     for (let i = 1; i <= recipes?.pagination?.totalPage; i++) {
       btn.push(
-        <button key={i} className={`btn btn-transparent ${recipes?.pagination?.currentPage == i ? 'bg-secondary text-light' : ''}`} onClick={() => window.location.replace(`/recipes?page=${i}&limit=${utils.limit}`)}>
+        <button key={i} className={`btn btn-transparent ${recipes?.pagination?.currentPage == i ? 'bg-secondary' : ''} text-light`} onClick={() => window.location.replace(`/recipes?page=${i}&limit=${utils.limit}`)}>
           {i}
         </button>
       );
@@ -70,8 +69,8 @@ const Recipes = () => {
                       <option selected disabled>
                         Sort
                       </option>
-                      <option defaultValue="desc">Newest</option>
-                      <option defaultValue="asc">Oldest</option>
+                      <option value="desc">Newest</option>
+                      <option value="asc">Oldest</option>
                     </select>
                   </div>
                 </div>
