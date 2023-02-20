@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
 // import { useGetAllRecipeQuery } from '../../Features/recipe/recipeApi'
-import { useCreateLikedRecipeMutation } from '../../Features/likedRecipe/likedRecipeApi';
+import { useCreateLikedRecipeMutation, useDeleteLikedRecipeMutation } from '../../Features/likedRecipe/likedRecipeApi';
 import { useCreateSavedRecipeMutation } from '../../Features/savedRecipe/savedRecipe';
 import { useCreateCommentMutation, useGetAllCommentQuery, useGetCommentByIdRecipeQuery } from '../../Features/comment/commentApi';
 import MyVerticallyCenteredModal from '../../Components/ModalButton/ModalButton';
@@ -25,10 +25,12 @@ const DetailResep = () => {
   const [createLikedRecipe, { isLoading: loadingLike, error: errorLike }] = useCreateLikedRecipeMutation();
   const [createSavedRecipe, { isLoading: loadingSaved, error: errorSaved }] = useCreateSavedRecipeMutation();
   const [createComment, { isLoading: loadingComment, error: errorComment, isSucces }] = useCreateCommentMutation();
+  // const [deleteLikedRecipe] = useDeleteLikedRecipeMutation()
 
   // const { data : comment } = useGetAllCommentQuery(id)
   // console.log(recipe?.id_user)
   console.log(recipe?.comments);
+  console.log(recipe?.id);
 
   const [message, setMessage] = useState('');
   // console.log(`${message}`);
@@ -54,6 +56,10 @@ const DetailResep = () => {
   const onClickLike = async () => {
     await createLikedRecipe({ id_recipe: id });
   };
+
+  // const onClickDeleteLike = async () => {
+  //   await deleteLikedRecipe({ id });
+  // };
 
   const onClickSave = async () => {
     await createSavedRecipe({ id_recipe: id });

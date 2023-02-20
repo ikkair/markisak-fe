@@ -26,8 +26,7 @@ const likedRecipeApi = apiSlice.injectEndpoints({
     createLikedRecipe: builder.mutation({
       query: ({ id_recipe }) => ({
         url: `recipe/${id_recipe}/liked-recipe`,
-        method: 'POST',
-        body: data,
+        method: 'POST'
       }),
 
       transformResponse: (response, meta, arg) => response,
@@ -36,8 +35,7 @@ const likedRecipeApi = apiSlice.injectEndpoints({
     updateLikedRecipe: builder.mutation({
       query: ({ id, data }) => ({
         url: `liked-recipes/${id}`,
-        method: 'PUT',
-        body: data,
+        method: 'PUT'
       }),
 
       transformResponse: (response, meta, arg) => response,
@@ -46,7 +44,7 @@ const likedRecipeApi = apiSlice.injectEndpoints({
     deleteLikedRecipe: builder.mutation({
       query: (id) => ({
         url: `liked-recipes/${id}`,
-        method: 'DELETE',
+        method: 'DELETE'
       }),
 
       transformResponse: (response, meta, arg) => response,

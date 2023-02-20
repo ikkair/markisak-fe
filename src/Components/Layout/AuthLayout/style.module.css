@@ -83,6 +83,15 @@
   border-color: rgb(239, 200, 26) !important;
   box-shadow: 0.5px 1px 10px 0.5px rgb(213, 213, 213) !important;
 }
+.controlStyle input::-webkit-outer-spin-button,
+.controlStyle input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.controlStyle input[type="number"] {
+  -moz-appearance: textfield;
+}
 
 .formControl::placeholder {
   color: rgb(191, 191, 191) !important;
