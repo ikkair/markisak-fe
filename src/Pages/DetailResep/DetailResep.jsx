@@ -26,14 +26,9 @@ const DetailResep = () => {
   const [createLikedRecipe, { isLoading: loadingLike, error: errorLike }] = useCreateLikedRecipeMutation();
   const [createSavedRecipe, { isLoading: loadingSaved, error: errorSaved }] = useCreateSavedRecipeMutation();
   const [createComment, { isLoading: loadingComment, error: errorComment, isSucces }] = useCreateCommentMutation();
-  const { data: likedRecipe, isLoading: isLoadingLikedRecipe } = useGetLikedRecipeByIdUserQuery(id);
+  const { data: likedRecipe, isLoading: isLoadingLikedRecipe, error: errorLikeRecipe } = useGetLikedRecipeByIdUserQuery(id);
   const user = useSelector((state) => state.auth.user);
-  const [deleteLikedRecipe, { isLoading: isLoadingDeleteLikedRecipe }] = useDeleteLikedRecipeMutation();
-
-  // const { data : comment } = useGetAllCommentQuery(id)
-  // console.log(recipe?.id_user)
-  console.log(recipe?.comments);
-  console.log(recipe?.id);
+  const [deleteLikedRecipe, { isLoading: isLoadingDeleteLikedRecipe, error: errorDeleteLikedRecipe }] = useDeleteLikedRecipeMutation();
 
   const [message, setMessage] = useState('');
 
@@ -74,18 +69,21 @@ const DetailResep = () => {
   };
 
   function checkLikeRecipe() {
-    return likedRecipe?.data.filter((recipe) => recipe.id_recipe == id);
+    if (errorLikeRecipe?.status == 404) {
+      return undefined;
+    }
+    return likedRecipe?.data?.filter((recipe) => recipe.id_recipe == id);
   }
 
   const onClickLike = async () => {
-    if (checkLikeRecipe().length > 0) {
+    if (checkLikeRecipe() || checkLikeRecipe()?.length > 0) {
       await deleteLikedRecipe({ id });
     } else {
       await createLikedRecipe({ id_recipe: id });
     }
-  };
 
-  console.log(likedRecipe);
+    console.log(checkLikeRecipe());
+  };
 
   const onClickSave = async () => {
     await createSavedRecipe({ id_recipe: id });
@@ -108,7 +106,7 @@ const DetailResep = () => {
                   <img crossOrigin="Anonymous" src={recipe.photo} className={`img-fluid ${style.imageDetail} d-block mx-auto mt-5 mb-5 `} alt="" />
                   <span className={style.action}>
                     <button
-                      className={`position-absolute ${style.saved}`}
+                      className={`position-absolute ${style.saved} `}
                       style={{ backgroundColor: color }}
                       onClick={() => {
                         onClickSave();
@@ -118,7 +116,7 @@ const DetailResep = () => {
                       <i class="fa-sharp fa-solid fa-bookmark"></i>
                     </button>
                     <button
-                      className={`position-absolute ${style.liked}`}
+                      className={`position-absolute ${style.liked} ${checkLikeRecipe()?.length > 0 ? 'bg-warning' : 'bg-transparent'} text-light`}
                       style={{ backgroundColor: colorl }}
                       onClick={() => {
                         onClickLike();
