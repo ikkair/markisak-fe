@@ -3,12 +3,13 @@
   width: 18rem;
   border-radius: 20px;
 }
-
+.cardBody {
+  position: relative;
+}
 .cardBody h5 {
   position: absolute;
   color: white;
-  bottom: 20px;
-  left: 20px;
+  bottom: 0;
   /* width: 195px; */
 }
 
@@ -27,25 +28,6 @@
   }
 } */
 
-.cardEdit {
-  position: absolute;
-  top: 5px;
-  right: 45px;
-  color: white !important;
-  padding: 5px;
-  border-radius: 8px;
-}
-
-.cardDelete {
-  position: absolute;
-  top: 5px;
-  right: 15px;
-  color: white !important;
-  padding: 5px;
-  border-radius: 8px;
-  height: 15px;
-}
-
 .cardEdit:hover {
   background-color: transparent !important;
   height: 22px;
@@ -54,6 +36,10 @@
 .cardDelete:hover {
   background-color: transparent !important;
   height: 20px;
+}
+
+.cardTitle {
+  font-size: 1.1em;
 }
 
 .img {
@@ -67,4 +53,10 @@
 
 .edit:hover {
   height: 200px;
+}
+
+@media (max-width: 456px) {
+  .cardTitle {
+    font-size: 0.9em;
+  }
 }

@@ -49,7 +49,7 @@ const recipeApi = apiSlice.injectEndpoints({
         body: data,
       }),
 
-      invalidatesTags: ['Recipe'],
+      invalidatesTags: ['Recipe', 'User'],
       transformResponse: (response, meta, arg) => response,
     }),
 
