@@ -7,7 +7,6 @@ import Login from './Pages/Login/Login';
 import DetailVideo from './Pages/DetailVideo/DetailVideo';
 import ResetPassword from './Pages/ResetPassword/ResetPassword';
 import Register from './Pages/Register/Register';
-import NotFound from './Pages/PageNotFound/NotFound';
 import Profile from './Pages/Dashboard/Profile/Profile';
 import Home from './Pages/Home/Home';
 import DetailResep from './Pages/DetailResep/DetailResep';
@@ -16,6 +15,7 @@ import UpdateRecipe from './Pages/Dashboard/UpdateRecipe/UpdateRecipe';
 import Recipes from './Pages/Recipes/Recipes';
 import UnauthMiddleware from './Middleware/UnauthMiddleware';
 import Verification from './Pages/Login/Verification';
+import NotFound from './Pages/PageNotFound';
 
 function App() {
   return (
@@ -79,10 +79,10 @@ function App() {
         }
       />
       <Route path="/recipes/videos/:id" element={<DetailVideo />} />
-      <Route path="*" element={<NotFound />} />
       <Route path="/recipes/:id" element={<DetailResep />} />
       <Route path="/recipes" element={<Recipes />} />
       <Route path="/user/verif" element={<Verification />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
