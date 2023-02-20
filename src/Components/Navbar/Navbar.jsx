@@ -121,7 +121,7 @@ const Navbar = () => {
               <>
                 <Link to="#" className={`${style.textWhite} me-auto text-decoration-none text-dark d-flex align-items-center `}>
                   <span className={`${style.iconLogin} d-flex align-items-center justify-content-center rounded-circle border border-1 me-2 overflow-hidden`}>
-                    {user.photo == 'photo.jpg' ? <FontAwesomeIcon icon={faUser} /> : <img src={photoDefault} className={'img-fluid'} alt="" />}
+                    {/* {user.photo == 'photo.jpg' ? <FontAwesomeIcon icon={faUser} /> : <img src={user.photo} className={'img-fluid'} alt="" />} */ <img src={`${profileUser()}`} className={'img-fluid'} alt="" crossOrigin="anonymous" />}
                   </span>
                   <div className="btn-group d-flex align-items-center">
                     <button

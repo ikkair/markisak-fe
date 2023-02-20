@@ -6,10 +6,13 @@ import MainFooter from '../../Components/Footer/MainFooter';
 import InputFormAddRecipe from '../../Components/Form/InputFormAddRecipe/InputFormAddRecipe';
 import profil from '../../assets/detailResep/ProfileComment.png';
 import { useGetRecipeByIdQuery } from '../../Features/recipe/recipeApi';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+import AOS from 'aos';
+// ..
 
 // import { useGetAllRecipeQuery } from '../../Features/recipe/recipeApi'
 import { useCreateLikedRecipeMutation, useDeleteLikedRecipeMutation, useGetLikedRecipeByIdQuery, useGetLikedRecipeByIdUserQuery } from '../../Features/likedRecipe/likedRecipeApi';
@@ -18,6 +21,7 @@ import { useCreateCommentMutation, useGetAllCommentQuery, useGetCommentByIdRecip
 import MyVerticallyCenteredModal from '../../Components/ModalButton/ModalButton';
 import ModalDelete from '../../Components/ModalDelete';
 import { useSelector } from 'react-redux';
+import { useGetUserDetailQuery } from '../../Features/user/userApi';
 
 const DetailResep = () => {
   const MySwal = withReactContent(Swal);
@@ -28,13 +32,22 @@ const DetailResep = () => {
   const [createComment, { isLoading: loadingComment, error: errorComment, isSucces }] = useCreateCommentMutation();
   const { data: likedRecipe, isLoading: isLoadingLikedRecipe, error: errorLikeRecipe } = useGetLikedRecipeByIdUserQuery(id);
   const user = useSelector((state) => state.auth.user);
+
   const [deleteLikedRecipe, { isLoading: isLoadingDeleteLikedRecipe, error: errorDeleteLikedRecipe }] = useDeleteLikedRecipeMutation();
+
+  const { data: userDetail } = useGetUserDetailQuery(localStorage.getItem('id_user'));
+  console.log(recipe);
+
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+  }, []);
 
   const [message, setMessage] = useState('');
 
   // Set Color liked and save
   const [color, setColor] = useState('#EFC81A');
-  const [colorl, setColorl] = useState('transparent');
+  const [colorl, setColorl] = useState('#dddd');
 
   // Function setColor like and save
   const changeColor = () => {
@@ -45,10 +58,10 @@ const DetailResep = () => {
     }
   };
   const changeColorl = () => {
-    if (colorl == 'transparent') {
+    if (colorl == '#dddd') {
       setColorl('#ff4646');
     } else {
-      setColorl('transparent');
+      setColorl('#dddd');
     }
   };
 
@@ -81,13 +94,18 @@ const DetailResep = () => {
     } else {
       await createLikedRecipe({ id_recipe: id });
     }
-
-    console.log(checkLikeRecipe());
   };
 
   const onClickSave = async () => {
     await createSavedRecipe({ id_recipe: id });
   };
+
+  // console.log(recipe);
+
+  // Ingredients
+  let ingredients = `${recipe?.ingredients}`;
+  let split = ingredients.split('-');
+  split.shift();
 
   return (
     <>
@@ -129,10 +147,18 @@ const DetailResep = () => {
                 </div>
               </div>
 
-              <h4 className="ingredients fw-semibold ">Ingredients</h4>
-              <p className="mb-5">{recipe.ingredients}</p>
-              <h4 className="fw-semibold">Step Video</h4>
-              <div className="row">
+              <h4 className="ingredients fw-semibold" data-aos="fade-right" data-aos-duration="3000">
+                Ingredients
+              </h4>
+              <ul type="stripe" data-aos="fade-right" data-aos-duration="3000">
+                {split.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+              <h4 className="fw-semibold" data-aos="fade-right" data-aos-duration="3000">
+                Step Video
+              </h4>
+              <div className="row" data-aos="fade-right" data-aos-duration="3000">
                 {recipe?.videos?.map((video, index) => (
                   <div key={index} className="col-md-12 col-6">
                     <ul className="list-unstyled">
@@ -155,7 +181,7 @@ const DetailResep = () => {
         )}
 
         <div className="row justify-content-center">
-          <div className="col-md-10 mb-5">
+          <div className="col-md-10 mb-5" data-aos="zoom-in-down" data-aos-duration="3000">
             <InputFormAddRecipe value={message} type={'textarea'} title={'Comment :'} name={'comment'} placeholder={'Comment here'} onchange={(e) => changeHandler(e)} />
             {/* <div class="mb-3">
                             <textarea class={`form-control ${style.comment}`} id="exampleFormControlTextarea1" rows="3" placeholder='Comment :'></textarea>
@@ -174,10 +200,10 @@ const DetailResep = () => {
             {recipe?.comments.map((comment, i) => (
               // console.log(comment.id)
               // console.log(recipe.id)
-              <div key={i} className={`${style.commentList} mt-4`}>
+              <div key={i} className={`${style.commentList} mt-4 `} data-aos="zoom-in-down" data-aos-duration="1000">
                 <div className="row">
                   <div className="col-1 d-flex align-items-center">
-                    <img crossOrigin="Anonymous" src={profil} alt="" />
+                    <img crossOrigin="Anonymous" src={comment?.photo} alt="" />
                   </div>
 
                   <div className="col-xxl-10 col-md-9 col-11 text-start d-grid align-items-center">
