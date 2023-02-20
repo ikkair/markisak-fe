@@ -30,7 +30,6 @@ const CreateRecipe = () => {
   const insertAllVideo = (id_recipe) => {
     return Promise.all(
       videos?.map(async (video) => {
-        console.log(video);
         await createVideo({ id_recipe, step: video.step, url_video: video.url });
       })
     );
