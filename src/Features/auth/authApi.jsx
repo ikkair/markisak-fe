@@ -29,7 +29,14 @@ const authApi = apiSlice.injectEndpoints({
 
       transformResponse: (response, meta, args) => response,
     }),
+
+    verfifyEmail: builder.query({
+      query: (token) => ({
+        url: `user/verif/${token}`,
+      }),
+      transformResponse: (response, meta, args) => response,
+    }),
   }),
 });
 
-export const { useLoginUserMutation, useRegisterUserMutation, useRefreshTokenMutation } = authApi;
+export const { useLoginUserMutation, useRegisterUserMutation, useRefreshTokenMutation, useVerfifyEmailQuery } = authApi;

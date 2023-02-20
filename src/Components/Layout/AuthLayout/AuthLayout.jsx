@@ -10,12 +10,12 @@ const AuthLayout = ({ children, title, description }) => {
         <div className={`${style.authContainer} container-fluid loginPage`}>
           <div className="row h-100 d-flex ">
             <div className={`col-md-6 ${style.sideLeft} min-vh-100 d-md-flex flex-column justify-content-center align-items-center d-none`}>
-            <Link className='text-decoration-none' to="/">
-              <img src={logo} alt="" />
-              <p>Mari Kita Masak.</p>
-            </Link>
+              <Link className="text-decoration-none" to="/">
+                <img src={logo} alt="" />
+                <p>Mari Kita Masak.</p>
+              </Link>
             </div>
-            <div className={`col-md-6 ${style.sideRight} min-vh-100 text-center d-grid align-items-center`}>
+            <div className={`col-md-6 ${style.sideRight} pt-3 min-vh-100 text-center d-grid align-items-center`}>
               <div className="inputGroup">
                 {/* <h1 className='text-warning mb- fw-bold mb-4 d-block d-lg-none'>MARKISAK.</h1> */}
                 <div className="row justify-content-center">
