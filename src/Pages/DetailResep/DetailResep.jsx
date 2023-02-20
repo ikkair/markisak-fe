@@ -14,7 +14,6 @@ import 'aos/dist/aos.css'; // You can also use <link> for styles
 import AOS from 'aos';
 // ..
 
-
 // import { useGetAllRecipeQuery } from '../../Features/recipe/recipeApi'
 import { useCreateLikedRecipeMutation, useDeleteLikedRecipeMutation, useGetLikedRecipeByIdQuery, useGetLikedRecipeByIdUserQuery } from '../../Features/likedRecipe/likedRecipeApi';
 import { useCreateSavedRecipeMutation } from '../../Features/savedRecipe/savedRecipe';
@@ -31,22 +30,18 @@ const DetailResep = () => {
   const [createLikedRecipe, { isLoading: loadingLike, error: errorLike }] = useCreateLikedRecipeMutation();
   const [createSavedRecipe, { isLoading: loadingSaved, error: errorSaved }] = useCreateSavedRecipeMutation();
   const [createComment, { isLoading: loadingComment, error: errorComment, isSucces }] = useCreateCommentMutation();
-  const { data: likedRecipe, isLoading: isLoadingLikedRecipe } = useGetLikedRecipeByIdUserQuery(id);
+  const { data: likedRecipe, isLoading: isLoadingLikedRecipe, error: errorLikeRecipe } = useGetLikedRecipeByIdUserQuery(id);
   const user = useSelector((state) => state.auth.user);
-  const [deleteLikedRecipe, { isLoading: isLoadingDeleteLikedRecipe }] = useDeleteLikedRecipeMutation();
-  const {data : userDetail} = useGetUserDetailQuery(localStorage.getItem('id_user'))
-  console.log(userDetail);
 
-  // const { data : comment } = useGetAllCommentQuery(id)
-  // console.log(recipe?.id_user)
-  // console.log(recipe?.comments);
-  // console.log(recipe?.id);
+  const [deleteLikedRecipe, { isLoading: isLoadingDeleteLikedRecipe, error: errorDeleteLikedRecipe }] = useDeleteLikedRecipeMutation();
+
+  const { data: userDetail } = useGetUserDetailQuery(localStorage.getItem('id_user'));
+  console.log(recipe);
 
   useEffect(() => {
     AOS.init();
     AOS.refresh();
   }, []);
-
 
   const [message, setMessage] = useState('');
 
@@ -87,18 +82,19 @@ const DetailResep = () => {
   };
 
   function checkLikeRecipe() {
-    return likedRecipe?.data.filter((recipe) => recipe.id_recipe == id);
+    if (errorLikeRecipe?.status == 404) {
+      return undefined;
+    }
+    return likedRecipe?.data?.filter((recipe) => recipe.id_recipe == id);
   }
 
   const onClickLike = async () => {
-    if (checkLikeRecipe().length > 0) {
+    if (checkLikeRecipe() || checkLikeRecipe()?.length > 0) {
       await deleteLikedRecipe({ id });
     } else {
       await createLikedRecipe({ id_recipe: id });
     }
   };
-
-  // console.log(likedRecipe);
 
   const onClickSave = async () => {
     await createSavedRecipe({ id_recipe: id });
@@ -110,8 +106,6 @@ const DetailResep = () => {
   let ingredients = `${recipe?.ingredients}`;
   let split = ingredients.split('-');
   split.shift();
-
-
 
   return (
     <>
@@ -125,48 +119,45 @@ const DetailResep = () => {
               <h1 className="text-center fw-normal" style={{ color: 'rgba(46, 38, 111, 1)' }}>
                 {recipe?.title}
               </h1>
-              <div className={`row justify-content-center ${style.header}`}>
-                <div className={`col-12 col-lg-8  position-relative`}>
-                  <div className="row">
-                    <div className="col-12" data-aos="zoom-in-down" data-aos-duration="3000">
-                      <img crossOrigin="Anonymous" src={recipe.photo}  className={`img-fluid rounded bg-primary ${style.imageDetail} d-block mx-auto mt-5 mb-5 `} alt="" />
-                      <span className={style.action} >
-                        <button
-                          className={`position-absolute ${style.saved}`}
-                          style={{ backgroundColor: color }}
-                          onClick={() => {
-                            onClickSave();
-                            changeColor();
-                          }}
-                        >
-                          <i class="fa-sharp fa-solid fa-bookmark"></i>
-                        </button>
-                        <button
-                          className={`position-absolute ${style.liked}`}
-                          style={{ backgroundColor: colorl }}
-                          onClick={() => {
-                            onClickLike();
-                            changeColorl();
-                          }}
-                        >
-                          <i class="fa-solid fa-thumbs-up"></i>
-                        </button>
-                      </span>
-
-                    </div>
-                  </div>
-
+              <div className="row justify-content-center">
+                <div className="col-12 col-lg-8  position-relative">
+                  <img crossOrigin="Anonymous" src={recipe.photo} className={`img-fluid ${style.imageDetail} d-block mx-auto mt-5 mb-5 `} alt="" />
+                  <span className={style.action}>
+                    <button
+                      className={`position-absolute ${style.saved} `}
+                      style={{ backgroundColor: color }}
+                      onClick={() => {
+                        onClickSave();
+                        changeColor();
+                      }}
+                    >
+                      <i class="fa-sharp fa-solid fa-bookmark"></i>
+                    </button>
+                    <button
+                      className={`position-absolute ${style.liked} ${checkLikeRecipe()?.length > 0 ? 'bg-warning' : 'bg-transparent'} text-light`}
+                      style={{ backgroundColor: colorl }}
+                      onClick={() => {
+                        onClickLike();
+                        changeColorl();
+                      }}
+                    >
+                      <i class="fa-solid fa-thumbs-up"></i>
+                    </button>
+                  </span>
                 </div>
               </div>
 
-              <h4 className="ingredients fw-semibold" data-aos="fade-right" data-aos-duration="3000">Ingredients</h4>
+              <h4 className="ingredients fw-semibold" data-aos="fade-right" data-aos-duration="3000">
+                Ingredients
+              </h4>
               <ul type="stripe" data-aos="fade-right" data-aos-duration="3000">
                 {split.map((item) => (
                   <li>{item}</li>
                 ))}
-
               </ul>
-              <h4 className="fw-semibold" data-aos="fade-right" data-aos-duration="3000">Step Video</h4>
+              <h4 className="fw-semibold" data-aos="fade-right" data-aos-duration="3000">
+                Step Video
+              </h4>
               <div className="row" data-aos="fade-right" data-aos-duration="3000">
                 {recipe?.videos?.map((video, index) => (
                   <div key={index} className="col-md-12 col-6">
@@ -212,7 +203,7 @@ const DetailResep = () => {
               <div key={i} className={`${style.commentList} mt-4 `} data-aos="zoom-in-down" data-aos-duration="1000">
                 <div className="row">
                   <div className="col-1 d-flex align-items-center">
-                    <img crossOrigin="Anonymous" src={user?.photo} alt="" />
+                    <img crossOrigin="Anonymous" src={comment?.photo} alt="" />
                   </div>
 
                   <div className="col-xxl-10 col-md-9 col-11 text-start d-grid align-items-center">

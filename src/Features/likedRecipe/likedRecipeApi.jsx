@@ -1,6 +1,7 @@
 import { apiSlice } from '../../Api/authApi';
 
 const likedRecipeApi = apiSlice.injectEndpoints({
+  tagTypes: ['LikedRecipe'],
   endpoints: (builder) => ({
     getAllLikedRecipeApi: builder.query({
       query: () => ({
@@ -20,7 +21,7 @@ const likedRecipeApi = apiSlice.injectEndpoints({
       query: () => ({
         url: `liked-recipe/user`,
       }),
-      providesTags: 'LikedRecipe',
+      providesTags: ['LikedRecipe'],
       transformResponse: (response, meta, arg) => response,
     }),
 

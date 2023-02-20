@@ -21,7 +21,7 @@ const authApi = apiSlice.injectEndpoints({
           body: data,
         };
       },
-      providesTags: ['User'],
+      invalidatesTags: ['User'],
       transformResponse: (response, meta, args) => response,
     }),
     loginUser: builder.mutation({
