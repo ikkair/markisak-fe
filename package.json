@@ -25,6 +25,7 @@
     "react-trix": "^0.10.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.2",
+    "sweetalert": "^2.1.2",
     "sweetalert2": "^11.7.1",
     "sweetalert2-react-content": "^5.0.7",
     "swiper": "^9.0.5"
