@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useGetAllRecipeQuery } from '../../Features/recipe/recipeApi';
 import MainLayout from './../../Components/Layout/MainLayout/MainLayout';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import style from './style.module.css';
 import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import CardRecipe from '../../Components/Cards/CardRecipe/CardRecipe';
 
 const Recipes = () => {
+  const { pathname } = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const [utils, setUtils] = useState({
     search: searchParams.get('search'),
@@ -36,7 +36,7 @@ const Recipes = () => {
 
     for (let i = 1; i <= recipes?.pagination?.totalPage; i++) {
       btn.push(
-        <button key={i} className={`btn btn-transparent ${recipes?.pagination?.currentPage == i ? 'bg-secondary text-light' : ''}`} onClick={() => window.location.replace(`/recipes?page=${i}&limit=${utils.limit}`)}>
+        <button key={i} className={`btn btn-transparent ${recipes?.pagination?.currentPage == i ? 'bg-secondary' : ''} text-light`} onClick={() => window.location.replace(`/recipes?page=${i}&limit=${utils.limit}`)}>
           {i}
         </button>
       );
@@ -56,16 +56,16 @@ const Recipes = () => {
 
   return (
     <MainLayout>
-      <div className={`${style.mainRow} pt-3 row`}>
+      <div className={`${style.mainRow} pt-5 row`}>
         <div className="col-12">
           <div className="container">
-            <h1 className="mb-3 pt-3">Recipes</h1>
+            <h1 className={`mb-4 pt-4 ${pathname == '/recipes' ? 'text-light' : ''}`}>Daftar Recipe</h1>
 
             <div className="row">
               <div className="col-12 mb-3">
                 <div className="row">
                   <div className="col-7 col-md-4">
-                    <select class="form-select" name="sort" onChange={handleSorting} aria-label="Default select example">
+                    <select className="form-select" name="sort" onChange={handleSorting} aria-label="Default select example">
                       <option selected disabled>
                         Sort
                       </option>
@@ -79,7 +79,7 @@ const Recipes = () => {
               {
                 (isLoading ? showLoading() : Swal.close(),
                 recipes?.data?.map((recipe) => (
-                  <div key={recipe.id} className="col-6 col-md-3 mb-3">
+                  <div key={recipe.id} className="col-6 col-md-3 mt-3">
                     <CardRecipe item={recipe} />
                   </div>
                 )))
@@ -90,7 +90,7 @@ const Recipes = () => {
                   Prev
                 </button>
                 <span className="d-flex">{isLoading ? 'Loading....' : generatePagination().map((page, i) => i < 5 && page)}</span>
-                <button className="prev-btn btn btn-primary" onClick={() => window.location.replace(`/recipes?page=${Number(utils?.page) + 1}&limit=${utils.limit}`)} disabled={utils?.page == recipes?.pagination?.totalPage}>
+                <button className="prev-btn btn btn-warning text-light" onClick={() => window.location.replace(`/recipes?page=${Number(utils?.page) + 1}&limit=${utils.limit}`)} disabled={utils?.page == recipes?.pagination?.totalPage}>
                   Next
                 </button>
               </div>

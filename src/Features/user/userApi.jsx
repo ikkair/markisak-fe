@@ -13,6 +13,17 @@ const authApi = apiSlice.injectEndpoints({
       providesTags: ['User'],
       transformResponse: (response, meta, args) => response.data[0],
     }),
+    updateUserById: builder.mutation({
+      query: ({ id, data }) => {
+        return {
+          url: `user/${id}`,
+          method: 'PUT',
+          body: data,
+        };
+      },
+      providesTags: ['User'],
+      transformResponse: (response, meta, args) => response,
+    }),
     loginUser: builder.mutation({
       query: (data) => ({
         url: 'user/login',
@@ -25,4 +36,4 @@ const authApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useLoginUserMutation, useRegisterUserMutation, useGetUserDetailQuery } = authApi;
+export const { useLoginUserMutation, useRegisterUserMutation, useUpdateUserByIdMutation, useGetUserDetailQuery } = authApi;
