@@ -26,6 +26,8 @@ const Profile = () => {
     });
   };
 
+  const handleUpdate = () => {};
+
   useEffect(() => {
     if (isSuccess) {
       setData((prev) => {
@@ -49,7 +51,7 @@ const Profile = () => {
               <img className="mt-5" src={edit} alt="" />
             </Link>
             <h3>{user?.name}</h3>
-            {!isLoading && <ModalEditProfile user={data} onchange={(e) => changeHandler(e)} />}
+            {!isLoading && <ModalEditProfile user={data} onchange={(e) => changeHandler(e)} onclick={handleUpdate} />}
           </div>
 
           <div className="text-secondary">
