@@ -12,6 +12,12 @@ import imgFood3 from '../../assets/Home/food3.png';
 import LandingPageSection from './../../Components/Section/LandingPageSection/LandingPageSection';
 import { useGetAllRecipeQuery, useGetRecipeByIdQuery } from '../../Features/recipe/recipeApi';
 import { Link, useNavigate } from 'react-router-dom';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+import AOS from 'aos';
+// ..
+
+
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
@@ -27,6 +33,11 @@ const Home = () => {
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const { data: recipes, isLoading, error } = useGetAllRecipeQuery({});
+
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+  }, []);
 
   function enterHandlerSearch(e) {
     if (e.code == 'Enter') {
@@ -57,12 +68,12 @@ const Home = () => {
     <MainLayout>
       <div id="home" className={`${style.firstSection} first-section container pt-5`}>
         <div className="row">
-          <div className={`${style.leftSide} col-12 col-sm-7 d-flex align-items-center`}>
+          <div className={`${style.leftSide} col-12 col-sm-7 d-flex align-items-center`} data-aos="fade-right">
             <div className="row main-title ">
               <div className={`col-12 col-lg-8 fw-semibold fs-1`}>
                 <span className={`${style.title}`}> Discover Recipe & Delicious Food</span>
               </div>
-              <div className={`col-9 col-md-7`}>
+              <div className={`col-9 col-md-7`} >
                 <div className={`${style.inputBackground} py-1 d-flex align-items-center gap-1 ps-4 rounded`}>
                   <FontAwesomeIcon className={style.inputSearch} type="text" icon={faSearch} />
                   <input
@@ -78,8 +89,8 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="col-5 d-none d-sm-grid">
-            <img src={imgFood} className={`${style.firstSectionImg} img-fluid`} alt="" />
+          <div className="col-5 d-none d-sm-grid" >
+            <img src={imgFood} className={`${style.firstSectionImg} img-fluid`} alt="" data-aos="fade-left"/>
           </div>
         </div>
       </div>
@@ -88,14 +99,14 @@ const Home = () => {
         <div className="col-12 col-sm-6">
           <div className="row">
             <div className={`${style.colImg} col-12 position-relative`}>
-              <img src={recipes?.data[0]?.photo} crossOrigin="anonymous" className={`${style.sectionImage} img-fluid rounded`} alt="" />
+              <img src={recipes?.data[0]?.photo} crossOrigin="anonymous" className={`${style.sectionImage} img-fluid rounded`} alt=""  data-aos="flip-left"  data-aos-duration="1000"/>
             </div>
           </div>
         </div>
         {isLoading ? (
           'Loading....'
         ) : (
-          <div className="col-12 col-sm-6 d-grid align-items-center">
+          <div className="col-12 col-sm-6 d-grid align-items-center" data-aos="fade-left" data-aos-duration="1000">
             <div className="row main-title d-inline-block d-md-flex flex-column align-items-end">
               <div className={`col-10 pe-3`}>
                 <span className={`${style.sectionTitleContent} d-block fw-semibold fs-2`}>{recipes?.data[0]?.title}</span>
@@ -115,14 +126,14 @@ const Home = () => {
       </LandingPageSection>
 
       <LandingPageSection title={'New Recipe'} id={'newRecipe'} embedClass={`${style.sectionPage}`}>
-        <div className="col-12 col-sm-6">
+        <div className="col-12 col-sm-6" >
           <div className="row">
             <div className={`${style.colImg2} col-12 position-relative`}>
-              <img src={recipes?.data[1]?.photo} crossOrigin="anonymous" className={`${style.sectionImage} img-flui rounded`} alt="" />
+              <img src={recipes?.data[1]?.photo} crossOrigin="anonymous" className={`${style.sectionImage} img-flui rounded`} alt="" data-aos="zoom-out-up" data-aos-duration="1000"/>
             </div>
           </div>
         </div>
-        <div className="col-12 col-sm-6 d-grid align-items-center mb-2">
+        <div className="col-12 col-sm-6 d-grid align-items-center mb-2" data-aos="fade-left" data-aos-duration="1000">
           <div className="row main-title d-inline-block d-md-flex flex-column align-items-end">
             <div className={`col-10 pe-3`}>
               <span className={`${style.sectionTitleContent} d-block fw-semibold fs-2`}>{recipes?.data[1]?.title}</span>
@@ -148,7 +159,7 @@ const Home = () => {
           </div>
         </div>
         <div className="row">
-          <div className="col-12">
+          <div className="col-12"  data-aos="fade-up" data-aos-duration="1000">
             <Swiper
               effect={'coverflow'}
               grabCursor={true}

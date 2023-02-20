@@ -54,6 +54,8 @@ const DetailResep = () => {
     AOS.refresh();
   }, []);
 
+  console.log(user?.id.length);
+
   const [message, setMessage] = useState('');
 
   // Change handler
@@ -193,9 +195,17 @@ const DetailResep = () => {
             <InputFormAddRecipe value={message} type={'textarea'} title={'Comment :'} name={'comment'} placeholder={'Comment here'} onchange={(e) => changeHandler(e)} />
 
             <div class={`d-flex justify-content-center text-center ${style.button}`}>
+              {user?.id.length > 0 ? 
               <button class={` btn btn-warning `} type="button" onClick={createHandler}>
-                Comment
+              Comment
+              </button> :
+              <button class={` btn btn-warning `} type="button" onClick={createHandler} disabled>
+              Comment
               </button>
+            
+            
+              }
+              
             </div>
 
             {recipe?.comments.length <= 0 ? <h1 style={{ visibility: 'hidden' }}></h1> : <h1>Comments</h1>}
