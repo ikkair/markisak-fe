@@ -23,10 +23,11 @@ const UpdateRecipe = () => {
   const [videos, setVideos] = useState([]);
   const [data, setData] = useState({
     title: '',
-    photo: '',
+    photo: recipe?.photo,
     ingredients: '',
     description: '',
   });
+  console.log(data.photo);
 
   useEffect(() => {
     if (isSuccess) {
@@ -65,6 +66,18 @@ const UpdateRecipe = () => {
     });
   };
 
+  function showLoading() {
+    Swal.fire({
+      title: 'Loading...',
+      html: 'Please wait...',
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+  }
+
   const updateHandler = async () => {
     const formData = new FormData();
     for (let attr in data) {
@@ -99,23 +112,6 @@ const UpdateRecipe = () => {
       };
     });
   };
-
-  // const createHandler = async () => {
-  //   await createRecipe({ ...data, photo: preview });
-  //   if (!error) {
-  //     MySwal.fire({
-  //       title: <p>Product add to Cart!</p>,
-  //       icon: 'success',
-  //     });
-
-  //     setData({
-  //       title: '',
-  //       photo: '',
-  //       ingredients: '',
-  //       video: '',
-  //     });
-  //   }
-  // };
 
   function imageClickHandler(e) {
     const inputImg = document.querySelector(`#photo`);
@@ -175,63 +171,70 @@ const UpdateRecipe = () => {
   return (
     <>
       <Navbar />
-      <div className="container mt-4 pb-5">
-        <div className="row">
-          <div className="col-12 ">
-            <div className="row">
-              <div className="col-12 col-lg-10 offset-lg-1 d-flex justify-content-center">
-                <div className={`item w-100 rounded ${style.inputBackground} ${style.inputPhoto} d-flex mx-auto justify-content-center align-items-center mb-2 flex-column mt-5`} onClick={imageClickHandler} id="thumbnail">
-                  <img src={preview ? preview : photoLogo} alt="" className="img-fluid" />
-                  <span className="text-secondary mt-2">Add Photo</span>
+      {isLoading
+        ? showLoading()
+        : (Swal.close(),
+          (
+            <>
+              <div className="container mt-4 pb-5">
+                <div className="row">
+                  <div className="col-12 ">
+                    <div className="row">
+                      <div className="col-12 col-lg-10 offset-lg-1 d-flex justify-content-center">
+                        <div className={`item w-100 rounded ${style.inputBackground} ${style.inputPhoto} d-flex mx-auto justify-content-center align-items-center mb-2 flex-column mt-5`} onClick={imageClickHandler} id="thumbnail">
+                          <img src={data?.photo ? data.photo : photoLogo} alt="" className="img-fluid" />
+                          <span className="text-secondary mt-2">Add Photo</span>
 
-                  <input type="file" className="d-none" name="photo1" onChange={selectFile} id={`photo`} />
-                </div>
-              </div>
+                          <input type="file" className="d-none" name="photo1" onChange={selectFile} id={`photo`} />
+                        </div>
+                      </div>
 
-              <div className="col-12 col-lg-10 offset-lg-1 mt-4">
-                <InputFormAddRecipe value={data?.title} type={'text'} title={'Title'} name={'title'} onchange={(e) => changeHandler(e)} />
-              </div>
+                      <div className="col-12 col-lg-10 offset-lg-1 mt-4">
+                        <InputFormAddRecipe value={data?.title} type={'text'} title={'Title'} name={'title'} onchange={(e) => changeHandler(e)} />
+                      </div>
 
-              <div className="col-12 col-lg-10 offset-lg-1 mt-4">
-                <InputFormAddRecipe value={data?.ingredients} type={'textarea'} title={'Ingredients'} name={'ingredients'} onchange={(e) => changeHandler(e)} />
-              </div>
+                      <div className="col-12 col-lg-10 offset-lg-1 mt-4">
+                        <InputFormAddRecipe value={data?.ingredients} type={'textarea'} title={'Ingredients'} name={'ingredients'} onchange={(e) => changeHandler(e)} />
+                      </div>
 
-              <div className="col-12 col-lg-10 offset-lg-1 mt-4">
-                <InputFormAddRecipe value={data?.description} type={'textarea'} title={'Description'} name={'description'} onchange={(e) => changeHandler(e)} />
-              </div>
+                      <div className="col-12 col-lg-10 offset-lg-1 mt-4">
+                        <InputFormAddRecipe value={data?.description} type={'textarea'} title={'Description'} name={'description'} onchange={(e) => changeHandler(e)} />
+                      </div>
 
-              <div className="col-12 col-lg-10 offset-lg-1 mt-4">
-                <div className={`item rounded ${style.inputBackground} mx-auto d-flex flex-column p-3 px-5 gap-3`} id="thumbnail">
-                  <div className="main-video d-flex gap-3">
-                    <span className="text-secondary mt-2 text-nowrap text-dark fw-semibold">Video</span>
-                    <input
-                      type="text"
-                      className="form-control bg-transparent border-0 border-bottom rounded-0 outline-none"
-                      name="video"
-                      value={videos[0]?.url_video}
-                      onChange={(e) => {
-                        changeHandler(e, 0);
-                      }}
-                      disabled={true}
-                    />
+                      <div className="col-12 col-lg-10 offset-lg-1 mt-4">
+                        <div className={`item rounded ${style.inputBackground} mx-auto d-flex flex-column p-3 px-5 gap-3`} id="thumbnail">
+                          <div className="main-video d-flex gap-3">
+                            <span className="text-secondary mt-2 text-nowrap text-dark fw-semibold">Video</span>
+                            <input
+                              type="text"
+                              className="form-control bg-transparent border-0 border-bottom rounded-0 outline-none"
+                              name="video"
+                              value={videos[0]?.url_video}
+                              onChange={(e) => {
+                                changeHandler(e, 0);
+                              }}
+                              disabled={true}
+                            />
 
-                    {/* <FontAwesomeIcon className={`${style.addVideo} bg-light text-secondary rounded-circle p-2`} onClick={() => incrementVideos()} icon={faPlus} /> */}
+                            {/* <FontAwesomeIcon className={`${style.addVideo} bg-light text-secondary rounded-circle p-2`} onClick={() => incrementVideos()} icon={faPlus} /> */}
+                          </div>
+
+                          <div className="row">{renderInputVideo()?.map((input) => input)}</div>
+                        </div>
+                      </div>
+
+                      <div className="col-12 col-lg-10 offset-lg-1 mt-5 d-flex justify-content-center">
+                        <button className="btn btn-warning w-50 text-light" onClick={updateHandler}>
+                          Update Recipe
+                        </button>
+                      </div>
+                    </div>
                   </div>
-
-                  <div className="row">{renderInputVideo()?.map((input) => input)}</div>
                 </div>
               </div>
-
-              <div className="col-12 col-lg-10 offset-lg-1 mt-5 d-flex justify-content-center">
-                <button className="btn btn-warning w-50 text-light" onClick={updateHandler}>
-                  Update Recipe
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <MainFooter />
+              <MainFooter />
+            </>
+          ))}
     </>
   );
 };

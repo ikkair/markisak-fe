@@ -74,10 +74,10 @@ const Profile = () => {
             {isLoading
               ? 'Loading...'
               : user?.recipes?.map((recipe, i) => (
-                <div className="col-6 px-1 col-md-3 mb-2">
-                  <Card key={i} item={recipe} />
-                </div>
-              ))}
+                  <div className="col-6 px-1 col-sm-4 col-md-3 mb-2">
+                    <Card key={i} item={recipe} />
+                  </div>
+                ))}
           </div>
         </div>
       </div>
