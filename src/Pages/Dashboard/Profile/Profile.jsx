@@ -50,7 +50,7 @@ const Profile = () => {
     }
     console.log(user.id);
 
-    await updateUserById({ id_user: user.id, data: formData });
+    await updateUserById({ id, data: formData });
     setLoading(false);
   };
 
