@@ -91,12 +91,12 @@ const Navbar = () => {
             {user ? (
               <>
                 <li className="nav-item">
-                  <Link className={`${style.textWhite} ${pathname == '/recipes' ? 'text-light' : ''} nav-link active`} aria-current="page" to="/dashboard/create-recipe">
+                  <a className={`${style.textWhite} ${pathname == '/recipes' ? 'text-light' : ''} nav-link active`} aria-current="page" href="/dashboard/create-recipe/#content">
                     Add Recipe
-                  </Link>
+                  </a>
                 </li>
                 <li className="nav-item">
-                  <Link className={`${style.textWhite} ${pathname == '/recipes' ? 'text-light' : ''} nav-link active`} aria-current="page" to="/profile">
+                  <Link className={`${style.textWhite} ${pathname == '/recipes' ? 'text-light' : ''} nav-link active`} aria-current="page" to="/profile/#content">
                     Profile
                   </Link>
                 </li>
@@ -137,14 +137,15 @@ const Navbar = () => {
                 </Link>
               </>
             ) : (
-              <>
+              <div className="text-light">
                 <Link to="/login" className={`${style.authLink} ${pathname != '/' ? 'text-dark' : ''} text-decoration-none fw-semibold me-2`}>
-                  Login /
+                  Login
                 </Link>
-                <Link to="/register" className={`${style.authLink} ${pathname != '/' ? 'text-dark' : ''} text-decoration-none fw-semibold `}>
+                |
+                <Link to="/register" className={`${style.authLink} ${pathname != '/' ? 'text-dark' : ''} text-decoration-none fw-semibold ms-2`}>
                   Register
                 </Link>
-              </>
+              </div>
             )}
           </div>
         </div>

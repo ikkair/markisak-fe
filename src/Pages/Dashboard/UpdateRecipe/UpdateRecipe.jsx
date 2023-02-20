@@ -240,7 +240,7 @@ const UpdateRecipe = () => {
                       </div>
 
                       <div className="col-12 col-lg-10 offset-lg-1 mt-5 d-flex justify-content-center">
-                        <button className="btn btn-warning w-50 text-light" onClick={updateHandler}>
+                        <button className="btn btn-warning w-50 text-light" onClick={updateHandler} disabled={!(data.title && typeof data.photo != 'string' && data.description && data.ingredients)}>
                           Update Recipe
                         </button>
                       </div>

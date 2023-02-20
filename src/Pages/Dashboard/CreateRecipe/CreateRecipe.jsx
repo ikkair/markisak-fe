@@ -76,14 +76,16 @@ const CreateRecipe = () => {
 
     const response = await createRecipe(formData);
     const idRecipe = response.data.data[0].id;
-    await insertAllVideo(idRecipe);
+    if (videos[0].url) {
+      await insertAllVideo(idRecipe);
+    }
     setLoading(false);
 
     setData({
       title: '',
       photo: '',
       ingredients: '',
-      video: '',
+      description: '',
     });
   };
 
@@ -107,7 +109,6 @@ const CreateRecipe = () => {
         icon: 'success',
       });
     }
-
   }, [loading]);
 
   function imageClickHandler(e) {
@@ -168,9 +169,9 @@ const CreateRecipe = () => {
   return (
     <>
       <Navbar />
-      <div className="container mt-4 pb-5">
+      <div id="content" className="container mt-4 pb-5">
         <div className="row">
-          <div className="col-12 ">
+          <div className="col-12">
             <div className="row">
               <div className="col-12 col-lg-10 offset-lg-1 d-flex justify-content-center">
                 <div className={`item w-100 rounded ${style.inputBackground} ${style.inputPhoto} d-flex mx-auto justify-content-center align-items-center mb-2 flex-column mt-5`} onClick={imageClickHandler} id="thumbnail">
@@ -215,7 +216,7 @@ const CreateRecipe = () => {
               </div>
 
               <div className="col-12 col-lg-10 offset-lg-1 mt-5 d-flex justify-content-center">
-                <button className="btn btn-warning w-50 text-light" onClick={createHandler}>
+                <button className="btn btn-warning w-50 text-light" onClick={createHandler} disabled={!(data.title && data.photo && data.description && data.ingredients)}>
                   Post
                 </button>
               </div>
