@@ -82,22 +82,39 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarScroll">
-          <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+          <ul className={` navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll`}>
             <li className="nav-item">
-              <Link className={`${style.textWhite} nav-link active`} aria-current="page" to="/">
+              <a className={`${style.textWhite} ${pathname == '/recipes' ? 'text-light' : ''} nav-link active`} aria-current="page" href="/#home">
                 Home
-              </Link>
+              </a>
             </li>
-            <li className="nav-item">
-              <Link className={`${style.textWhite} nav-link active`} aria-current="page" to="/dashboard/create-recipe">
-                Add Recipe
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className={`${style.textWhite} nav-link active`} aria-current="page" to="/profile">
-                Profile
-              </Link>
-            </li>
+            {user ? (
+              <>
+                <li className="nav-item">
+                  <Link className={`${style.textWhite} ${pathname == '/recipes' ? 'text-light' : ''} nav-link active`} aria-current="page" to="/dashboard/create-recipe">
+                    Add Recipe
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className={`${style.textWhite} ${pathname == '/recipes' ? 'text-light' : ''} nav-link active`} aria-current="page" to="/profile">
+                    Profile
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <a className={`${style.textWhite} ${pathname == '/recipes' ? 'text-light' : ''} nav-link active`} aria-current="page" href="#popularRecipe">
+                    Popular Recipe
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className={`${style.textWhite} ${pathname == '/recipes' ? 'text-light' : ''} nav-link active`} aria-current="page" href="#newRecipe">
+                    New Recipe
+                  </a>
+                </li>
+              </>
+            )}
           </ul>
           <div className="d-flex">
             {user ? (
@@ -107,7 +124,7 @@ const Navbar = () => {
                     <FontAwesomeIcon icon={faUser} />
                   </span>
                   <div className="btn-group d-flex align-items-center">
-                    <button type="button" className={`${style.userName} border-0 bg-transparent dropdown-toggle ${pathname != '/' ? 'text-dark' : ''}`} data-bs-toggle="dropdown" aria-expanded="false">
+                    <button type="button" className={`${style.userName} border-0 bg-transparent dropdown-toggle ${pathname != '/' && pathname != '/recipes' ? 'text-dark' : ''} `} data-bs-toggle="dropdown" aria-expanded="false">
                       {user?.name}
                     </button>
 

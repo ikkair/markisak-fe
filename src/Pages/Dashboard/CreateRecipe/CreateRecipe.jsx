@@ -108,17 +108,6 @@ const CreateRecipe = () => {
       });
     }
 
-    if (isErrorCreateRecipe && isErrorCreateVideo) {
-      Swal.close();
-      MySwal.fire({
-        title: (
-          <p>
-            {errorCreateVideo.message} or {errorCreateMessage.message}
-          </p>
-        ),
-        icon: 'failed',
-      });
-    }
   }, [loading]);
 
   function imageClickHandler(e) {

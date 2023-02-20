@@ -10,7 +10,7 @@ import withReactContent from 'sweetalert2-react-content';
 const Register = () => {
   const MySwal = withReactContent(Swal);
 
-  const [userRegister, { isLoading, isSuccess, error }] = useRegisterUserMutation();
+  const [userRegister, { isLoading, isSuccess, isError, error }] = useRegisterUserMutation();
   const [passwordError, setPasswordError] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [checkTerms, setCheckTerms] = useState(false);
@@ -22,7 +22,6 @@ const Register = () => {
   });
 
   const changeHandler = (e) => {
-    console.log(data);
     setData((prev) => {
       return {
         ...prev,
@@ -52,37 +51,67 @@ const Register = () => {
   }
   const successLoading = () => {
     Swal.close();
+    MySwal.fire({
+      title: <p>Register Success, Please Login!</p>,
+      icon: 'success',
+    });
   };
 
   const onRegisHandler = async () => {
     try {
       const passwordValidated = await checkPasswordMatch(data.password);
       await userRegister({ ...data, password: passwordValidated });
-      MySwal.fire({
-        title: <p>Register Success, Please Login!</p>,
-        icon: 'success',
-      });
+    } catch (err) {
+      setPasswordError(err);
+    }
+  };
 
+  useEffect(() => {
+    if (isLoading) {
+      showLoading();
+    }
+
+    if (isSuccess) {
+      successLoading();
       setData({
         name: '',
         email: '',
         password: '',
         phone_number: '',
       });
-    } catch (err) {
-      setPasswordError(err);
     }
-  };
+
+    if (isError) {
+      Swal.close();
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: error?.status == 400 ? 'Email Already taken!' : 'Something went Wrong!',
+      });
+    }
+  }, [isLoading]);
 
   return (
     <AuthLayout title="Let’s Get Started !" description="Create new account to access all features">
+      {/* {error?.status == 400 && (
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>Register Failed!</strong> Email Already taken!
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      )} */}
+      {passwordError ? (
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>Register Failed!</strong> {passwordError}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      ) : (
+        ''
+      )}
       <InputFormAuth title="Name" name="name" value={data.name} type="text" onchange={(e) => changeHandler(e)} />
       <InputFormAuth title="Email Address" value={data.email} name="email" type="text" onchange={(e) => changeHandler(e)} />
       <InputFormAuth title="Phone Number" value={data.phone_number} name="phone_number" type="number" onchange={(e) => changeHandler(e)} />
       <InputFormAuth title="Password" name="password" value={data.password} type="password" onchange={(e) => changeHandler(e)} />
       <InputFormAuth title="Confirm Password" name="confirmPassword" type="password" onchange={(e) => setPasswordConfirm(e.target.value)} />
-
-      {passwordError ? <h1>{passwordError}</h1> : ''}
 
       <div class="form-check mb-3 customCheck">
         <input class="form-check-input" type="checkbox" value="" onChange={() => setCheckTerms((prev) => !prev)} id={style.flexCheckDefault} />

@@ -24,8 +24,8 @@ const likedRecipeApi = apiSlice.injectEndpoints({
     }),
 
     createLikedRecipe: builder.mutation({
-      query: (data) => ({
-        url: `liked-recipes`,
+      query: ({ id_recipe }) => ({
+        url: `recipe/${id_recipe}/liked-recipe`,
         method: 'POST',
         body: data,
       }),
