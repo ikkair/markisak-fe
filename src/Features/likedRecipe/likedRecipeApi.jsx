@@ -20,7 +20,7 @@ const likedRecipeApi = apiSlice.injectEndpoints({
       query: () => ({
         url: `liked-recipe/user`,
       }),
-      providesTags: ['LikedRecipe'],
+      providesTags: 'LikedRecipe',
       transformResponse: (response, meta, arg) => response,
     }),
 
