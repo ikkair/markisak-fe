@@ -89,24 +89,24 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="col-5 d-none d-sm-grid" data-aos="fade-left">
-            <img src={imgFood} className={`${style.firstSectionImg} img-fluid`} alt="" />
+          <div className="col-5 d-none d-sm-grid" >
+            <img src={imgFood} className={`${style.firstSectionImg} img-fluid`} alt="" data-aos="fade-left"/>
           </div>
         </div>
       </div>
 
       <LandingPageSection title={'Popular For You!'} id={'popularRecipe'} embedClass={`${style.sectionPage}`}>
-        <div className="col-12 col-sm-6" data-aos="flip-left" data-aos-duration="1000">
+        <div className="col-12 col-sm-6">
           <div className="row">
             <div className={`${style.colImg} col-12 position-relative`}>
-              <img src={recipes?.data[0]?.photo} crossOrigin="anonymous" className={`${style.sectionImage} img-fluid rounded`} alt="" />
+              <img src={recipes?.data[0]?.photo} crossOrigin="anonymous" className={`${style.sectionImage} img-fluid rounded`} alt=""  data-aos="flip-left"  data-aos-duration="1000"/>
             </div>
           </div>
         </div>
         {isLoading ? (
           'Loading....'
         ) : (
-          <div className="col-12 col-sm-6 d-grid align-items-center" data-aos="flip-right" data-aos-duration="1000">
+          <div className="col-12 col-sm-6 d-grid align-items-center" data-aos="fade-left" data-aos-duration="1000">
             <div className="row main-title d-inline-block d-md-flex flex-column align-items-end">
               <div className={`col-10 pe-3`}>
                 <span className={`${style.sectionTitleContent} d-block fw-semibold fs-2`}>{recipes?.data[0]?.title}</span>
@@ -126,14 +126,14 @@ const Home = () => {
       </LandingPageSection>
 
       <LandingPageSection title={'New Recipe'} id={'newRecipe'} embedClass={`${style.sectionPage}`}>
-        <div className="col-12 col-sm-6" data-aos="zoom-out-up" data-aos-duration="1000">
+        <div className="col-12 col-sm-6" >
           <div className="row">
             <div className={`${style.colImg2} col-12 position-relative`}>
-              <img src={recipes?.data[1]?.photo} crossOrigin="anonymous" className={`${style.sectionImage} img-flui rounded`} alt="" />
+              <img src={recipes?.data[1]?.photo} crossOrigin="anonymous" className={`${style.sectionImage} img-flui rounded`} alt="" data-aos="zoom-out-up" data-aos-duration="1000"/>
             </div>
           </div>
         </div>
-        <div className="col-12 col-sm-6 d-grid align-items-center mb-2" data-aos="zoom-out-down" data-aos-duration="1000">
+        <div className="col-12 col-sm-6 d-grid align-items-center mb-2" data-aos="fade-left" data-aos-duration="1000">
           <div className="row main-title d-inline-block d-md-flex flex-column align-items-end">
             <div className={`col-10 pe-3`}>
               <span className={`${style.sectionTitleContent} d-block fw-semibold fs-2`}>{recipes?.data[1]?.title}</span>
