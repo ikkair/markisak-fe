@@ -6,15 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useDeleteRecipeByIdMutation } from '../../Features/recipe/recipeApi';
 
-const Card = ({ item, onclick }) => {
-  const [deleteRecipeById, { error, isLoading }] = useDeleteRecipeByIdMutation();
-
+const Card = ({ item, onclick, ondelete, type }) => {
   const deleteHandler = async () => {
-    await deleteRecipeById(item.id);
-
-    if (error) {
-      console.log(error);
-    }
+    ondelete(item.id);
   };
 
   return (
