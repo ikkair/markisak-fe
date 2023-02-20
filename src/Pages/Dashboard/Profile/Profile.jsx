@@ -8,12 +8,12 @@ import style from './style.module.css';
 import img from '../../../assets/Profile/img1.png';
 import img2 from '../../../assets/Profile/img2.png';
 import { useGetAllRecipeQuery, useDeleteRecipeByIdMutation, useGetRecipeByIdQuery } from '../../../Features/recipe/recipeApi';
-import edit from '../../../assets/Profile/vector.png';
-import { useGetUserDetailQuery } from '../../../Features/user/userApi';
+import { useGetUserDetailQuery, useUpdateUserByIdMutation } from '../../../Features/user/userApi';
 import ModalEditProfile from '../../../Components/Profile/ModalEditProfile';
 
 const Profile = () => {
   const { data: user, isLoading, isSuccess } = useGetUserDetailQuery(localStorage.getItem('id_user'));
+  const [updateUserById, { isSuccess: isSuccessUpdate }] = useUpdateUserByIdMutation();
   const [dataRow, setDataRow] = useState('my-recipe');
   const [data, setData] = useState({});
 
@@ -27,7 +27,14 @@ const Profile = () => {
     });
   };
 
-  const handleUpdate = () => {};
+  const handleUpdate = async () => {
+    const formData = new FormData();
+    for (let attr in data) {
+      formData.append(attr, data[attr]);
+    }
+
+    await updateUserById({ id, data: formData });
+  };
 
   useEffect(() => {
     if (isSuccess) {
@@ -47,12 +54,12 @@ const Profile = () => {
       <div className="container mt-5 mb-2 min-vh-100">
         <div className="row">
           <div className="profil text-center py-5">
-            <img className="rounded-circle mb-3" width={95} height={90} src={profile} alt="img" />
-            <Link to="/dashboard/my-recipe/:id">
-              <img className="mt-5" src={edit} alt="" />
-            </Link>
+            <div className="d-flex justify-content-center">
+              <img className="rounded-circle mb-1 ms-5" width={95} height={90} src={profile} alt="img" />
+              {/* <img className="rounded-circle mb-1 ms-5" width={95} height={90} src={user?.photo} crossOrigin={'anonymous'} alt="" /> */}
+              {!isLoading && <ModalEditProfile user={data} onchange={(e) => changeHandler(e)} onclick={(e) => handleUpdate(e)} />}
+            </div>
             <h3>{user?.name}</h3>
-            {!isLoading && <ModalEditProfile user={data} onchange={(e) => changeHandler(e)} onclick={handleUpdate} />}
           </div>
 
           <div className="text-secondary">
@@ -78,10 +85,10 @@ const Profile = () => {
             {isLoading
               ? 'Loading...'
               : user?.recipes?.map((recipe, i) => (
-                  <div key={i} className="col-6 px-1 col-sm-4 col-md-3 mb-2">
-                    <Card item={recipe} />
-                  </div>
-                ))}
+                <div key={i} className="col-6 px-1 col-sm-4 col-md-3 mb-2">
+                  <Card item={recipe} />
+                </div>
+              ))}
           </div>
         </div>
       </div>
