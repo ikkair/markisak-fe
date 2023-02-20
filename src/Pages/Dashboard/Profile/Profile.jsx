@@ -8,11 +8,12 @@ import style from './style.module.css';
 import img from '../../../assets/Profile/img1.png';
 import img2 from '../../../assets/Profile/img2.png';
 import { useGetAllRecipeQuery, useDeleteRecipeByIdMutation, useGetRecipeByIdQuery } from '../../../Features/recipe/recipeApi';
-import { useGetUserDetailQuery } from '../../../Features/user/userApi';
+import { useGetUserDetailQuery, useUpdateUserByIdQUery } from '../../../Features/user/userApi';
 import ModalEditProfile from '../../../Components/Profile/ModalEditProfile';
 
 const Profile = () => {
   const { data: user, isLoading, isSuccess } = useGetUserDetailQuery(localStorage.getItem('id_user'));
+  const [updateUserById, {isSuccess: isSuccessUpdate}] = useUpdateUserByIdQUery();
   const [data, setData] = useState({});
 
   const changeHandler = (e) => {
