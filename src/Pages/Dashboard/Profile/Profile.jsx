@@ -15,7 +15,7 @@ import { useDeleteSavedRecipeMutation } from '../../../Features/savedRecipe/save
 
 const Profile = () => {
   const { data: user, isLoading, isSuccess } = useGetUserDetailQuery(localStorage.getItem('id_user'));
-  const [updateUserById, { isSuccess: isSuccessUpdate }] = useUpdateUserByIdMutation();
+  const [updateUserById, {isSuccess: isSuccessUpdate}] = useUpdateUserByIdMutation();
   const [dataRow, setDataRow] = useState('my-recipe');
   const [data, setData] = useState({});
   const [deleteRecipeById, { error: errorDeleteRecipeById, isLoading: isLoadingdeleteRecipeById }] = useDeleteRecipeByIdMutation();
@@ -33,6 +33,18 @@ const Profile = () => {
     await deleteSavedRecipe({ id });
   };
 
+  // const updateHandler = async () => {
+  //   setLoading(true);
+  //   const formData = new FormData();
+  //   for (let attr in user) {
+  //     formData.append(attr, user[attr]);
+  //   }
+  //   console.log(user.id);
+
+  //   await updateUserById({ id, data: formData });
+  //   setLoading(false);
+  // };
+
   return (
     <div>
       <Navbar />
@@ -40,8 +52,8 @@ const Profile = () => {
         <div className="row">
           <div className="profil text-center py-5">
             <div className="d-flex justify-content-center">
-              <img className="rounded-circle mb-1 ms-5" width={95} height={90} src={profile} alt="img" />
-              {/* <img className="rounded-circle mb-1 ms-5" width={95} height={90} src={user?.photo} crossOrigin={'anonymous'} alt="" /> */}
+              {/* <img className="rounded-circle mb-1 ms-5" width={95} height={90} src={profile} alt="img" /> */}
+              <img className="rounded-circle mb-1 ms-5" width={95} height={90} src={user?.photo} crossOrigin={'anonymous'} alt="" />
               {!isLoading && <ModalEditProfile id={user.id} />}
             </div>
             <h3>{user?.name}</h3>

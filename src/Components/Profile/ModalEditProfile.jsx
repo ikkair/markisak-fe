@@ -13,12 +13,13 @@ const ModalEditProfile = ({ id}) => {
   const [data, setData] = useState({
     name: '',
     phone_number : '',
+    photo: user?.photo,
   });
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // const [selectedFile, setSelectedFile] = useState();
+  const [selectedFile, setSelectedFile] = useState();
 
   const changeHandler = (e) => {
     setData((prev) => {
@@ -50,14 +51,20 @@ const ModalEditProfile = ({ id}) => {
     }
   }, [isSuccess]);
 
-  // const selectFile = (e) => {
-  //   if (!e.target.files || e.target.files.length === 0) {
-  //     setSelectedFile(undefined);
-  //     return;
-  //   }
+  const selectFile = (e) => {
+    if (!e.target.files || e.target.files.length === 0) {
+      setSelectedFile(undefined);
+      return;
+    }
 
-  //   setSelectedFile(e.target.files[0]);
-  // };
+    setSelectedFile(e.target.files[0]);
+    setData((prev) => {
+      return {
+        ...prev,
+        photo: e.target.files[0],
+      };
+    });
+  };
 
   return (
     <div>
@@ -74,7 +81,7 @@ const ModalEditProfile = ({ id}) => {
             <Modal.Body>
               <input className="form-control mt-3" type="text" placeholder="name" name="name" value={data.name} onChange={(e) => changeHandler(e)} />
               <input className="form-control mt-3" type="text" placeholder="phone number" name="phone_number" value={data.phone_number} onChange={(e) => changeHandler(e)} />
-              {/* <input className="form-control mt-3" type="file" placeholder="photo" name="photo" onChange={selectFile} /> */}
+              <input className="form-control mt-3" type="file" placeholder="photo" name="photo" onChange={selectFile} id={`photo`} />
             </Modal.Body>
 
             <Modal.Footer>

@@ -20,7 +20,7 @@ const SecondaryFooter = () => {
                         <Link className={`list-link ${style.listLink}`} to="#">Laptop</Link>
                     </li>
                     <li className="list-inline-item mx-3">
-                        <Link className={`list-link ${style.listLink}`} to="#">get in touch</Link>
+                        <Link className={`list-link ${style.listLink}`} to="#">Get In Touch</Link>
                     </li>
                 </ul>
             </div>
