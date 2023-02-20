@@ -9,7 +9,6 @@ const UnauthMiddleware = ({ children }) => {
       return navigate('/');
     }
   }, []);
-  // tes
   return children;
 };
 
