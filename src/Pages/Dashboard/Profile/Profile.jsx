@@ -18,35 +18,7 @@ const Profile = () => {
   const [data, setData] = useState({});
   console.log(user);
 
-  const changeHandler = (e) => {
-    setData((prev) => {
-      return {
-        ...prev,
-        [e.target.name]: e.target.value,
-      };
-    });
-  };
-
-  const handleUpdate = async () => {
-    const formData = new FormData();
-    for (let attr in data) {
-      formData.append(attr, data[attr]);
-    }
-
-    await updateUserById({ id, data: formData });
-  };
-
-  useEffect(() => {
-    if (isSuccess) {
-      setData((prev) => {
-        let data = {};
-        for (let attr in user) {
-          data = { ...data, [attr]: user[attr] };
-        }
-        return data;
-      });
-    }
-  }, [isSuccess]);
+  
 
   return (
     <div>
@@ -57,7 +29,7 @@ const Profile = () => {
             <div className="d-flex justify-content-center">
               <img className="rounded-circle mb-1 ms-5" width={95} height={90} src={profile} alt="img" />
               {/* <img className="rounded-circle mb-1 ms-5" width={95} height={90} src={user?.photo} crossOrigin={'anonymous'} alt="" /> */}
-              {!isLoading && <ModalEditProfile user={data} onchange={(e) => changeHandler(e)} onclick={(e) => handleUpdate(e)} />}
+              {!isLoading && <ModalEditProfile id={user.id} />}
             </div>
             <h3>{user?.name}</h3>
           </div>
