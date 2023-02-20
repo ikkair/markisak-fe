@@ -55,7 +55,7 @@ const Home = () => {
   }, [chat, closeChat]);
   return (
     <MainLayout>
-      <div className={`${style.firstSection} first-section container pt-5`}>
+      <div id="home" className={`${style.firstSection} first-section container pt-5`}>
         <div className="row">
           <div className={`${style.leftSide} col-12 col-sm-7 d-flex align-items-center`}>
             <div className="row main-title ">
@@ -84,7 +84,7 @@ const Home = () => {
         </div>
       </div>
 
-      <LandingPageSection title={'Popular For You!'} embedClass={`${style.sectionPage}`}>
+      <LandingPageSection title={'Popular For You!'} id={'popularRecipe'} embedClass={`${style.sectionPage}`}>
         <div className="col-12 col-sm-6">
           <div className="row">
             <div className={`${style.colImg} col-12 position-relative`}>
@@ -114,7 +114,7 @@ const Home = () => {
         )}
       </LandingPageSection>
 
-      <LandingPageSection title={'New Recipe'} embedClass={`${style.sectionPage}`}>
+      <LandingPageSection title={'New Recipe'} id={'newRecipe'} embedClass={`${style.sectionPage}`}>
         <div className="col-12 col-sm-6">
           <div className="row">
             <div className={`${style.colImg2} col-12 position-relative`}>

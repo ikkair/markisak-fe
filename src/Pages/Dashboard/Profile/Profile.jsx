@@ -25,6 +25,8 @@ const Profile = () => {
     });
   };
 
+  const handleUpdate = () => {};
+
   useEffect(() => {
     if (isSuccess) {
       setData((prev) => {

@@ -18,6 +18,7 @@ const UpdateRecipe = () => {
   const [selectedFile, setSelectedFile] = useState();
   const { data: recipe, isLoading, error, isSuccess } = useGetRecipeByIdQuery(id);
   const [updateRecipeById, { isSuccess: isSuccessUpdate }] = useUpdateRecipeByIdMutation();
+  const [loading, setLoading] = useState(false);
   const [preview, setPreview] = useState();
   const [stepVideo, setStepVideo] = useState(1);
   const [videos, setVideos] = useState([]);
@@ -27,7 +28,6 @@ const UpdateRecipe = () => {
     ingredients: '',
     description: '',
   });
-  console.log(data.photo);
 
   useEffect(() => {
     if (isSuccess) {
@@ -79,19 +79,14 @@ const UpdateRecipe = () => {
   }
 
   const updateHandler = async () => {
+    setLoading(true);
     const formData = new FormData();
     for (let attr in data) {
       formData.append(attr, data[attr]);
     }
 
     await updateRecipeById({ id, data: formData });
-
-    if (isSuccessUpdate) {
-      MySwal.fire({
-        title: <p>Recipe updated!</p>,
-        icon: 'success',
-      });
-    }
+    setLoading(false);
   };
 
   const inputDeleteHandler = (i) => {
@@ -132,6 +127,27 @@ const UpdateRecipe = () => {
       };
     });
   };
+
+  useEffect(() => {
+    if (loading) {
+      Swal.fire({
+        title: 'Loading...',
+        html: 'Recipe are being changed, Please wait...',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+    }
+
+    if (isSuccessUpdate) {
+      MySwal.fire({
+        title: <p>Success Update recipe!</p>,
+        icon: 'success',
+      });
+    }
+  }, [loading]);
 
   useEffect(() => {
     if (!selectedFile) {
@@ -178,11 +194,11 @@ const UpdateRecipe = () => {
             <>
               <div className="container mt-4 pb-5">
                 <div className="row">
-                  <div className="col-12 ">
+                  <div className="col-12">
                     <div className="row">
                       <div className="col-12 col-lg-10 offset-lg-1 d-flex justify-content-center">
                         <div className={`item w-100 rounded ${style.inputBackground} ${style.inputPhoto} d-flex mx-auto justify-content-center align-items-center mb-2 flex-column mt-5`} onClick={imageClickHandler} id="thumbnail">
-                          <img src={data?.photo ? data.photo : photoLogo} alt="" className="img-fluid" />
+                          <img src={preview ? preview : data.photo ? data.photo : photoLogo} crossOrigin={'anonymous'} alt="" className="img-fluid" />
                           <span className="text-secondary mt-2">Add Photo</span>
 
                           <input type="file" className="d-none" name="photo1" onChange={selectFile} id={`photo`} />
@@ -224,7 +240,7 @@ const UpdateRecipe = () => {
                       </div>
 
                       <div className="col-12 col-lg-10 offset-lg-1 mt-5 d-flex justify-content-center">
-                        <button className="btn btn-warning w-50 text-light" onClick={updateHandler}>
+                        <button className="btn btn-warning w-50 text-light" onClick={updateHandler} disabled={!(data.title && typeof data.photo != 'string' && data.description && data.ingredients)}>
                           Update Recipe
                         </button>
                       </div>
