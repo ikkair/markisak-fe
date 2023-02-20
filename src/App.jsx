@@ -29,7 +29,14 @@ function App() {
           </AuthMiddleware>
         }
       />
-      <Route path="/dashboard/my-recipe/:id" element={<UpdateRecipe />} />
+      <Route
+        path="/dashboard/my-recipe/:id"
+        element={
+          <AuthMiddleware>
+            <UpdateRecipe />
+          </AuthMiddleware>
+        }
+      />
       <Route
         path="/login"
         element={
