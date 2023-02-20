@@ -102,7 +102,7 @@ const Home = () => {
                 <span className={`${style.underlineTitleRecipe} d-none d-md-block  mt-1`}></span>
               </div>
               <div className={`col-12 col-md-10 mt-3 text-secondary ${style.sectionDesc}`}>
-                <span>Quick + Easy Chicken Bone Broth Ramen- Healthy chicken ramen in a hurry? That’s right!</span>
+                <span>{recipes?.data[0]?.description}</span>
               </div>
               <div className="col-10 ">
                 <Link to={`/recipes/${recipes?.data[0]?.id}`} className={`btn btn-warning text-light mt-3 ${style.btnLearnMore}`}>

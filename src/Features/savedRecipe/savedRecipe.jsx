@@ -29,7 +29,6 @@ const savedRecipeApi = apiSlice.injectEndpoints({
       query: ({ id, data }) => ({
         url: `saved-recipes/${id}`,
         method: 'PUT',
-        body: data,
       }),
 
       transformResponse: (response, meta, arg) => response,
