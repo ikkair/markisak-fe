@@ -1,0 +1,16 @@
+.Buttons {
+    width: 50%;
+    height: 45px;
+    transition: transform 2s;
+}
+
+.Buttons:hover {
+    transform: scale(1.02);
+}
+
+@media screen and (max-width: 768px) {
+    .Buttons {
+        margin-left: auto;
+        width: 100%;
+    }
+}

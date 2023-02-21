@@ -1,0 +1,13 @@
+.inputBackground {
+  background: #f0f0f0;
+  overflow: hidden;
+}
+
+.inputPhoto {
+  height: 320px;
+  cursor: pointer;
+}
+
+.addVideo {
+  cursor: pointer;
+}

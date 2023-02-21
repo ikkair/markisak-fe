@@ -1,0 +1,8 @@
+@media (max-width: 456px) {
+  .videoTitle {
+    font-size: 0.8em;
+  }
+  .videoTime {
+    font-size: 0.7em;
+  }
+}

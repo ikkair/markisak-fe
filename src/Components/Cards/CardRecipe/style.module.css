@@ -1,0 +1,70 @@
+.card {
+  position: relative;
+  width: 18rem;
+  border-radius: 20px;
+}
+.cardBody {
+  position: relative;
+}
+.cardBody h5 {
+  position: absolute;
+  color: white;
+  bottom: 0;
+  /* width: 195px; */
+}
+
+.cardAction {
+  position: absolute;
+  bottom: 145px;
+  left: 210px;
+  /* width: 195px; */
+}
+
+/* @media only screen and (max-width: 600px) {
+  .cardAction {
+      position: absolute;
+      bottom: 200px;
+      left: 300px;
+  }
+} */
+
+.cardEdit:hover {
+  background-color: transparent !important;
+  height: 22px;
+}
+
+.cardDelete:hover {
+  background-color: transparent !important;
+  height: 20px;
+}
+
+.cardTitle {
+  font-size: 1.1em;
+}
+
+.img {
+  filter: brightness(50%);
+  border-radius: 15px !important;
+  max-height: 145px;
+  width: 100%;
+}
+
+.img:hover {
+  filter: brightness(100%);
+}
+
+.edit:hover {
+  height: 200px;
+}
+
+@media (max-width: 990px) {
+  .img {
+    max-height: 105px;
+  }
+}
+
+@media (max-width: 456px) {
+  .cardTitle {
+    font-size: 0.9em;
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "recipes": [
+    {
+      "title": "Chicken ayam KFC Pedas manis (Quick - Easy)",
+      "photo": "asd",
+      "ingredients": "asd",
+      "video": "asd",
+      "id": 1
+    },
+    {
+      "title": "asd",
+      "photo": "blob:http://localhost:5173/b1135a8f-cf7f-43c4-aec0-fe2b80f131ec",
+      "ingredients": "asd",
+      "video": "asd",
+      "id": 2
+    },
+    {
+      "title": "asd",
+      "photo": "blob:http://localhost:5173/2ec14fe1-fa8d-44de-9204-3a01eb75ab51",
+      "ingredients": "asd",
+      "video": "asd",
+      "id": 3
+    },
+    {
+      "title": "asd",
+      "photo": "blob:http://localhost:5173/22c20c6b-7707-47a1-a605-2057224ad7c3",
+      "ingredients": "asd",
+      "video": "ads",
+      "id": 4
+    },
+    {
+      "title": "Burger King Tuan Crab",
+      "photo": "blob:http://localhost:5173/bfa9764b-81d9-4fbe-b4d8-35c86feb6031",
+      "ingredients": "sayur oncom",
+      "id": 5
+    },
+    {
+      "email": "ilham@gmail.com",
+      "password": "password",
+      "id": 6
+    },
+    {
+      "title": "Ayam Bakar Pijar",
+      "ingredients": "- 2 eggs\n- 2 tbsp mayonnaise\n- 3 slices bread\n- a little butter\n- ⅓ carton of cress\n- 2-3 slices of tomato or a lettuce leaf\nand a slice of ham or cheese\n- crisps , to serve",
+      "id": 7
+    }
+  ],
+  "liked-recipes": [
+    {
+      "id": 1,
+      "id_user": 1,
+      "id_recipe": 1
+    },
+    {
+      "id_recipe": "1",
+      "id_user": 1,
+      "id": 2
+    },
+    {
+      "message": "dsadassdada",
+      "id_recipe": "1",
+      "id_user": "1",
+      "id": 3
+    },
+    {
+      "message": "sadas",
+      "id_recipe": "1",
+      "id_user": "1",
+      "id": 4
+    },
+    {
+      "message": "sdasda",
+      "id_recipe": "1",
+      "id_user": "1",
+      "id": 5
+    }
+  ],
+  "saved-recipes": [
+    {
+      "id": 1,
+      "id_user": 1,
+      "id_recipe": 1
+    },
+    {
+      "id_recipe": "1",
+      "id_user": 1,
+      "id": 2
+    },
+    {
+      "id_recipe": "1",
+      "id_user": 1,
+      "id": 3
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    },
+    {
+      "id_recipe": 1,
+      "id_user": 1,
+      "message": "Hello World!",
+      "id": 2
+    },
+    {
+      "message": "Good Recipe ilike it",
+      "id_recipe": "1",
+      "id_user": "1",
+      "id": 3
+    },
+    {
+      "message": "Hello",
+      "id_recipe": "1",
+      "id_user": "1",
+      "id": 4
+    },
+    {
+      "message": "sdasd",
+      "id_recipe": "1",
+      "id_user": "1",
+      "id": 5
+    },
+    {
+      "message": "Hello",
+      "id_recipe": "1",
+      "id_user": "1",
+      "id": 6
+    },
+    {
+      "message": "Mantap",
+      "id_recipe": "1",
+      "id_user": "1",
+      "id": 7
+    }
+  ],
+  "videos": {
+    "id": 1,
+    "step": 1,
+    "url": "asdasdas",
+    "id_recipes": 1
+  }
+}
