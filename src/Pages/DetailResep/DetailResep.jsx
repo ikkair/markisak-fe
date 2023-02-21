@@ -150,12 +150,12 @@ const DetailResep = () => {
                   </h1>
                   <div className="row justify-content-center">
                     <div className="col-12 col-lg-8  position-relative">
-                      <img crossOrigin="Anonymous" src={recipe?.photo} className={`img-fluid ${style.imageDetail} d-block mx-auto mt-5 mb-5 `} alt="" />
+                      <img src={recipe?.photo} className={`img-fluid ${style.imageDetail} d-block mx-auto mt-5 mb-5 `} alt="" />
                       <span className={style.action}>
                         <button
                           className={`position-absolute ${style.saved} ${checkSavedRecipe()?.length > 0 ? 'bg-warning text-light' : 'bg-light text-dark'} `}
                           onClick={() => {
-                            onClickSave();
+                            user ? onClickSave() : window.replace.location('/login');
                           }}
                         >
                           <i class="fa-sharp fa-solid fa-bookmark"></i>
@@ -198,7 +198,7 @@ const DetailResep = () => {
                         );
                       }
                     })}
-                    {recipe?.videos?.length != 0 ? (
+                    {recipe?.videos?.length != 0 && recipe?.videos.length > 3 ? (
                       <div className="col-md-6 pe-md-0 col-12">
                         <Link className="btn btn-primary w-100" to={`/recipes/videos/${recipe?.id}`}>
                           Show more
@@ -238,7 +238,7 @@ const DetailResep = () => {
               <div key={i} className={`${style.commentList} mt-4 `} data-aos="zoom-in-down" data-aos-duration="1000">
                 <div className="row">
                   <div className="col-md-1 col-2 d-flex align-items-center justify-content-center">
-                    <img crossOrigin="Anonymous" className={` img-fluid ${style.imgComment}`} src={comment?.photo} alt="" />
+                    <img className={` img-fluid ${style.imgComment}`} src={comment?.photo} alt="" />
                   </div>
 
                   <div className="col-md-9 col-10 text-start d-grid align-items-center">

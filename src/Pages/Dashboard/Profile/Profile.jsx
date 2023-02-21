@@ -19,7 +19,6 @@ const Profile = () => {
   const { data: user, isLoading, isSuccess } = useGetUserDetailQuery(localStorage.getItem('id_user'));
   const [updateUserById, { isSuccess: isSuccessUpdate }] = useUpdateUserByIdMutation();
   const [dataRow, setDataRow] = useState('my-recipe');
-  const [data, setData] = useState({});
   const [deleteRecipeById, { error: errorDeleteRecipeById, isLoading: isLoadingdeleteRecipeById }] = useDeleteRecipeByIdMutation();
   const [createLikedRecipe, { isLoading: isLoadingDeleteLiked, error: errorDeleteLikedRecipe }] = useCreateLikedRecipeMutation();
   const [createSavedRecipe, { isLoading: isLoadingSavedRecipe, error: errorSavedRecipe }] = useCreateSavedRecipeMutation();
@@ -34,8 +33,7 @@ const Profile = () => {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes',
-    })
-    .then(async (result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
         dispatch(deleteRecipeById(id));
       }
@@ -51,8 +49,7 @@ const Profile = () => {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes',
-    })
-    .then(async (result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
         await createLikedRecipe({ id_recipe: id });
       }
@@ -68,8 +65,7 @@ const Profile = () => {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes',
-    })
-    .then(async (result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
         await createSavedRecipe({ id_recipe: id });
       }
@@ -84,7 +80,7 @@ const Profile = () => {
           <div className="profil text-center py-5">
             <div className="d-flex justify-content-center">
               {/* <img className="rounded-circle mb-1 ms-5" width={95} height={90} src={profile} alt="img" /> */}
-              <img className="rounded-circle mb-1 ms-5" width={95} height={90} src={user?.photo} crossOrigin={'anonymous'} alt="" />
+              <img className="rounded-circle mb-1 ms-5" width={95} height={90} src={user?.photo} alt="" />
               {!isLoading && <ModalEditProfile id={user.id} />}
             </div>
             <h3>{user?.name}</h3>

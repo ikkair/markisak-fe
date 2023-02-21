@@ -9,7 +9,6 @@ const authSlice = createSlice({
   },
   reducers: {
     setCredentials: (state, { payload }) => {
-      console.log(payload);
       localStorage.setItem('access_token', payload.token);
       localStorage.setItem('refresh_token', payload.refreshToken);
       localStorage.setItem('id_user', payload.data.id);
