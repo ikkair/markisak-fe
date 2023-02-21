@@ -30,7 +30,9 @@ const savedRecipeApi = apiSlice.injectEndpoints({
         url: `recipe/${id_recipe}/saved-recipe`,
         method: 'POST',
       }),
-      invalidatesTags: ['SavedRecipe', 'User'],
+
+      providesTags: ['CreatedSaved'],
+      invalidatesTags: ['SavedRecipe', 'User', 'CreatedSaved'],
       transformResponse: (response, meta, arg) => response,
     }),
 

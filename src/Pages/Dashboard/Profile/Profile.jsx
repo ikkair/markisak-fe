@@ -12,6 +12,8 @@ import { useGetUserDetailQuery, useUpdateUserByIdMutation } from '../../../Featu
 import ModalEditProfile from '../../../Components/Profile/ModalEditProfile';
 import { useCreateLikedRecipeMutation } from '../../../Features/likedRecipe/likedRecipeApi';
 import { useCreateSavedRecipeMutation } from '../../../Features/savedRecipe/savedRecipe';
+import Swal from 'sweetalert2';
+import { useDispatch } from 'react-redux';
 
 const Profile = () => {
   const { data: user, isLoading, isSuccess } = useGetUserDetailQuery(localStorage.getItem('id_user'));
@@ -21,16 +23,57 @@ const Profile = () => {
   const [deleteRecipeById, { error: errorDeleteRecipeById, isLoading: isLoadingdeleteRecipeById }] = useDeleteRecipeByIdMutation();
   const [createLikedRecipe, { isLoading: isLoadingDeleteLiked, error: errorDeleteLikedRecipe }] = useCreateLikedRecipeMutation();
   const [createSavedRecipe, { isLoading: isLoadingSavedRecipe, error: errorSavedRecipe }] = useCreateSavedRecipeMutation();
+  const dispatch = useDispatch();
 
   const deleteRecipeHandler = async (id) => {
-    await deleteRecipeById(id);
+    Swal.fire({
+      title: 'Sure to Delete This Recipe ?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+    })
+    .then(async (result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteRecipeById(id));
+      }
+    });
   };
 
   const deleteLikedRecipeHandler = async (id) => {
-    await createLikedRecipe({ id_recipe: id });
+    Swal.fire({
+      title: 'Sure to Delete from Liked Recipe ?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+    })
+    .then(async (result) => {
+      if (result.isConfirmed) {
+        await createLikedRecipe({ id_recipe: id });
+      }
+    });
   };
+
   const deleteSavedRecipeHandler = async (id) => {
-    await createSavedRecipe({ id_recipe: id });
+    Swal.fire({
+      title: 'Sure to Delete from Saved Recipe ?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+    })
+    .then(async (result) => {
+      if (result.isConfirmed) {
+        await createSavedRecipe({ id_recipe: id });
+      }
+    });
   };
 
   return (
