@@ -33,8 +33,12 @@ const DetailResep = () => {
   const { data: likedRecipe, isLoading: isLoadingLikedRecipe, error: errorLikeRecipe } = useGetLikedRecipeByIdUserQuery(id);
   const [deleteLikedRecipe, { isLoading: isLoadingDeleteLikedRecipe, error: errorDeleteLikedRecipe }] = useDeleteLikedRecipeMutation();
   const user = useSelector((state) => state.auth.user);
+
   const { data: savedRecipe, error: errorSavedRecipe } = useGetSavedRecipeByIdQuery(id);
-  console.log(savedRecipe);
+  // console.log(savedRecipe);
+
+  // console.log(user.id);
+  // console.log(recipe?.comments);
 
   useEffect(() => {
     AOS.init();
@@ -150,7 +154,7 @@ const DetailResep = () => {
               <h4 className="ingredients fw-semibold" data-aos="fade-right" data-aos-duration="3000">
                 Ingredients
               </h4>
-              <ul type="stripe" data-aos="fade-right" data-aos-duration="3000">
+              <ul type="strip" data-aos="fade-right" data-aos-duration="3000">
                 {split.map((item) => (
                   <li>{item}</li>
                 ))}
@@ -181,21 +185,21 @@ const DetailResep = () => {
         )}
 
         <div className="row justify-content-center">
-          <div className="col-md-10 mb-5" data-aos="zoom-in-down" data-aos-duration="3000">
+          <div className="col-md-10 mb-5" data-aos="zoom-in-down" data-aos-duration="1000">
             <InputFormAddRecipe value={message} type={'textarea'} title={'Comment :'} name={'comment'} placeholder={'Comment here'} onchange={(e) => changeHandler(e)} />
 
             <div class={`d-flex justify-content-center text-center ${style.button}`}>
-              {user?.id.length > 0 ? 
-              <button class={` btn btn-warning `} type="button" onClick={createHandler}>
-              Comment
-              </button> :
-              <button class={` btn btn-warning `} type="button" onClick={createHandler} disabled>
-              Comment
-              </button>
-            
-            
+              {user?.id.length > 0 ?
+                <button class={` btn btn-warning `} type="button" onClick={createHandler}>
+                  Comment
+                </button> :
+                <button class={` btn btn-warning `} type="button" onClick={createHandler} disabled>
+                  Comment
+                </button>
+
+
               }
-              
+
             </div>
 
             {recipe?.comments.length <= 0 ? <h1 style={{ visibility: 'hidden' }}></h1> : <h1>Comments</h1>}
@@ -220,10 +224,14 @@ const DetailResep = () => {
                     </div>
                   </div>
 
-                  <div className={`col-3 col-md-2 col-xxl-1 d-grid align-items-center ${style.del}`}>
-                    <ModalDelete id={comment.id} idRecipe={recipe.id}>
-                      Delete
-                    </ModalDelete>
+                  <div className={`col-3 col-md-2 col-xxl-1 d-grid align-items-center ${style.del}`}>                  
+                      {comment.id_user !== user.id ? 
+                      <p></p> : 
+                      <ModalDelete id={comment.id} idRecipe={recipe.id}>
+                        Delete
+                      </ModalDelete>
+                      }
+                    
                   </div>
                 </div>
               </div>
