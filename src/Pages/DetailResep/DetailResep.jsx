@@ -7,7 +7,7 @@ import InputFormAddRecipe from '../../Components/Form/InputFormAddRecipe/InputFo
 import profil from '../../assets/detailResep/ProfileComment.png';
 import { useGetRecipeByIdQuery } from '../../Features/recipe/recipeApi';
 import { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
@@ -16,7 +16,7 @@ import AOS from 'aos';
 
 // import { useGetAllRecipeQuery } from '../../Features/recipe/recipeApi'
 import { useCreateLikedRecipeMutation, useDeleteLikedRecipeMutation, useGetLikedRecipeByIdQuery, useGetLikedRecipeByIdUserQuery } from '../../Features/likedRecipe/likedRecipeApi';
-import { useCreateSavedRecipeMutation } from '../../Features/savedRecipe/savedRecipe';
+import { useCreateSavedRecipeMutation, useDeleteSavedRecipeMutation, useGetSavedRecipeByIdQuery, useGetSavedRecipeByIdUserQuery } from '../../Features/savedRecipe/savedRecipe';
 import { useCreateCommentMutation, useGetAllCommentQuery, useGetCommentByIdRecipeQuery } from '../../Features/comment/commentApi';
 import MyVerticallyCenteredModal from '../../Components/ModalButton/ModalButton';
 import ModalDelete from '../../Components/ModalDelete';
@@ -25,18 +25,29 @@ import { useGetUserDetailQuery } from '../../Features/user/userApi';
 
 const DetailResep = () => {
   const MySwal = withReactContent(Swal);
+  const navigate = useNavigate();
   const { id } = useParams();
   const { data: recipe, isLoading, error } = useGetRecipeByIdQuery(id);
   const [createLikedRecipe, { isLoading: loadingLike, error: errorLike }] = useCreateLikedRecipeMutation();
-  const [createSavedRecipe, { isLoading: loadingSaved, error: errorSaved }] = useCreateSavedRecipeMutation();
   const [createComment, { isLoading: loadingComment, error: errorComment, isSucces }] = useCreateCommentMutation();
   const { data: likedRecipe, isLoading: isLoadingLikedRecipe, error: errorLikeRecipe } = useGetLikedRecipeByIdUserQuery(id);
-  const user = useSelector((state) => state.auth.user);
-
   const [deleteLikedRecipe, { isLoading: isLoadingDeleteLikedRecipe, error: errorDeleteLikedRecipe }] = useDeleteLikedRecipeMutation();
+  const user = useSelector((state) => state.auth.user);
+  const [createSavedRecipe, { isLoading: loadingSaved, error: errorSaved }] = useCreateSavedRecipeMutation();
+  const { data: savedRecipe, error: errorSavedRecipe } = useGetSavedRecipeByIdUserQuery();
+  const [deleteSavedRecipe, { isLoading: isLoadingDeleteSavedRecipe, error: errorDeleteSavedRecipe }] = useDeleteSavedRecipeMutation();
 
-  const { data: userDetail } = useGetUserDetailQuery(localStorage.getItem('id_user'));
-  console.log(recipe);
+  function showLoading() {
+    Swal.fire({
+      title: 'Loading...',
+      html: 'Please wait...',
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+  }
 
   useEffect(() => {
     AOS.init();
@@ -44,26 +55,6 @@ const DetailResep = () => {
   }, []);
 
   const [message, setMessage] = useState('');
-
-  // Set Color liked and save
-  const [color, setColor] = useState('#EFC81A');
-  const [colorl, setColorl] = useState('#dddd');
-
-  // Function setColor like and save
-  const changeColor = () => {
-    if (color == '#EFC81A') {
-      setColor('#ff4646');
-    } else {
-      setColor('#EFC81A');
-    }
-  };
-  const changeColorl = () => {
-    if (colorl == '#dddd') {
-      setColorl('#ff4646');
-    } else {
-      setColorl('#dddd');
-    }
-  };
 
   // Change handler
   const changeHandler = (e) => {
@@ -82,13 +73,23 @@ const DetailResep = () => {
   };
 
   function checkLikeRecipe() {
-    if (errorLikeRecipe?.status == 404) {
+    if (errorLikeRecipe?.status == 404 || errorDeleteLikedRecipe?.status == 404) {
       return undefined;
     }
     return likedRecipe?.data?.filter((recipe) => recipe.id_recipe == id);
   }
 
+  function checkSavedRecipe() {
+    if (errorSavedRecipe?.status == 404) {
+      return undefined;
+    }
+    return savedRecipe?.data?.filter((recipe) => recipe.id_recipe == id);
+  }
+
   const onClickLike = async () => {
+    if (!user) {
+      return navigate('/login');
+    }
     if (checkLikeRecipe() || checkLikeRecipe()?.length > 0) {
       await deleteLikedRecipe({ id });
     } else {
@@ -97,10 +98,15 @@ const DetailResep = () => {
   };
 
   const onClickSave = async () => {
-    await createSavedRecipe({ id_recipe: id });
+    if (!user) {
+      return navigate('/login');
+    }
+    if (checkSavedRecipe()) {
+      await deleteSavedRecipe({ id });
+    } else {
+      await createSavedRecipe({ id_recipe: id });
+    }
   };
-
-  // console.log(recipe);
 
   // Ingredients
   let ingredients = `${recipe?.ingredients}`;
@@ -111,86 +117,93 @@ const DetailResep = () => {
     <>
       <Navbar />
       <main className={`container ${style.contentDetail}`}>
-        {isLoading ? (
-          'Loading....'
-        ) : (
-          <div className="row justify-content-center mb-5">
-            <div className="col-md-10 col-12 col-sm-12">
-              <h1 className="text-center fw-normal" style={{ color: 'rgba(46, 38, 111, 1)' }}>
-                {recipe?.title}
-              </h1>
-              <div className="row justify-content-center">
-                <div className="col-12 col-lg-8  position-relative">
-                  <img crossOrigin="Anonymous" src={recipe.photo} className={`img-fluid ${style.imageDetail} d-block mx-auto mt-5 mb-5 `} alt="" />
-                  <span className={style.action}>
-                    <button
-                      className={`position-absolute ${style.saved} `}
-                      style={{ backgroundColor: color }}
-                      onClick={() => {
-                        onClickSave();
-                        changeColor();
-                      }}
-                    >
-                      <i class="fa-sharp fa-solid fa-bookmark"></i>
-                    </button>
-                    <button
-                      className={`position-absolute ${style.liked} ${checkLikeRecipe()?.length > 0 ? 'bg-warning' : 'bg-transparent'} text-light`}
-                      style={{ backgroundColor: colorl }}
-                      onClick={() => {
-                        onClickLike();
-                        changeColorl();
-                      }}
-                    >
-                      <i class="fa-solid fa-thumbs-up"></i>
-                    </button>
-                  </span>
-                </div>
-              </div>
-
-              <h4 className="ingredients fw-semibold" data-aos="fade-right" data-aos-duration="3000">
-                Ingredients
-              </h4>
-              <ul type="stripe" data-aos="fade-right" data-aos-duration="3000">
-                {split.map((item) => (
-                  <li>{item}</li>
-                ))}
-              </ul>
-              <h4 className="fw-semibold" data-aos="fade-right" data-aos-duration="3000">
-                Step Video
-              </h4>
-              <div className="row" data-aos="fade-right" data-aos-duration="3000">
-                {recipe?.videos?.map((video, index) => (
-                  <div key={index} className="col-md-12 col-6">
-                    <ul className="list-unstyled">
-                      <li className="list-group-item">
-                        {/* <p>Step {index + 1}. </p> */}
-                        <MyVerticallyCenteredModal link={video.url_video} step={`STEP ${index + 1}`} nameRecipe={recipe.title} />
-                      </li>
-                    </ul>
+        {isLoading
+          ? showLoading()
+          : (Swal.close(),
+            (
+              <div className="row justify-content-center mb-5">
+                <div className="col-md-10 col-12 col-sm-12">
+                  <h1 className="text-center fw-normal" style={{ color: 'rgba(46, 38, 111, 1)' }}>
+                    {recipe?.title}
+                  </h1>
+                  <div className="row justify-content-center">
+                    <div className="col-12 col-lg-8  position-relative">
+                      <img crossOrigin="Anonymous" src={recipe.photo} className={`img-fluid ${style.imageDetail} d-block mx-auto mt-5 mb-5 `} alt="" />
+                      <span className={style.action}>
+                        <button
+                          className={`position-absolute ${style.saved} ${checkSavedRecipe()?.length > 0 ? 'bg-warning text-light' : 'bg-light text-dark'} `}
+                          onClick={() => {
+                            onClickSave();
+                          }}
+                        >
+                          <i class="fa-sharp fa-solid fa-bookmark"></i>
+                        </button>
+                        <button
+                          className={`position-absolute ${style.liked} ${checkLikeRecipe()?.length > 0 ? 'bg-warning text-light' : 'bg-light text-dark'}`}
+                          onClick={() => {
+                            onClickLike();
+                          }}
+                        >
+                          <i class="fa-solid fa-thumbs-up"></i>
+                        </button>
+                      </span>
+                    </div>
                   </div>
-                ))}
 
-                <div className="col-md-6 pe-md-0 col-12">
-                  <Link className="btn btn-primary w-100" to={`/recipes/videos/${recipe.id}`}>
-                    Show more
-                  </Link>
+                  <h4 className="ingredients fw-semibold" data-aos="fade-right" data-aos-duration="1000">
+                    Ingredients
+                  </h4>
+                  <ul type="stripe" data-aos="fade-right" data-aos-duration="1000">
+                    {split.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                  <h4 className="fw-semibold" data-aos="fade-right" data-aos-duration="1000">
+                    Step Video
+                  </h4>
+                  <div className="row" data-aos="fade-right" data-aos-duration="1000">
+                    {recipe?.videos?.map((video, index) => {
+                      if (index < 3) {
+                        return (
+                          <div key={index} className="col-md-12 col-6">
+                            <ul className="list-unstyled">
+                              <li className="list-group-item">
+                                {/* <p>Step {index + 1}. </p> */}
+                                <MyVerticallyCenteredModal link={video.url_video} step={`STEP ${index + 1}`} nameRecipe={recipe.title} />
+                              </li>
+                            </ul>
+                          </div>
+                        );
+                      }
+                    })}
+                    {recipe?.videos?.length != 0 ? (
+                      <div className="col-md-6 pe-md-0 col-12">
+                        <Link className="btn btn-primary w-100" to={`/recipes/videos/${recipe.id}`}>
+                          Show more
+                        </Link>
+                      </div>
+                    ) : (
+                      ''
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        )}
+            ))}
 
         <div className="row justify-content-center">
-          <div className="col-md-10 mb-5" data-aos="zoom-in-down" data-aos-duration="3000">
+          <div className="col-md-10 mb-5" data-aos="zoom-in-down" data-aos-duration="1000">
             <InputFormAddRecipe value={message} type={'textarea'} title={'Comment :'} name={'comment'} placeholder={'Comment here'} onchange={(e) => changeHandler(e)} />
-            {/* <div class="mb-3">
-                            <textarea class={`form-control ${style.comment}`} id="exampleFormControlTextarea1" rows="3" placeholder='Comment :'></textarea>
-                        </div> */}
 
             <div class={`d-flex justify-content-center text-center ${style.button}`}>
-              <button class={` btn btn-warning `} type="button" onClick={createHandler}>
-                Comment
-              </button>
+              {user?.id.length > 0 ? (
+                <button class={` btn btn-warning `} type="button" onClick={createHandler}>
+                  Comment
+                </button>
+              ) : (
+                <button class={` btn btn-warning `} type="button" onClick={createHandler} disabled>
+                  Comment
+                </button>
+              )}
             </div>
 
             {recipe?.comments.length <= 0 ? <h1 style={{ visibility: 'hidden' }}></h1> : <h1>Comments</h1>}
@@ -216,9 +229,13 @@ const DetailResep = () => {
                   </div>
 
                   <div className={`col-3 col-md-2 col-xxl-1 d-grid align-items-center ${style.del}`}>
-                    <ModalDelete id={comment.id} idRecipe={recipe.id}>
-                      Delete
-                    </ModalDelete>
+                    {comment.id_user !== user.id ? (
+                      <p></p>
+                    ) : (
+                      <ModalDelete id={comment.id} idRecipe={recipe.id}>
+                        Delete
+                      </ModalDelete>
+                    )}
                   </div>
                 </div>
               </div>

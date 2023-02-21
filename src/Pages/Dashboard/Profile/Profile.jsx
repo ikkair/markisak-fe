@@ -50,18 +50,6 @@ const Profile = () => {
     await deleteSavedRecipe({ id });
   };
 
-  // const updateHandler = async () => {
-  //   setLoading(true);
-  //   const formData = new FormData();
-  //   for (let attr in user) {
-  //     formData.append(attr, user[attr]);
-  //   }
-  //   console.log(user.id);
-
-  //   await updateUserById({ id, data: formData });
-  //   setLoading(false);
-  // };
-
   return (
     <div>
       <Navbar />
@@ -79,17 +67,17 @@ const Profile = () => {
           <div className="text-secondary">
             <ul className="list-inline mt-3 sm-4">
               <li className="list-inline-item mx-3" onClick={() => setDataRow('my-recipe')}>
-                <Link className={`list-link ${style.listProfil}`} to="#">
+                <Link className={`list-link ${dataRow == 'my-recipe' ? 'text-dark fw-semibold' : ''} ${style.listProfil}`} to="#">
                   My Recipe
                 </Link>
               </li>
               <li className="list-inline-item mx-2" onClick={() => setDataRow('saved')}>
-                <Link className={`list-link ${style.listProfil}`} to="#">
+                <Link className={`list-link ${dataRow == 'saved' ? 'text-dark fw-semibold' : ''} ${style.listProfil}`} to="#">
                   Saved Recipe
                 </Link>
               </li>
               <li className="list-inline-item mx-3" onClick={() => setDataRow('likes')}>
-                <Link className={`list-link ${style.listProfil}`} to="#">
+                <Link className={`list-link ${dataRow == 'likes' ? 'text-dark fw-semibold' : ''} ${style.listProfil}`} to="#">
                   Liked Recipe
                 </Link>
               </li>
@@ -101,7 +89,7 @@ const Profile = () => {
               : dataRow == 'my-recipe'
                 ? user?.recipes?.map((recipe, i) => (
                   <div key={i} className="col-6 px-1 col-sm-4 col-md-3 mb-2">
-                    <Card item={recipe} ondelete={(id) => deleteRecipeHandler(id)} />
+                    <Card type={'my-recipe'} item={recipe} ondelete={(id) => deleteRecipeHandler(id)} />
                   </div>
                 ))
                 : dataRow == 'saved'

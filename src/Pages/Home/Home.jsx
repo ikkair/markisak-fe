@@ -89,24 +89,24 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="col-5 d-none d-sm-grid" data-aos="fade-left">
-            <img src={imgFood} className={`${style.firstSectionImg} img-fluid`} alt="" />
+          <div className="col-5 d-none d-sm-grid" >
+            <img src={imgFood} className={`${style.firstSectionImg} img-fluid`} alt="" data-aos="fade-left"/>
           </div>
         </div>
       </div>
 
       <LandingPageSection title={'Popular For You!'} id={'popularRecipe'} embedClass={`${style.sectionPage}`}>
-        <div className="col-12 col-sm-6" data-aos="flip-left" data-aos-duration="1000">
+        <div className="col-12 col-sm-6">
           <div className="row">
             <div className={`${style.colImg} col-12 position-relative`}>
-              <img src={recipes?.data[0]?.photo} crossOrigin="anonymous" className={`${style.sectionImage} img-fluid rounded`} alt="" />
+              <img src={recipes?.data[0]?.photo} crossOrigin="anonymous" className={`${style.sectionImage} img-fluid rounded`} alt=""  data-aos="flip-left"  data-aos-duration="1000"/>
             </div>
           </div>
         </div>
         {isLoading ? (
           'Loading....'
         ) : (
-          <div className="col-12 col-sm-6 d-grid align-items-center" data-aos="flip-right" data-aos-duration="1000">
+          <div className="col-12 col-sm-6 d-grid align-items-center" data-aos="fade-left" data-aos-duration="1000">
             <div className="row main-title d-inline-block d-md-flex flex-column align-items-end">
               <div className={`col-10 pe-3`}>
                 <span className={`${style.sectionTitleContent} d-block fw-semibold fs-2`}>{recipes?.data[0]?.title}</span>
@@ -126,14 +126,14 @@ const Home = () => {
       </LandingPageSection>
 
       <LandingPageSection title={'New Recipe'} id={'newRecipe'} embedClass={`${style.sectionPage}`}>
-        <div className="col-12 col-sm-6" data-aos="zoom-out-up" data-aos-duration="1000">
+        <div className="col-12 col-sm-6" >
           <div className="row">
             <div className={`${style.colImg2} col-12 position-relative`}>
-              <img src={recipes?.data[1]?.photo} crossOrigin="anonymous" className={`${style.sectionImage} img-flui rounded`} alt="" />
+              <img src={recipes?.data[1]?.photo} crossOrigin="anonymous" className={`${style.sectionImage} img-flui rounded`} alt="" data-aos="zoom-out-up" data-aos-duration="1000"/>
             </div>
           </div>
         </div>
-        <div className="col-12 col-sm-6 d-grid align-items-center mb-2" data-aos="zoom-out-down" data-aos-duration="1000">
+        <div className="col-12 col-sm-6 d-grid align-items-center mb-2" data-aos="fade-left" data-aos-duration="1000">
           <div className="row main-title d-inline-block d-md-flex flex-column align-items-end">
             <div className={`col-10 pe-3`}>
               <span className={`${style.sectionTitleContent} d-block fw-semibold fs-2`}>{recipes?.data[1]?.title}</span>
@@ -143,7 +143,9 @@ const Home = () => {
               <span>{recipes?.data[1]?.description}</span>
             </div>
             <div className="col-10">
-              <button className={`btn btn-warning text-light mt-3 ${style.btnLearnMore}`}>Learn More</button>
+              <Link to={`/recipes/${recipes?.data[1]?.id}`} className={`btn btn-warning text-light mt-3 ${style.btnLearnMore}`}>
+                Learn More
+              </Link>
             </div>
           </div>
         </div>
@@ -196,10 +198,10 @@ const Home = () => {
             <FontAwesomeIcon id="closeChat" className={`${style.closeIcon} text-light me-1 fs-3 d-sm-none`} icon={faXmark} />
           </div>
           <div className={`col-12 ${style.chatBody} px-4 align-self-start d-flex flex-column justify-content-end bg-light gap-2 pb-2`}>
-            <span className={`${style.chatSection} ${style.leftSideChat} p-2`}>loremlormlorem</span>
-            <span className={`${style.chatSection} ${style.leftSideChat} p-2`}>lorem10asndasldnasldnalsdnasd</span>
-            <span className={`${style.chatSection} ${style.rightSideChat} text-end ms-auto p-2`}>loremlormlorem</span>
-            <span className={`${style.chatSection} ${style.rightSideChat} text-end ms-auto p-2`}>lorem10asndasldnasldnalsdnasd</span>
+            <span className={`${style.chatSection} ${style.leftSideChat} p-2`}>Tolong infokan teman kamu, dia maling kangkung</span>
+            <span className={`${style.chatSection} ${style.leftSideChat} p-2`}>dia akan dikanakan pasal hukum!</span>
+            <span className={`${style.chatSection} ${style.rightSideChat} text-end ms-auto p-2`}>Artinya apa bang admin?</span>
+            <span className={`${style.chatSection} ${style.rightSideChat} text-end ms-auto p-2`}>Hello Min 😜</span>
           </div>
           <div className={`${style.chatFooter} bg-light align-self-end d-flex align-items-center gap-2 col-12 px-4 py-2`}>
             <input type="text" placeholder="chat here.." className="form-control bg-transparent border-0 shadow-none py-0" />
