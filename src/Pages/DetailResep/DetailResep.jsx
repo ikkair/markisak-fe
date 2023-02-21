@@ -229,9 +229,13 @@ const DetailResep = () => {
                   </div>
 
                   <div className={`col-3 col-md-2 col-xxl-1 d-grid align-items-center ${style.del}`}>
-                    <ModalDelete id={comment.id} idRecipe={recipe.id}>
-                      Delete
-                    </ModalDelete>
+                    {comment.id_user !== user.id ? (
+                      <p></p>
+                    ) : (
+                      <ModalDelete id={comment.id} idRecipe={recipe.id}>
+                        Delete
+                      </ModalDelete>
+                    )}
                   </div>
                 </div>
               </div>
