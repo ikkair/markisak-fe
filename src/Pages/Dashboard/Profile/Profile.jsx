@@ -10,8 +10,8 @@ import img2 from '../../../assets/Profile/img2.png';
 import { useGetAllRecipeQuery, useDeleteRecipeByIdMutation, useGetRecipeByIdQuery } from '../../../Features/recipe/recipeApi';
 import { useGetUserDetailQuery, useUpdateUserByIdMutation } from '../../../Features/user/userApi';
 import ModalEditProfile from '../../../Components/Profile/ModalEditProfile';
-import { useDeleteLikedRecipeMutation } from '../../../Features/likedRecipe/likedRecipeApi';
-import { useDeleteSavedRecipeMutation } from '../../../Features/savedRecipe/savedRecipe';
+import { useCreateLikedRecipeMutation } from '../../../Features/likedRecipe/likedRecipeApi';
+import { useCreateSavedRecipeMutation } from '../../../Features/savedRecipe/savedRecipe';
 
 const Profile = () => {
   const { data: user, isLoading, isSuccess } = useGetUserDetailQuery(localStorage.getItem('id_user'));
@@ -19,18 +19,18 @@ const Profile = () => {
   const [dataRow, setDataRow] = useState('my-recipe');
   const [data, setData] = useState({});
   const [deleteRecipeById, { error: errorDeleteRecipeById, isLoading: isLoadingdeleteRecipeById }] = useDeleteRecipeByIdMutation();
-  const [deleteLikedRecipe, { isLoading: isLoadingDeleteLiked, error: errorDeleteLikedRecipe }] = useDeleteLikedRecipeMutation();
-  const [deleteSavedRecipe, { isLoading: isLoadingSavedRecipe, error: errorSavedRecipe }] = useDeleteSavedRecipeMutation();
+  const [createLikedRecipe, { isLoading: isLoadingDeleteLiked, error: errorDeleteLikedRecipe }] = useCreateLikedRecipeMutation();
+  const [createSavedRecipe, { isLoading: isLoadingSavedRecipe, error: errorSavedRecipe }] = useCreateSavedRecipeMutation();
 
   const deleteRecipeHandler = async (id) => {
     await deleteRecipeById(id);
   };
 
   const deleteLikedRecipeHandler = async (id) => {
-    await deleteLikedRecipe({ id });
+    await createLikedRecipe({ id_recipe: id });
   };
   const deleteSavedRecipeHandler = async (id) => {
-    await deleteSavedRecipe({ id });
+    await createSavedRecipe({ id_recipe: id });
   };
 
   return (
