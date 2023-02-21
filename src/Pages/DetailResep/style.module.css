@@ -59,7 +59,7 @@
 }
 .data {
     height: auto;
-    padding-bottom: 0;
+    margin-left: 0px !important;
 }
 .name {
     margin-top: 15px;
@@ -80,6 +80,11 @@
     color: red !important;
 }
 
+.hideInput {
+    display: none;
+}
+
+
 @media screen and (max-width: 768px) {
     .imageDetail {
       width: 100%;
@@ -88,12 +93,12 @@
     .contentDetail ul li {
         list-style: none;
     }
-    .del {
-        margin-left: 36px;
-    }
     .commentList:hover .delete {
         background-color: transparent !important;
         border: none !important;
 
+    }
+    .data {
+        margin-left: 20px !important;
     }
 }

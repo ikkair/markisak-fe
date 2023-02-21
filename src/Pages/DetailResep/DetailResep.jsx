@@ -17,11 +17,12 @@ import AOS from 'aos';
 // import { useGetAllRecipeQuery } from '../../Features/recipe/recipeApi'
 import { useCreateLikedRecipeMutation, useDeleteLikedRecipeMutation, useGetLikedRecipeByIdQuery, useGetLikedRecipeByIdUserQuery } from '../../Features/likedRecipe/likedRecipeApi';
 import { useCreateSavedRecipeMutation, useDeleteSavedRecipeMutation, useGetSavedRecipeByIdQuery, useGetSavedRecipeByIdUserQuery } from '../../Features/savedRecipe/savedRecipe';
-import { useCreateCommentMutation, useGetAllCommentQuery, useGetCommentByIdRecipeQuery } from '../../Features/comment/commentApi';
+import { useCreateCommentMutation, useGetAllCommentQuery, useGetCommentByIdRecipeQuery, useUpdateCommentMutation } from '../../Features/comment/commentApi';
 import MyVerticallyCenteredModal from '../../Components/ModalButton/ModalButton';
 import ModalDelete from '../../Components/ModalDelete';
 import { useSelector } from 'react-redux';
 import { useGetUserDetailQuery } from '../../Features/user/userApi';
+import ModalUpdateComment from '../../Components/ModalButton/ModalUpdateComment';
 
 const DetailResep = () => {
   const MySwal = withReactContent(Swal);
@@ -36,6 +37,7 @@ const DetailResep = () => {
   const [createSavedRecipe, { isLoading: loadingSaved, error: errorSaved }] = useCreateSavedRecipeMutation();
   const { data: savedRecipe, error: errorSavedRecipe } = useGetSavedRecipeByIdUserQuery();
   const [deleteSavedRecipe, { isLoading: isLoadingDeleteSavedRecipe, error: errorDeleteSavedRecipe }] = useDeleteSavedRecipeMutation();
+  const [updateComment] = useUpdateCommentMutation()
 
   function showLoading() {
     Swal.fire({
@@ -49,12 +51,28 @@ const DetailResep = () => {
     });
   }
 
+  function showInput(inputIdComment) {
+    const inputComment = document.querySelector(`#input${inputIdComment}`)
+    console.log(inputIdComment);
+    inputComment.classList.toggle(`d-none`)
+  }
+
+  // function checkShowComment(inputIdComment) {
+  //   if (!isLoading) {
+  //     const inputComment = document.querySelector(`#input${inputIdComment}`)
+  //     return inputComment?.classList.contains(`d-none`)
+  //   }else {
+  //     return true
+  //   }
+  // }
+
+
   useEffect(() => {
     AOS.init();
     AOS.refresh();
   }, []);
 
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState([]);  
 
   // Change handler
   const changeHandler = (e) => {
@@ -71,6 +89,17 @@ const DetailResep = () => {
 
     setMessage('');
   };
+
+  const updateHandler = async (commentId) => {
+    await updateComment({ message, id_recipe: id, id: commentId })
+
+    swal({
+      title: 'Comment updated!',
+      icon: 'success',
+    });
+
+    setMessage('')
+  }
 
   function checkLikeRecipe() {
     if (errorLikeRecipe?.status == 404 || errorDeleteLikedRecipe?.status == 404) {
@@ -107,6 +136,8 @@ const DetailResep = () => {
       await createSavedRecipe({ id_recipe: id });
     }
   };
+
+  const [show, setShow] = useState(false);
 
   // Ingredients
   let ingredients = `${recipe?.ingredients}`;
@@ -211,32 +242,62 @@ const DetailResep = () => {
             {/* <h1>{recipe.message}</h1> */}
 
             {recipe?.comments.map((comment, i) => (
+
+
               // console.log(comment.id)
               // console.log(recipe.id)
               <div key={i} className={`${style.commentList} mt-4 `} data-aos="zoom-in-down" data-aos-duration="1000">
                 <div className="row">
-                  <div className="col-1 d-flex align-items-center">
-                    <img crossOrigin="Anonymous" src={comment?.photo} alt="" />
+                  <div className="col-md-1 col-2 d-flex align-items-center justify-content-center">
+                    <img crossOrigin="Anonymous" className={` img-fluid ${style.imgComment}`} src={comment?.photo} alt="" />
                   </div>
 
-                  <div className="col-xxl-10 col-md-9 col-11 text-start d-grid align-items-center">
-                    <div className={`${style.data} ms-4 text-wrap flex-wrap`}>
-                      <p className={`${style.name} fw-bold`}>{comment.name}</p>
-                      <p className="">{comment?.message}</p>
-
-                      {/* <button className={`position-absolute ${style.delete}`}>Delete</button> */}
+                  <div className="col-md-9 col-10 text-start d-grid align-items-center">
+                    <div className={`${style.data}`}>
+                      <p className={`${style.name} fw-bold text-wrap`}>{comment.name}</p>
+                      <p className="text-wrap">{comment.message}</p>
                     </div>
                   </div>
 
-                  <div className={`col-3 col-md-2 col-xxl-1 d-grid align-items-center ${style.del}`}>
+                  <div className={`d-flex align-items-center justify-content-end col-xxl-2 col-12 ${style.del}`}>
                     {comment.id_user !== user.id ? (
                       <p></p>
                     ) : (
-                      <ModalDelete id={comment.id} idRecipe={recipe.id}>
-                        Delete
-                      </ModalDelete>
+                      <>
+
+                        <div className="pe-1">
+                          <button onClick={() => { setShow(!show); showInput(i) }} className={`btn ${style.delete}`}>
+                            edit
+                            
+                          </button>
+                        </div>
+
+                        <div>
+                          <ModalDelete id={comment.id} idRecipe={recipe.id}>
+                            Delete
+                          </ModalDelete>
+                        </div>
+
+                      </>
                     )}
                   </div>
+
+                  {comment.id_user !== user.id ? `` :
+                    (
+
+                    <div className="">
+                      <div className={`col-sm-10 col-md-6 col-10 offset-2 offset-md-1 d-none`} id={`input${i}`}>
+                        <div className="mb-3 mt-2 d-flex">
+                          <input type="text" onChange={(e)=> setMessage(e.target.value)} name={`message`} className="border-0 border-bottom form-control" />
+                          <button className='ms-2 btn btn-light ' onClick={() => updateHandler(comment.id)} > Send </button>
+                        </div>
+                      </div>
+
+
+                    </div>
+                    )
+                  }
+
                 </div>
               </div>
             ))}
