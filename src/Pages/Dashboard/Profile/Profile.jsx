@@ -44,10 +44,39 @@ const Profile = () => {
   };
 
   const deleteLikedRecipeHandler = async (id) => {
-    await deleteLikedRecipe({ id });
+    Swal.fire({
+      title: "Sure to Delete from Liked Recipe ?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    })
+
+    .then(async (result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteLikedRecipe({ id }))
+      }
+    });
   };
+
   const deleteSavedRecipeHandler = async (id) => {
-    await deleteSavedRecipe({ id });
+    Swal.fire({
+      title: "Sure to Delete from Saved Recipe ?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    })
+
+    .then(async (result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteSavedRecipe({ id }))
+      }
+    });
   };
 
   return (
