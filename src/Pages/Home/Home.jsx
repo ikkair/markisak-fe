@@ -143,7 +143,9 @@ const Home = () => {
               <span>{recipes?.data[1]?.description}</span>
             </div>
             <div className="col-10">
-              <button className={`btn btn-warning text-light mt-3 ${style.btnLearnMore}`}>Learn More</button>
+              <Link to={`/recipes/${recipes?.data[1]?.id}`} className={`btn btn-warning text-light mt-3 ${style.btnLearnMore}`}>
+                Learn More
+              </Link>
             </div>
           </div>
         </div>

@@ -8,7 +8,7 @@ const AuthMiddleware = ({ children }) => {
     if (!localStorage.getItem('refresh_token')) {
       return navigate('/');
     }
-  }, []);
+  }, [localStorage.getItem('refresh_token')]);
 
   return children;
 };
