@@ -20,7 +20,7 @@ const AuthLayout = ({ children, title, description }) => {
                 {/* <h1 className='text-warning mb- fw-bold mb-4 d-block d-lg-none'>MARKISAK.</h1> */}
                 <div className="row justify-content-center">
                   <div className="col-lg-6 col-8">
-                    <header className="text-center">
+                    <header className="tzext-center">
                       <h3 className="">{title}</h3>
                       <p className="mb-2">{description}</p>
                     </header>

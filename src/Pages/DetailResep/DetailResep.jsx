@@ -26,18 +26,16 @@ import ModalUpdateComment from '../../Components/ModalButton/ModalUpdateComment'
 
 const DetailResep = () => {
   const MySwal = withReactContent(Swal);
-  const navigate = useNavigate();
   const { id } = useParams();
   const { data: recipe, isLoading, error } = useGetRecipeByIdQuery(id);
   const [createLikedRecipe, { isLoading: loadingLike, error: errorLike }] = useCreateLikedRecipeMutation();
   const [createComment, { isLoading: loadingComment, error: errorComment, isSucces }] = useCreateCommentMutation();
   const { data: likedRecipe, isLoading: isLoadingLikedRecipe, error: errorLikeRecipe } = useGetLikedRecipeByIdUserQuery(id);
-  const [deleteLikedRecipe, { isLoading: isLoadingDeleteLikedRecipe, error: errorDeleteLikedRecipe }] = useDeleteLikedRecipeMutation();
   const user = useSelector((state) => state.auth.user);
-  const [createSavedRecipe, { isLoading: loadingSaved, error: errorSaved }] = useCreateSavedRecipeMutation();
+  const [createSavedRecipe, { isLoading: isLoadingSavedRecipe }] = useCreateSavedRecipeMutation();
   const { data: savedRecipe, error: errorSavedRecipe } = useGetSavedRecipeByIdUserQuery();
-  const [deleteSavedRecipe, { isLoading: isLoadingDeleteSavedRecipe, error: errorDeleteSavedRecipe }] = useDeleteSavedRecipeMutation();
-  const [updateComment] = useUpdateCommentMutation()
+
+  const [updateComment] = useUpdateCommentMutation();
 
   function showLoading() {
     Swal.fire({
@@ -52,9 +50,9 @@ const DetailResep = () => {
   }
 
   function showInput(inputIdComment) {
-    const inputComment = document.querySelector(`#input${inputIdComment}`)
+    const inputComment = document.querySelector(`#input${inputIdComment}`);
     console.log(inputIdComment);
-    inputComment.classList.toggle(`d-none`)
+    inputComment.classList.toggle(`d-none`);
   }
 
   // function checkShowComment(inputIdComment) {
@@ -66,13 +64,12 @@ const DetailResep = () => {
   //   }
   // }
 
-
   useEffect(() => {
     AOS.init();
     AOS.refresh();
   }, []);
 
-  const [message, setMessage] = useState([]);  
+  const [message, setMessage] = useState([]);
 
   // Change handler
   const changeHandler = (e) => {
@@ -91,18 +88,18 @@ const DetailResep = () => {
   };
 
   const updateHandler = async (commentId) => {
-    await updateComment({ message, id_recipe: id, id: commentId })
+    await updateComment({ message, id_recipe: id, id: commentId });
 
     swal({
       title: 'Comment updated!',
       icon: 'success',
     });
 
-    setMessage('')
-  }
+    setMessage('');
+  };
 
   function checkLikeRecipe() {
-    if (errorLikeRecipe?.status == 404 || errorDeleteLikedRecipe?.status == 404) {
+    if (errorLikeRecipe?.status == 404) {
       return undefined;
     }
     return likedRecipe?.data?.filter((recipe) => recipe.id_recipe == id);
@@ -116,25 +113,13 @@ const DetailResep = () => {
   }
 
   const onClickLike = async () => {
-    if (!user) {
-      return navigate('/login');
-    }
-    if (checkLikeRecipe() || checkLikeRecipe()?.length > 0) {
-      await deleteLikedRecipe({ id });
-    } else {
-      await createLikedRecipe({ id_recipe: id });
-    }
+    await createLikedRecipe({ id_recipe: id });
+    showLoading();
   };
 
   const onClickSave = async () => {
-    if (!user) {
-      return navigate('/login');
-    }
-    if (checkSavedRecipe()) {
-      await deleteSavedRecipe({ id });
-    } else {
-      await createSavedRecipe({ id_recipe: id });
-    }
+    await createSavedRecipe({ id_recipe: id });
+    showLoading();
   };
 
   const [show, setShow] = useState(false);
@@ -143,6 +128,12 @@ const DetailResep = () => {
   let ingredients = `${recipe?.ingredients}`;
   let split = ingredients.split('-');
   split.shift();
+
+  useEffect(() => {
+    if (!isLoadingSavedRecipe || !isLoadingLikedRecipe) {
+      Swal.close();
+    }
+  }, [isLoadingSavedRecipe, isLoadingLikedRecipe]);
 
   return (
     <>
@@ -159,12 +150,12 @@ const DetailResep = () => {
                   </h1>
                   <div className="row justify-content-center">
                     <div className="col-12 col-lg-8  position-relative">
-                      <img crossOrigin="Anonymous" src={recipe.photo} className={`img-fluid ${style.imageDetail} d-block mx-auto mt-5 mb-5 `} alt="" />
+                      <img src={recipe?.photo} className={`img-fluid ${style.imageDetail} d-block mx-auto mt-5 mb-5 `} alt="" />
                       <span className={style.action}>
                         <button
                           className={`position-absolute ${style.saved} ${checkSavedRecipe()?.length > 0 ? 'bg-warning text-light' : 'bg-light text-dark'} `}
                           onClick={() => {
-                            onClickSave();
+                            user ? onClickSave() : window.replace.location('/login');
                           }}
                         >
                           <i class="fa-sharp fa-solid fa-bookmark"></i>
@@ -207,9 +198,9 @@ const DetailResep = () => {
                         );
                       }
                     })}
-                    {recipe?.videos?.length != 0 ? (
+                    {recipe?.videos?.length != 0 && recipe?.videos.length > 3 ? (
                       <div className="col-md-6 pe-md-0 col-12">
-                        <Link className="btn btn-primary w-100" to={`/recipes/videos/${recipe.id}`}>
+                        <Link className="btn btn-primary w-100" to={`/recipes/videos/${recipe?.id}`}>
                           Show more
                         </Link>
                       </div>
@@ -237,19 +228,17 @@ const DetailResep = () => {
               )}
             </div>
 
-            {recipe?.comments.length <= 0 ? <h1 style={{ visibility: 'hidden' }}></h1> : <h1>Comments</h1>}
+            {recipe?.comments?.length <= 0 ? <h1 style={{ visibility: 'hidden' }}></h1> : <h1>Comments</h1>}
 
             {/* <h1>{recipe.message}</h1> */}
 
-            {recipe?.comments.map((comment, i) => (
-
-
+            {recipe?.comments?.map((comment, i) => (
               // console.log(comment.id)
               // console.log(recipe.id)
               <div key={i} className={`${style.commentList} mt-4 `} data-aos="zoom-in-down" data-aos-duration="1000">
                 <div className="row">
                   <div className="col-md-1 col-2 d-flex align-items-center justify-content-center">
-                    <img crossOrigin="Anonymous" className={` img-fluid ${style.imgComment}`} src={comment?.photo} alt="" />
+                    <img className={` img-fluid ${style.imgComment}`} src={comment?.photo} alt="" />
                   </div>
 
                   <div className="col-md-9 col-10 text-start d-grid align-items-center">
@@ -259,16 +248,20 @@ const DetailResep = () => {
                     </div>
                   </div>
 
-                  <div className={`d-flex align-items-center justify-content-end col-xxl-2 col-12 ${style.del}`}>
-                    {comment.id_user !== user.id ? (
+                  <div className={`col-3 col-md-2 col-xxl-1 d-grid align-items-center ${style.del}`}>
+                    {comment?.id_user !== user?.id ? (
                       <p></p>
                     ) : (
                       <>
-
                         <div className="pe-1">
-                          <button onClick={() => { setShow(!show); showInput(i) }} className={`btn ${style.delete}`}>
+                          <button
+                            onClick={() => {
+                              setShow(!show);
+                              showInput(i);
+                            }}
+                            className={`btn ${style.delete}`}
+                          >
                             edit
-                            
                           </button>
                         </div>
 
@@ -277,27 +270,25 @@ const DetailResep = () => {
                             Delete
                           </ModalDelete>
                         </div>
-
                       </>
                     )}
                   </div>
 
-                  {comment.id_user !== user.id ? `` :
-                    (
-
+                  {comment?.id_user !== user?.id ? (
+                    ``
+                  ) : (
                     <div className="">
                       <div className={`col-sm-10 col-md-6 col-10 offset-2 offset-md-1 d-none`} id={`input${i}`}>
                         <div className="mb-3 mt-2 d-flex">
-                          <input type="text" onChange={(e)=> setMessage(e.target.value)} name={`message`} className="border-0 border-bottom form-control" />
-                          <button className='ms-2 btn btn-light ' onClick={() => updateHandler(comment.id)} > Send </button>
+                          <input type="text" onChange={(e) => setMessage(e.target.value)} name={`message`} className="border-0 border-bottom form-control" />
+                          <button className="ms-2 btn btn-light " onClick={() => updateHandler(comment.id)}>
+                            {' '}
+                            Send{' '}
+                          </button>
                         </div>
                       </div>
-
-
                     </div>
-                    )
-                  }
-
+                  )}
                 </div>
               </div>
             ))}

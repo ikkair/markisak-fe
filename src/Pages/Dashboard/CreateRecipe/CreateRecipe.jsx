@@ -186,7 +186,7 @@ const CreateRecipe = () => {
               </div>
 
               <div className="col-12 col-lg-10 offset-lg-1 mt-4">
-                <InputFormAddRecipe value={data.ingredients} type={'textarea'} title={'Ingredients'} name={'ingredients'} onchange={(e) => changeHandler(e)} />
+                <InputFormAddRecipe value={data.ingredients} type={'textarea'} placeholder={'use a strip (-) for each ingredient'} title={'Ingredients'} name={'ingredients'} onchange={(e) => changeHandler(e)} />
               </div>
 
               <div className="col-12 col-lg-10 offset-lg-1 mt-4">

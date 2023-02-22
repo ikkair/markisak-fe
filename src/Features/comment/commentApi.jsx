@@ -42,7 +42,7 @@ const commentApi = apiSlice.injectEndpoints({
         method: 'PUT',
         body: other,
       }),
-
+      invalidatesTags: ['Recipe'],
       transformResponse: (response, meta, arg) => response,
     }),
 

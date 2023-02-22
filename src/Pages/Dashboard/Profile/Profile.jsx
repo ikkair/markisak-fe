@@ -10,71 +10,64 @@ import img2 from '../../../assets/Profile/img2.png';
 import { useGetAllRecipeQuery, useDeleteRecipeByIdMutation, useGetRecipeByIdQuery } from '../../../Features/recipe/recipeApi';
 import { useGetUserDetailQuery, useUpdateUserByIdMutation } from '../../../Features/user/userApi';
 import ModalEditProfile from '../../../Components/Profile/ModalEditProfile';
-import { useDeleteLikedRecipeMutation } from '../../../Features/likedRecipe/likedRecipeApi';
-import { useDeleteSavedRecipeMutation } from '../../../Features/savedRecipe/savedRecipe';
-import Swal from "sweetalert2";
-import { useDispatch } from "react-redux";
+import { useCreateLikedRecipeMutation } from '../../../Features/likedRecipe/likedRecipeApi';
+import { useCreateSavedRecipeMutation } from '../../../Features/savedRecipe/savedRecipe';
+import Swal from 'sweetalert2';
+import { useDispatch } from 'react-redux';
 
 const Profile = () => {
   const { data: user, isLoading, isSuccess } = useGetUserDetailQuery(localStorage.getItem('id_user'));
   const [updateUserById, { isSuccess: isSuccessUpdate }] = useUpdateUserByIdMutation();
   const [dataRow, setDataRow] = useState('my-recipe');
-  const [data, setData] = useState({});
   const [deleteRecipeById, { error: errorDeleteRecipeById, isLoading: isLoadingdeleteRecipeById }] = useDeleteRecipeByIdMutation();
-  const [deleteLikedRecipe, { isLoading: isLoadingDeleteLiked, error: errorDeleteLikedRecipe }] = useDeleteLikedRecipeMutation();
-  const [deleteSavedRecipe, { isLoading: isLoadingSavedRecipe, error: errorSavedRecipe }] = useDeleteSavedRecipeMutation();
+  const [createLikedRecipe, { isLoading: isLoadingDeleteLiked, error: errorDeleteLikedRecipe }] = useCreateLikedRecipeMutation();
+  const [createSavedRecipe, { isLoading: isLoadingSavedRecipe, error: errorSavedRecipe }] = useCreateSavedRecipeMutation();
   const dispatch = useDispatch();
 
   const deleteRecipeHandler = async (id) => {
     Swal.fire({
-      title: "Sure to Delete This Recipe ?",
+      title: 'Sure to Delete This Recipe ?',
       text: "You won't be able to revert this!",
-      icon: "warning",
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes",
-    })
-    
-    .then(async (result) => {
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        dispatch(deleteRecipeById(id))
+        dispatch(deleteRecipeById(id));
       }
     });
   };
 
   const deleteLikedRecipeHandler = async (id) => {
     Swal.fire({
-      title: "Sure to Delete from Liked Recipe ?",
+      title: 'Sure to Delete from Liked Recipe ?',
       text: "You won't be able to revert this!",
-      icon: "warning",
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes",
-    })
-
-    .then(async (result) => {
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        dispatch(deleteLikedRecipe({ id }))
+        await createLikedRecipe({ id_recipe: id });
       }
     });
   };
 
   const deleteSavedRecipeHandler = async (id) => {
     Swal.fire({
-      title: "Sure to Delete from Saved Recipe ?",
+      title: 'Sure to Delete from Saved Recipe ?',
       text: "You won't be able to revert this!",
-      icon: "warning",
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes",
-    })
-
-    .then(async (result) => {
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        dispatch(deleteSavedRecipe({ id }))
+        await createSavedRecipe({ id_recipe: id });
       }
     });
   };
@@ -87,7 +80,7 @@ const Profile = () => {
           <div className="profil text-center py-5">
             <div className="d-flex justify-content-center">
               {/* <img className="rounded-circle mb-1 ms-5" width={95} height={90} src={profile} alt="img" /> */}
-              <img className="rounded-circle mb-1 ms-5" width={95} height={90} src={user?.photo} crossOrigin={'anonymous'} alt="" />
+              <img className="rounded-circle mb-1 ms-5" width={95} height={90} src={user?.photo} alt="" />
               {!isLoading && <ModalEditProfile id={user.id} />}
             </div>
             <h3>{user?.name}</h3>
@@ -116,22 +109,22 @@ const Profile = () => {
             {isLoading
               ? 'Loading...'
               : dataRow == 'my-recipe'
-                ? user?.recipes?.map((recipe, i) => (
+              ? user?.recipes?.map((recipe, i) => (
                   <div key={i} className="col-6 px-1 col-sm-4 col-md-3 mb-2">
                     <Card type={'my-recipe'} item={recipe} ondelete={(id) => deleteRecipeHandler(id)} />
                   </div>
                 ))
-                : dataRow == 'saved'
-                  ? user?.saved?.map((recipe, i) => (
-                    <div key={i} className="col-6 px-1 col-sm-4 col-md-3 mb-2">
-                      <Card item={recipe} ondelete={(id) => deleteSavedRecipeHandler(id)} />
-                    </div>
-                  ))
-                  : user?.likes?.map((recipe, i) => (
-                    <div key={i} className="col-6 px-1 col-sm-4 col-md-3 mb-2">
-                      <Card item={recipe} ondelete={(id) => deleteLikedRecipeHandler(id)} />
-                    </div>
-                  ))}
+              : dataRow == 'saved'
+              ? user?.saved?.map((recipe, i) => (
+                  <div key={i} className="col-6 px-1 col-sm-4 col-md-3 mb-2">
+                    <Card item={recipe} ondelete={(id) => deleteSavedRecipeHandler(id)} />
+                  </div>
+                ))
+              : user?.likes?.map((recipe, i) => (
+                  <div key={i} className="col-6 px-1 col-sm-4 col-md-3 mb-2">
+                    <Card item={recipe} ondelete={(id) => deleteLikedRecipeHandler(id)} />
+                  </div>
+                ))}
           </div>
         </div>
       </div>

@@ -198,7 +198,7 @@ const UpdateRecipe = () => {
                     <div className="row">
                       <div className="col-12 col-lg-10 offset-lg-1 d-flex justify-content-center">
                         <div className={`item w-100 rounded ${style.inputBackground} ${style.inputPhoto} d-flex mx-auto justify-content-center align-items-center mb-2 flex-column mt-5`} onClick={imageClickHandler} id="thumbnail">
-                          <img src={preview ? preview : data.photo ? data.photo : photoLogo} crossOrigin={'anonymous'} alt="" className="img-fluid" />
+                          <img src={preview ? preview : data.photo ? data.photo : photoLogo} alt="" className="img-fluid" />
                           <span className="text-secondary mt-2">Add Photo</span>
 
                           <input type="file" className="d-none" name="photo1" onChange={selectFile} id={`photo`} />
