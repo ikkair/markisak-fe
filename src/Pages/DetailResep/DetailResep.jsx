@@ -248,7 +248,7 @@ const DetailResep = () => {
                     </div>
                   </div>
 
-                  <div className={`col-3 col-md-2 col-xxl-1 d-grid align-items-center ${style.del}`}>
+                  <div className={`d-flex align-items-center justify-content-end col-xxl-2 col-12 ${style.del}`}>
                     {comment?.id_user !== user?.id ? (
                       <p></p>
                     ) : (

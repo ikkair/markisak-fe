@@ -19,7 +19,9 @@ function MyVerticallyCenteredModal(props) {
           <Modal.Title id="contained-modal-title-vcenter">Step Video</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <CardDetailVideo url={props.link} title={props.nameRecipe} time={props.step} show={props.stepps}  />
+          <CardDetailVideo url={props.link} title={props.nameRecipe} time={props.step} show={props.stepps} style={{display: "flex"}} >
+                test
+          </CardDetailVideo>
         </Modal.Body>
         <Modal.Footer>{/* <Button onClick={props.onHide}>Close</Button> */}</Modal.Footer>
       </Modal>
