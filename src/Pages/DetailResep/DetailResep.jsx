@@ -155,7 +155,7 @@ const DetailResep = () => {
                         <button
                           className={`position-absolute ${style.saved} ${checkSavedRecipe()?.length > 0 ? 'bg-warning text-light' : 'bg-light text-dark'} `}
                           onClick={() => {
-                            user ? onClickSave() : window.replace.location('/login');
+                            onClickSave();
                           }}
                         >
                           <i class="fa-sharp fa-solid fa-bookmark"></i>
