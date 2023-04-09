@@ -166,11 +166,11 @@ Contributions are what make the open source community such an amazing place to b
 
 ## Related Project
 
-:rocket: [`Backend Blanja`](https://github.com/mhmdiamd/markisak-fe)
+:rocket: [`Backend Markisak`](https://github.com/ikkair/markisak-be)
 
-:rocket: [`Frontend Blanja`](https://github.com/mhmdiamd/markisak-fe)
+:rocket: [`Frontend Markisak`](https://github.com/ikkair/markisak-fe)
 
-:rocket: [`Demo Blanja`](https://markisak-fe.vercel.app/)
+:rocket: [`Demo Markisak`](https://markisak-fe.vercel.app/)
 
 <!-- Meet The Teams -->
 
