@@ -217,14 +217,12 @@ Contributions are what make the open source community such an amazing place to b
           <b>Dhimas Pandu Yogaswara</b>
         </a>
       </td>
-
       <td align="center">
         <a href="https://github.com/rrizalyuniar">
           <img width="200"  src="./documentation/hose.jpg" alt=""><br/>
           <b>Rizal Yuniar S</b>
         </a>
       </td>
-
     </tr>
   </table>
 </center>
