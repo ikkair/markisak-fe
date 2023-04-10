@@ -33,7 +33,8 @@ const likedRecipeApi = apiSlice.injectEndpoints({
         };
       },
 
-      invalidatesTags: ['LikedRecipe', 'User'],
+      providesTags: ['createdLiked'],
+      invalidatesTags: ['LikedRecipe', 'User', 'createdLiked'],
       transformResponse: (response, meta, arg) => response,
     }),
 

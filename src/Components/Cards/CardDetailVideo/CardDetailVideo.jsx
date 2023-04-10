@@ -9,7 +9,7 @@ const CardDetailVideo = ({ url, title, time, show }) => {
   };
   return (
     <div className="row mb-3">
-      <div className="col-5 col-md-4 col-lg-12">
+      <div className="col-12 col-lg-12">
         <LiteYouTubeEmbed id={getIdUrlVideo(url)} title={title} />
       </div>
       <div className="col-7 col-md-8 col-lg-12 description d-grid">

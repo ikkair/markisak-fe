@@ -5,10 +5,13 @@ import Modal from 'react-bootstrap/Modal';
 import edit from '../../assets/Profile/vector.png';
 import { useGetUserDetailQuery } from '../../Features/user/userApi';
 import { useUpdateUserByIdMutation } from '../../Features/user/userApi';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 const ModalEditProfile = ({ id }) => {
+  const MySwal = withReactContent(Swal);
   const { data: user, isLoading, isSuccess } = useGetUserDetailQuery(localStorage.getItem('id_user'));
-  const [updateUserById, { isSuccess: isSuccessUpdate }] = useUpdateUserByIdMutation();
+  const [updateUserById, { isSuccess: isSuccessUpdate, isLoading: isLoadingUpdate }] = useUpdateUserByIdMutation();
   const [dataRow, setDataRow] = useState('my-recipe');
   const [data, setData] = useState({
     name: '',
@@ -31,8 +34,19 @@ const ModalEditProfile = ({ id }) => {
     });
   };
 
+  function showLoading() {
+    Swal.fire({
+      title: 'Loading...',
+      html: 'Please wait...',
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+  }
+
   const handleUpdate = async () => {
-    console.log(data);
     const formData = new FormData();
     for (let attr in data) {
       formData.append(attr, data[attr]);
@@ -52,6 +66,20 @@ const ModalEditProfile = ({ id }) => {
       });
     }
   }, [isSuccess]);
+
+  useEffect(() => {
+    if (isLoadingUpdate) {
+      showLoading();
+    }
+
+    if (isSuccessUpdate) {
+      Swal.close();
+      MySwal.fire({
+        title: <p>Profile Updated!</p>,
+        icon: 'success',
+      });
+    }
+  }, [isSuccessUpdate, isLoadingUpdate]);
 
   const selectFile = (e) => {
     if (!e.target.files || e.target.files.length === 0) {

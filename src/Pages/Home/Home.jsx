@@ -16,8 +16,6 @@ import 'aos/dist/aos.css'; // You can also use <link> for styles
 import AOS from 'aos';
 // ..
 
-
-
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
@@ -73,7 +71,7 @@ const Home = () => {
               <div className={`col-12 col-lg-8 fw-semibold fs-1`}>
                 <span className={`${style.title}`}> Discover Recipe & Delicious Food</span>
               </div>
-              <div className={`col-9 col-md-7`} >
+              <div className={`col-9 col-md-7`}>
                 <div className={`${style.inputBackground} py-1 d-flex align-items-center gap-1 ps-4 rounded`}>
                   <FontAwesomeIcon className={style.inputSearch} type="text" icon={faSearch} />
                   <input
@@ -89,8 +87,8 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="col-5 d-none d-sm-grid" >
-            <img src={imgFood} className={`${style.firstSectionImg} img-fluid`} alt="" data-aos="fade-left"/>
+          <div className="col-5 d-none d-sm-grid">
+            <img src={imgFood} className={`${style.firstSectionImg} img-fluid`} alt="" data-aos="fade-left" />
           </div>
         </div>
       </div>
@@ -99,7 +97,7 @@ const Home = () => {
         <div className="col-12 col-sm-6">
           <div className="row">
             <div className={`${style.colImg} col-12 position-relative`}>
-              <img src={recipes?.data[0]?.photo} crossOrigin="anonymous" className={`${style.sectionImage} img-fluid rounded`} alt=""  data-aos="flip-left"  data-aos-duration="1000"/>
+              <img src={recipes?.data[0]?.photo} className={`${style.sectionImage} img-fluid rounded`} alt="" data-aos="flip-left" data-aos-duration="1000" />
             </div>
           </div>
         </div>
@@ -126,10 +124,10 @@ const Home = () => {
       </LandingPageSection>
 
       <LandingPageSection title={'New Recipe'} id={'newRecipe'} embedClass={`${style.sectionPage}`}>
-        <div className="col-12 col-sm-6" >
+        <div className="col-12 col-sm-6">
           <div className="row">
             <div className={`${style.colImg2} col-12 position-relative`}>
-              <img src={recipes?.data[1]?.photo} crossOrigin="anonymous" className={`${style.sectionImage} img-flui rounded`} alt="" data-aos="zoom-out-up" data-aos-duration="1000"/>
+              <img src={recipes?.data[1]?.photo} className={`${style.sectionImage} img-flui rounded`} alt="" data-aos="zoom-out-up" data-aos-duration="1000" />
             </div>
           </div>
         </div>
@@ -143,7 +141,9 @@ const Home = () => {
               <span>{recipes?.data[1]?.description}</span>
             </div>
             <div className="col-10">
-              <button className={`btn btn-warning text-light mt-3 ${style.btnLearnMore}`}>Learn More</button>
+              <Link to={`/recipes/${recipes?.data[1]?.id}`} className={`btn btn-warning text-light mt-3 ${style.btnLearnMore}`}>
+                Learn More
+              </Link>
             </div>
           </div>
         </div>
@@ -157,7 +157,7 @@ const Home = () => {
           </div>
         </div>
         <div className="row">
-          <div className="col-12"  data-aos="fade-up" data-aos-duration="1000">
+          <div className="col-12" data-aos="fade-up" data-aos-duration="1000">
             <Swiper
               effect={'coverflow'}
               grabCursor={true}
@@ -179,7 +179,7 @@ const Home = () => {
                 : recipes?.data?.map((recipe, i) => (
                     <SwiperSlide key={i}>
                       <Link to={`/recipes/${recipe.id}`} className={'position-relative'}>
-                        <img className={`${style.imgSwipper}`} src={recipe.photo} crossOrigin={'anonymous'} />
+                        <img className={`${style.imgSwipper}`} src={recipe.photo} />
                         <span className={`${style.titleSwipper} fs-4 position-absolute text-light`}>{recipe?.title}</span>
                       </Link>
                     </SwiperSlide>

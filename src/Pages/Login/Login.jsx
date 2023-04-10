@@ -20,7 +20,7 @@ const Login = () => {
 
   const loginHandler = async () => {
     const data = await loginUser({ email, password });
-    const userBeforRedestruct = data.data.data[0];
+    const userBeforRedestruct = data?.data?.data[0];
     const { refreshToken, token, ...other } = userBeforRedestruct;
     dispatch(setCredentials({ data: other, token, refreshToken }));
   };

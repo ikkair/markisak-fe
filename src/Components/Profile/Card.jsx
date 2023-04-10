@@ -14,12 +14,10 @@ const Card = ({ item, onclick, ondelete, type }) => {
   return (
     <div className={`${style.card} rounded`}>
       <Link to={`/recipes/${item.id}`}>
-        <img src={item.photo} crossOrigin={'anonymous'} className={`img-fluid ${style.img}`} alt="..." />
+        <img src={item.photo} className={`img-fluid ${style.img}`} alt="..." />
       </Link>
 
-      <Link to={`/dashboard/my-recipe/${item.id}`}>
-        <FontAwesomeIcon className={`card-title mx-1 bg-success ${style.cardEdit}`} icon={faPenToSquare} />
-      </Link>
+      <Link to={`/dashboard/my-recipe/${item.id}`}>{type == 'my-recipe' ? <FontAwesomeIcon className={`card-title mx-1 bg-success ${style.cardEdit}`} icon={faPenToSquare} /> : ''}</Link>
       <FontAwesomeIcon className={`card-title mx-1 bg-danger ${style.cardDelete}`} icon={faTrash} onClick={deleteHandler} />
       <div className={`card-body ${style.cardBody}`}>
         <h5 className={`${style.cardTitle} card-title`}>{item?.title}</h5>
