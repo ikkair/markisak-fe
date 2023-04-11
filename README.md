@@ -1,8 +1,8 @@
 <p align="center">
 <div align="center">
-  <img height="150" src="./src/assets/logo/logo.png" alt="blanja-logo" border="0"/>
+  <img height="150" src="./documentation/logo.png" alt="blanja-logo" border="0"/>
 </div>
-  <h3 align="center">Markisan (Recipe App)</h3>
+  <h3 align="center">Markisak (Recipe App)</h3>
   <p align="center">
     <a href="https://github.com/mhmdiamd/markisak-fe"><strong>Explore the docs »</strong></a>
     <br />
