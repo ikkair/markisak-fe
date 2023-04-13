@@ -166,7 +166,7 @@ Contributions are what make the open source community such an amazing place to b
 
 ## Related Project
 
-:rocket: [`Backend Markisak`](https://github.com/ikkair/markisak-be)
+:rocket: [`Backend Markisak`](https://github.com/mhmdiamd/markisak-be)
 
 :rocket: [`Frontend Markisak`](https://github.com/ikkair/markisak-fe)
 
@@ -189,37 +189,37 @@ Contributions are what make the open source community such an amazing place to b
     <tr >
       <td align="center">
         <a href="https://github.com/ikkair">
-          <img width="200"  src="./documentation/iqbal.jpg" alt=""><br/>
+          <img width="200"  src="./documentation/member/kamal.jpg" alt=""><br/>
           <b>Ikhlasul Kamal Irmansyah</b>
         </a>
       </td>
       <td align="center">
         <a href="https://github.com/alifankebima">
-          <img width="200"  src="./documentation/alif.jpg" alt=""><br/>
+          <img width="200"  src="./documentation/member/alif.jpg" alt=""><br/>
           <b>Alif Anke Bima Putra</b>
         </a>
       </td>
       <td align="center">
         <a href="https://github.com/andkvnt">
-          <img width="200"  src="" alt=""><br/>
+          <img width="200"  src="./documentation/member/andhiko.jpg" alt=""><br/>
           <b>Andiko Oktafianto</b>
         </a>
       </td>
       <td align="center">
         <a href="https://github.com/mhmdiamd">
-          <img width="200"   src="" alt=""><br/>
+          <img width="200"   src="./documentation/member/ilham.jpg" alt=""><br/>
           <b>Muhamad Ilham Darmawan</b>
         </a>
       </td>
       <td align="center">
         <a href="https://github.com/Dhimasswara">
-          <img width="200"  src="./documentation/hose.jpg" alt=""><br/>
+          <img width="200"  src="./documentation/member/dhimas.jpg" alt=""><br/>
           <b>Dhimas Pandu Yogaswara</b>
         </a>
       </td>
       <td align="center">
         <a href="https://github.com/rrizalyuniar">
-          <img width="200"  src="./documentation/hose.jpg" alt=""><br/>
+          <img width="200"  src="./documentation/member/rizal.jpg" alt=""><br/>
           <b>Rizal Yuniar S</b>
         </a>
       </td>
